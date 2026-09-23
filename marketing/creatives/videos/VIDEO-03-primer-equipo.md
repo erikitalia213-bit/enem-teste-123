@@ -5,7 +5,7 @@
 
 ## Guion (voiceover)
 > Tu primer equipo de tocho bandera no necesita empezar desde cero.
-> Tienes más de 120 jugadas listas…
+> Tienes más de 100 jugadas listas…
 > drills explicados paso a paso…
 > entrenamientos completos…
 > y tu propio playbook para imprimir.
@@ -16,7 +16,7 @@
 | # | Tiempo | Escena | Texto en pantalla | VO |
 |---|---|---|---|---|
 | 1 | 0:00-0:04 | Coach con bolsa de balones y conos llegando a un campo vacío; niños esperando. Plano abierto. | **TU PRIMER EQUIPO NO NECESITA EMPEZAR DESDE CERO** | Tu primer equipo de tocho bandera no necesita empezar desde cero. |
-| 2 | 0:04-0:08 | Pantalla: Biblioteca de jugadas, scroll rápido de diagramas; filtro “Para principiantes”. | **120+ JUGADAS** | Tienes más de 120 jugadas listas… |
+| 2 | 0:04-0:08 | Pantalla: Biblioteca de jugadas, scroll rápido de diagramas; filtro “Para principiantes”. | **+100 JUGADAS** | Tienes más de 100 jugadas listas… |
 | 3 | 0:08-0:12 | Pantalla: Biblioteca de drills (tarjetas de colores) → detalle “Espejo de flags”. Corte al drill real en el campo. | **DRILLS PASO A PASO** | …drills explicados paso a paso… |
 | 4 | 0:12-0:16 | Pantalla: “50 entrenamientos listos” → sesión “Primer día del equipo”. | **ENTRENAMIENTOS LISTOS** | …entrenamientos completos… |
 | 5 | 0:16-0:20 | Pantalla: Mi Playbook → “IMPRIMIR PLAYBOOK”. Hoja saliendo de la impresora; coach la mete en su carpeta. | **TU PLAYBOOK IMPRESO** | …y tu propio playbook para imprimir. |
@@ -29,5 +29,5 @@
 4. *“Equipo infantil mixto de flag football chocando manos en círculo, celebración, cámara lenta.”*
 
 ## Notas
-- “120+” es consistente con la biblioteca (130 jugadas).
+- “+100” es consistente con la biblioteca (110 jugadas).
 - Si grabas menores de edad, recaba autorización por escrito de padres o tutores.

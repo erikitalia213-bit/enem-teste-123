@@ -16,17 +16,26 @@ export function SiteFooter() {
             <Link href="/entrar/" className="text-mist-2 hover:text-snow">
               Entrar a la app
             </Link>
-            <a href="#precio" className="text-mist-2 hover:text-snow">
+            <Link href="/#precio" className="text-mist-2 hover:text-snow">
               Precio
-            </a>
-            <a href="#faq" className="text-mist-2 hover:text-snow">
+            </Link>
+            <Link href="/#faq" className="text-mist-2 hover:text-snow">
               Preguntas frecuentes
-            </a>
+            </Link>
             {Object.values(ORDER_BUMPS).map((b) => (
               <Link key={b.slug} href={`/extras/${b.slug}/`} className="text-mist-2 hover:text-snow">
                 {b.name}
               </Link>
             ))}
+            <Link href="/privacidad/" className="text-mist-2 hover:text-snow">
+              Aviso de privacidad
+            </Link>
+            <Link href="/terminos/" className="text-mist-2 hover:text-snow">
+              Términos y condiciones
+            </Link>
+            <Link href="/aviso-de-independencia/" className="text-mist-2 hover:text-snow">
+              Aviso de independencia
+            </Link>
             {BRAND.supportEmail && (
               <a href={`mailto:${BRAND.supportEmail}`} className="text-mist-2 hover:text-snow">
                 Soporte

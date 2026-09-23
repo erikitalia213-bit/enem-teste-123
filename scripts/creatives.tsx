@@ -126,7 +126,7 @@ function creative2() {
       <div class="brand">${LOGO}<b>FLAGLAB <span>5x5</span></b></div>
       <h1 class="d" contenteditable style="font-size:128px;margin-top:34px"><span style="color:#49F05A">100+ jugadas</span><br>listas para usar</h1>
       <div style="margin:auto auto 0;width:620px;background:#fff;border-radius:22px;padding:22px;box-shadow:0 40px 100px -20px rgba(73,240,90,.55),0 0 0 3px #49F05A;transform:rotate(-2deg)">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b style="font-family:'Barlow Condensed';font-size:34px;color:#111">MI PLAYBOOK</b><span style="background:#49F05A;color:#070909;border-radius:10px;padding:4px 12px;font-weight:700;font-size:20px">130 jugadas</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b style="font-family:'Barlow Condensed';font-size:34px;color:#111">MI PLAYBOOK</b><span style="background:#49F05A;color:#070909;border-radius:10px;padding:4px 12px;font-weight:700;font-size:20px">110 jugadas</span></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">${book}</div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px">

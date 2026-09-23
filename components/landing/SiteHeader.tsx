@@ -12,7 +12,7 @@ export function SiteHeader() {
         </Link>
         <nav aria-label="Secciones" className="hidden items-center gap-6 text-sm font-semibold text-mist-2 lg:flex">
           {COPY.nav.map((n) => (
-            <a key={n.href} href={n.href} className="hover:text-snow">
+            <a key={n.href} href={`/${n.href}`} className="hover:text-snow">
               {n.label}
             </a>
           ))}

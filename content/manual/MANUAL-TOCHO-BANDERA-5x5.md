@@ -78,7 +78,7 @@ Las medidas varían por liga, pero un campo común de 5x5 mide entre 25 y 30 yar
 
 ### Reglas clave que debes enseñar desde el día uno
 
-- No hay contacto: no se tacklea, no se empuja, no se bloquea.
+- No hay contacto: no se taclea, no se empuja, no se bloquea.
 - El portador del balón no puede proteger sus flags con las manos ni con el balón.
 - El rusher (quien presiona al QB) sale desde una distancia marcada, comúnmente 7 yardas.
 - El QB normalmente no puede correr con el balón más allá de la línea de scrimmage, salvo que la liga lo permita después de una entrega.
@@ -380,7 +380,7 @@ Mover a un jugador antes del snap para leer la cobertura (si alguien lo sigue, e
 
 _Zona, hombre a hombre, el rusher y cómo organizar una defensa sencilla._
 
-La defensa gana partidos. En tocho bandera, una defensa organizada que retira flags de inmediato puede frenar a ataques mucho más talentosos.
+La defensa es la mitad del juego. En tocho bandera, una defensa organizada que retira flags de inmediato le complica el trabajo a cualquier ataque.
 
 ### Los dos tipos de cobertura
 
@@ -431,7 +431,7 @@ No corras hacia donde está el portador; corre hacia donde va a estar. Si corres
 
 ### La banda es tu mejor defensor
 
-Empuja al portador hacia la banda cerrando el lado de adentro. Cuanto menos espacio tenga, más fácil es retirar la flag.
+Dirige al portador hacia la banda cerrando el lado de adentro (con tu posición, sin tocarlo). Cuanto menos espacio tenga, más fácil es retirar la flag.
 
 ### Errores comunes
 
@@ -719,7 +719,7 @@ FLAGLAB está pensado para que prepares tu semana en minutos. Todo se guarda en 
 | Herramienta | Para qué sirve |
 | --- | --- |
 | Creador de jugadas | Diseñar jugadas propias: jugadores, rutas, colores y notas. |
-| Biblioteca | 130 jugadas listas con diagrama, objetivo y lecturas. |
+| Biblioteca | 110 jugadas listas con diagrama, objetivo y lecturas. |
 | Mi Playbook | Organizar tus jugadas por secciones e imprimirlas. |
 | Tarjetas para muñequera | Hojas imprimibles con 6, 9, 12 o 18 jugadas numeradas. |
 | Generador de entrenamientos | Sesiones completas según edad, nivel, duración y objetivo. |

@@ -60,7 +60,7 @@ const DEFAULT: Tournament = {
 const TOURNAMENT_CHECKLIST = [
   "Reglamento del torneo impreso y compartido",
   "Campos marcados con conos (zona de anotación y mitad)",
-  "Balones oficiales por campo",
+  "Balones de juego por campo",
   "Flags de dos colores y repuestos",
   "Árbitros o responsables por campo",
   "Silbatos y cronómetros",

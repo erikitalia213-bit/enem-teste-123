@@ -1,4 +1,4 @@
-# Biblioteca de jugadas (130)
+# Biblioteca de jugadas (110)
 
 Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C = centro · QB = mariscal. Verde = lectura principal · Amarillo = secundaria.
 
@@ -35,7 +35,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Formación:** Twins · **Nivel:** Principiante
 - **Rutas:** Z: hook · Y: flat · X: slant · C: drag
 - **Objetivo:** Poner al defensor de la banda en conflicto entre dos rutas.
-- **Descripción:** Z sube y se engancha mientras Y sale al flat. El defensor no puede cubrir a los dos.
+- **Descripción:** Z sube y se engancha mientras Y sale al flat. Un solo defensor difícilmente cubre a los dos.
 - **Lectura principal:** Si el defensor baja con Y, lanza a Z en el hook.
 - **Lectura secundaria:** Si el defensor se queda arriba, Y en el flat.
 - **Consejo:** Enseña al QB a mirar solo al defensor de afuera. Él le dice a quién lanzar.
@@ -202,7 +202,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Rutas:** X: go · Z: go · Y: seam · C: seam
 - **Objetivo:** Obligar a la defensa a cubrir cuatro rutas profundas.
 - **Descripción:** Cuatro jugadores suben verticales en carriles separados. La defensa no alcanza a cubrir todo.
-- **Lectura principal:** Y por el hueco derecho entre safety y esquina.
+- **Lectura principal:** Y subiendo por el carril interior derecho.
 - **Lectura secundaria:** C por el hueco izquierdo.
 - **Consejo:** Los carriles deben respetarse: si dos receptores se juntan, un solo defensor los cubre.
 
@@ -334,15 +334,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** Z en el in.
 - **Consejo:** Define quién pasa por arriba y quién por abajo en el cruce. Así nunca chocan.
 
-### Inundación Roja (rz-07)
-- **Formación:** Trips Left · **Nivel:** Intermedio
-- **Rutas:** X: go · Y: out · Z: flat · C: hook
-- **Objetivo:** Sobrecargar la esquina izquierda con tres niveles.
-- **Descripción:** X se lleva al defensor profundo, Y corta a 4 yardas y Z sale al flat.
-- **Lectura principal:** Y en el out.
-- **Lectura secundaria:** Z en el flat.
-- **Consejo:** Contra zona casi siempre queda libre Y o Z. Contra hombre, busca el mejor emparejamiento.
-
 ### Rollout Rojo (rz-08)
 - **Formación:** Twins · **Nivel:** Avanzado
 - **Rutas:** QB: rollout · Y: flat · Z: corner · X: drag · C: hook
@@ -372,15 +363,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 
 ## Conversiones
 
-### Uno Seguro (cv-01)
-- **Formación:** Spread · **Nivel:** Principiante
-- **Rutas:** X: slant · Z: slant · Y: flat · C: hook
-- **Objetivo:** Conversión corta con la jugada más confiable.
-- **Descripción:** Doble slant desde las 5 yardas. Rutas cortas, pase rápido y sin riesgo.
-- **Lectura principal:** X en el slant.
-- **Lectura secundaria:** Z en el slant del otro lado.
-- **Consejo:** En conversión usa lo que tu equipo ejecuta mejor, no lo más vistoso.
-
 ### Fade-Out (cv-02)
 - **Formación:** Twins · **Nivel:** Intermedio
 - **Rutas:** Y: out · Z: fade · X: slant · C: sit
@@ -394,19 +376,10 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Formación:** Trips Right · **Nivel:** Intermedio
 - **Rutas:** Z: corner · Y: sit · X: flat · C: hook
 - **Objetivo:** Triángulo de lectura para conversiones de 1 punto.
-- **Descripción:** Z a la esquina, Y se sienta y X al flat. Forman un triángulo imposible de cubrir con dos defensores.
+- **Descripción:** Z a la esquina, Y se sienta y X al flat. Forman un triángulo difícil de cubrir con solo dos defensores.
 - **Lectura principal:** Z en la esquina.
 - **Lectura secundaria:** Y sentado en el hueco.
 - **Consejo:** El triángulo se lee igual siempre. Tu QB debería decidir en menos de 3 segundos.
-
-### Cruce Corto (cv-04)
-- **Formación:** Bunch · **Nivel:** Avanzado
-- **Rutas:** X: out · Z: in · Y: fade · C: drag
-- **Objetivo:** Ganar ventaja con rutas que se cruzan contra hombre.
-- **Descripción:** X y Z cruzan sus caminos a 2 yardas. Los defensores que los siguen se estorban.
-- **Lectura principal:** X en el out.
-- **Lectura secundaria:** Z en el in.
-- **Consejo:** Los receptores cruzan sin contacto. Si un defensor choca con otro, no es falta del ataque.
 
 ### Línea de Gol (cv-05)
 - **Formación:** Empty · **Nivel:** Intermedio
@@ -416,15 +389,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y en el sit.
 - **Lectura secundaria:** Z en el out.
 - **Consejo:** Marca la línea de gol con conos en práctica. El receptor debe saber exactamente dónde está.
-
-### Espejo Izquierdo (cv-06)
-- **Formación:** Stack · **Nivel:** Intermedio
-- **Rutas:** Y: out · Z: slant · X: hook · C: drag
-- **Objetivo:** Stack del lado izquierdo para conversión.
-- **Descripción:** El receptor de adelante sale a la banda y el de atrás corta por dentro.
-- **Lectura principal:** Y en el out.
-- **Lectura secundaria:** Z en el slant.
-- **Consejo:** Cambiar el lado del stack obliga a la defensa a ajustarse. Úsala si ya corriste el stack derecho.
 
 ### Doble Poste (cv-07)
 - **Formación:** Twins · **Nivel:** Intermedio
@@ -545,15 +509,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** Y en el gancho.
 - **Consejo:** El QB debe mirar a la izquierda primero para arrastrar a la defensa.
 
-### Pantalla Rápida (sc-10)
-- **Formación:** Empty · **Nivel:** Principiante
-- **Rutas:** Y: screen · Z: go · X: go · C: hook
-- **Objetivo:** Balón rápido al slot contra un rusher agresivo.
-- **Descripción:** Y recibe detrás de la línea antes de que llegue el rusher. Z y X suben para abrir espacio.
-- **Lectura principal:** Y en el screen.
-- **Lectura secundaria:** C en el gancho.
-- **Consejo:** Si el rusher llega muy rápido, esta jugada lo castiga. Úsala dos veces seguidas.
-
 ## Motion
 
 ### Viaje (mo-01)
@@ -668,7 +623,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 
 ### Malla (cs-03)
 - **Formación:** Spread · **Nivel:** Avanzado
-- **Rutas:** X: drag · Z: drag · Y: wheel · C: sit
+- **Rutas:** X: drag · Z: drag · Y: wheel · C: hook
 - **Objetivo:** Cruzar dos drags por el centro.
 - **Descripción:** X y Z cruzan por el medio a diferentes alturas. Sus defensores se estorban.
 - **Lectura principal:** X en el drag bajo.
@@ -684,15 +639,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** Z en el in profundo.
 - **Consejo:** Lee al defensor del medio: si sube con Y, lanza a Z. Si se queda, lanza a Y.
 
-### Gancho y Plano Izquierdo (cs-05)
-- **Formación:** Spread · **Nivel:** Principiante
-- **Rutas:** X: hook · Y: flat · Z: slant · C: seam
-- **Objetivo:** Concepto gancho-plano del lado izquierdo.
-- **Descripción:** X sube y se engancha. Y sale del backfield al flat izquierdo.
-- **Lectura principal:** X en el gancho.
-- **Lectura secundaria:** Y en el flat.
-- **Consejo:** El QB mira al defensor de X. Si baja con Y, el gancho está libre.
-
 ### Alto-Bajo (cs-06)
 - **Formación:** Trips Right · **Nivel:** Intermedio
 - **Rutas:** X: in · Y: drag · Z: go · C: hook
@@ -702,27 +648,9 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** Y en el drag.
 - **Consejo:** Concepto perfecto contra un apoyador que juega en medio. Solo tienes que leerlo a él.
 
-### Vela (cs-07)
-- **Formación:** Trips Right · **Nivel:** Intermedio
-- **Rutas:** Z: go · Y: out · X: flat · C: sit
-- **Objetivo:** Out profundo detrás del defensor de la banda.
-- **Descripción:** Z se lleva al defensor profundo, Y corta a 8 yardas hacia la banda y X al flat.
-- **Lectura principal:** Y en el out profundo.
-- **Lectura secundaria:** X en el flat.
-- **Consejo:** Si el QB no tiene brazo para el out de 8, reduce la profundidad a 6.
-
-### Cruce Y (cs-08)
-- **Formación:** Twins · **Nivel:** Avanzado
-- **Rutas:** Y: cross · Z: go · X: hook · C: drag
-- **Objetivo:** Cruce profundo de Y como jugada principal.
-- **Descripción:** Y cruza todo el campo hacia la izquierda. Z limpia arriba y X se engancha.
-- **Lectura principal:** Y en el cruce.
-- **Lectura secundaria:** X en el gancho del lado izquierdo.
-- **Consejo:** El cruce es mejor en tercera oportunidad: gana muchas yardas si se completa.
-
 ### Manejo (cs-09)
 - **Formación:** Spread · **Nivel:** Intermedio
-- **Rutas:** Z: in · X: drag · Y: flat · C: hook
+- **Rutas:** Z: in · X: drag · Y: flat · C: seam
 - **Objetivo:** Drag por debajo y in por encima en el centro.
 - **Descripción:** X cruza corto y Z corta a 6 yardas. Llenan el centro en dos alturas.
 - **Lectura principal:** Z en el in.
@@ -784,15 +712,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** C en el gancho.
 - **Lectura secundaria:** X en el out.
 - **Consejo:** Muchos equipos olvidan que el centro puede recibir. Aprovecha que casi nadie lo cubre.
-
-### Diagonal Simple (pr-06)
-- **Formación:** Spread · **Nivel:** Principiante
-- **Rutas:** X: slant · Z: go · Y: flat · C: sit
-- **Objetivo:** Aprender el slant, la ruta más útil del tocho.
-- **Descripción:** X corta en diagonal hacia adentro. Y sale al flat del otro lado.
-- **Lectura principal:** X en el slant.
-- **Lectura secundaria:** Y en el flat.
-- **Consejo:** Enseña el slant con un cono: dos pasos rectos, pie de afuera en el cono y corte a 45°.
 
 ### Paralelo (pr-07)
 - **Formación:** Stack · **Nivel:** Principiante
@@ -859,15 +778,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** Z en el out.
 - **Consejo:** El seam se lanza temprano, antes de que el safety cierre el hueco.
 
-### Curl en Zona (cz-04)
-- **Formación:** Spread · **Nivel:** Intermedio
-- **Rutas:** X: hook · Z: hook · Y: seam · C: drag
-- **Objetivo:** Ganchos detrás de los defensores cortos.
-- **Descripción:** Y y C ocupan a los defensores de abajo. X y Z se enganchan detrás de ellos.
-- **Lectura principal:** X en el gancho.
-- **Lectura secundaria:** Z en el gancho del otro lado.
-- **Consejo:** El gancho contra zona se ajusta: si hay un defensor enfrente, el receptor se desliza al hueco.
-
 ### Estira (cz-05)
 - **Formación:** Trips Left · **Nivel:** Intermedio
 - **Rutas:** Y: hook · Z: flat · X: go · C: sit
@@ -876,15 +786,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y en el gancho.
 - **Lectura secundaria:** Z en el flat.
 - **Consejo:** El defensor de zona tiene que elegir. Enseña al QB a lanzar al contrario de lo que haga.
-
-### Poste Bajo Safety (cz-06)
-- **Formación:** Twins · **Nivel:** Avanzado
-- **Rutas:** Z: post · Y: out · X: go · C: drag
-- **Objetivo:** Atacar el centro cuando hay dos safeties.
-- **Descripción:** Z quiebra al poste justo entre los dos safeties. Y sale a la banda.
-- **Lectura principal:** Z en el poste.
-- **Lectura secundaria:** Y en el out.
-- **Consejo:** Contra dos safeties, el centro profundo es el punto débil.
 
 ### Tres Alturas (cz-07)
 - **Formación:** Trips Right · **Nivel:** Intermedio
@@ -897,7 +798,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 
 ### Rotación (cz-08)
 - **Formación:** Bunch · **Nivel:** Avanzado
-- **Rutas:** Z: corner · X: in · Y: flat · C: sit
+- **Rutas:** Z: corner · X: in · Y: flat · C: drag
 - **Objetivo:** Atacar la esquina y el centro desde bunch.
 - **Descripción:** Z va a la esquina, X corta al centro y Y sale al flat del lado contrario.
 - **Lectura principal:** Z en la esquina.
@@ -924,7 +825,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 
 ## Contra hombre
 
-### Latigazo (ch-01)
+### Chicote Racimo (ch-01)
 - **Formación:** Bunch · **Nivel:** Avanzado
 - **Rutas:** Z: whip · Y: go · X: in · C: hook
 - **Objetivo:** Ganar con un cambio de dirección contra hombre.
@@ -933,7 +834,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** C en el gancho.
 - **Consejo:** El whip se gana con el pie de adentro: se planta fuerte y se regresa. Practícalo sin balón.
 
-### Látigo (ch-02)
+### Chicote (ch-02)
 - **Formación:** Twins · **Nivel:** Intermedio
 - **Rutas:** Y: whip · Z: go · X: slant · C: sit
 - **Objetivo:** Liberar a Y del hombre a hombre.
@@ -941,33 +842,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y en el whip.
 - **Lectura secundaria:** X en el slant.
 - **Consejo:** El QB lanza cuando Y regresa hacia la banda, al hombro de afuera.
-
-### Doble Slant Stack (ch-03)
-- **Formación:** Stack · **Nivel:** Intermedio
-- **Rutas:** Y: slant · Z: out · X: go · C: hook
-- **Objetivo:** Rutas opuestas desde el stack contra hombre.
-- **Descripción:** Y corta adentro y Z afuera. Sus defensores tienen que cruzarse.
-- **Lectura principal:** Y en el slant.
-- **Lectura secundaria:** Z en el out.
-- **Consejo:** Contra hombre, el stack obliga a los defensores a comunicarse. Si no lo hacen, alguien queda libre.
-
-### Pivote (ch-04)
-- **Formación:** Trips Right · **Nivel:** Avanzado
-- **Rutas:** Y: whip · X: out · Z: go · C: hook
-- **Objetivo:** Doble cambio de dirección en trips.
-- **Descripción:** Y hace whip y X sale a la banda. Dos rutas rápidas contra defensores que marcan hombre.
-- **Lectura principal:** Y en el whip.
-- **Lectura secundaria:** X en el out.
-- **Consejo:** Contra hombre, la ruta más rápida gana. No uses rutas largas si el rusher es bueno.
-
-### Slant y Arriba (ch-05)
-- **Formación:** Spread · **Nivel:** Avanzado
-- **Rutas:** X: custom · Z: slant · Y: flat · C: sit
-- **Objetivo:** Doble movimiento contra un defensor agresivo.
-- **Descripción:** X finge el slant y sube. El defensor que se adelanta queda atrás.
-- **Lectura principal:** X en el slant-and-go.
-- **Lectura secundaria:** Z en el slant real.
-- **Consejo:** La finta del QB es obligatoria: bombea el balón hacia el slant antes de lanzar largo.
 
 ### Out y Arriba (ch-06)
 - **Formación:** Twins · **Nivel:** Avanzado
@@ -1027,9 +901,9 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 
 ### Pase del Receptor (js-02)
 - **Formación:** Twins · **Nivel:** Avanzado
-- **Rutas:** Y: screen · Z: go · X: drag · C: hook
+- **Rutas:** Y: screen · Z: go · X: go · C: hook
 - **Objetivo:** Que un receptor lance el pase largo.
-- **Descripción:** El QB lanza la burbuja a Y detrás de la línea. Y se detiene y lanza a Z que corrió vertical.
+- **Descripción:** El QB lanza la burbuja a Y detrás de la línea. Y se detiene y lanza a Z, que corrió vertical. X también sube para llevarse al safety.
 - **Lectura principal:** Z en la vertical, lanzada por Y.
 - **Lectura secundaria:** C en el gancho como salida.
 - **Consejo:** El primer pase debe ir hacia atrás o de lado (lateral). Revisa las reglas de tu liga sobre segundo pase.
@@ -1042,24 +916,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y en el gancho.
 - **Lectura secundaria:** Z recibe el lateral.
 - **Consejo:** Practica el lateral a corta distancia. Un balón suelto es balón muerto en la mayoría de las ligas.
-
-### Pulga (js-04)
-- **Formación:** Spread · **Nivel:** Avanzado
-- **Rutas:** QB: handoff · Y: run · X: go · Z: post · C: hook
-- **Objetivo:** Engañar con una entrega falsa y pase largo.
-- **Descripción:** El QB entrega a Y, que regresa el balón al QB con un lateral. La defensa ya subió y X está solo.
-- **Lectura principal:** X en la vertical.
-- **Lectura secundaria:** Z en el poste.
-- **Consejo:** Funciona solo si ya corriste entregas antes en el partido. La defensa tiene que creerla.
-
-### Regreso al QB (js-05)
-- **Formación:** Spread · **Nivel:** Avanzado
-- **Rutas:** QB: custom · Y: run · X: hook · Z: go · C: drag
-- **Objetivo:** El QB se convierte en receptor.
-- **Descripción:** El QB da lateral a Y, sale hacia la izquierda y recibe el pase de Y.
-- **Lectura principal:** QB saliendo por la izquierda.
-- **Lectura secundaria:** X en el gancho.
-- **Consejo:** Muchas ligas permiten al QB recibir después de un lateral o entrega. Verifica el reglamento antes.
 
 ### Centro Fantasma (js-06)
 - **Formación:** Trips Right · **Nivel:** Intermedio
@@ -1079,15 +935,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** C en el drag.
 - **Consejo:** El rusher suele seguir al QB. Eso le da tiempo extra para lanzar corto.
 
-### Doble Reverso (js-08)
-- **Formación:** Spread · **Nivel:** Avanzado
-- **Rutas:** QB: handoff · Y: run · X: run · Z: go · C: drag
-- **Objetivo:** Dos entregas para cambiar de dirección dos veces.
-- **Descripción:** El QB entrega a Y y Y entrega a X, que viene por detrás hacia la derecha.
-- **Lectura principal:** X corriendo hacia la derecha.
-- **Lectura secundaria:** C en el drag si deciden pasar.
-- **Consejo:** Solo para equipos avanzados. Practica las entregas muchas veces antes de usarla.
-
 ### Estatua (js-09)
 - **Formación:** Twins · **Nivel:** Intermedio
 - **Rutas:** Y: custom · Z: go · X: slant · C: hook
@@ -1096,15 +943,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y con el balón en entrega.
 - **Lectura secundaria:** X en el slant si la defensa no reacciona.
 - **Consejo:** Esto cuenta como entrega. La defensa mira al balón que 'vuela' y se olvida de Y.
-
-### Lateral Cruzado (js-10)
-- **Formación:** Empty · **Nivel:** Avanzado
-- **Rutas:** X: screen · Z: go · Y: custom · C: sit
-- **Objetivo:** Burbuja a X con lateral cruzado a la derecha.
-- **Descripción:** X recibe la burbuja y lanza cruzado a Z, que sube por la derecha.
-- **Lectura principal:** Z esperando el pase cruzado.
-- **Lectura secundaria:** X corre si no hay pase.
-- **Consejo:** El segundo pase debe ir hacia atrás o de lado según tu liga. Enséñalo como lateral largo.
 
 ## Situaciones especiales
 
@@ -1116,15 +954,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y en la zona de anotación.
 - **Lectura secundaria:** C como segundo objetivo.
 - **Consejo:** Designa a un receptor para atrapar y los demás van por el rebote.
-
-### Contra Blitz (se-02)
-- **Formación:** Spread · **Nivel:** Intermedio
-- **Rutas:** C: sit · X: slant · Z: slant · Y: flat
-- **Objetivo:** Pase rápido cuando la defensa manda más de un rusher.
-- **Descripción:** Rutas muy cortas. El balón sale en menos de 2 segundos.
-- **Lectura principal:** C en el sit, donde salió el rusher extra.
-- **Lectura secundaria:** X en el slant.
-- **Consejo:** Enséñale al QB: si vienen dos, el balón sale ya. No hay tiempo para buscar.
 
 ### Cuarta y Corta (se-03)
 - **Formación:** Twins · **Nivel:** Principiante
@@ -1143,15 +972,6 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura principal:** Y en el in profundo.
 - **Lectura secundaria:** Z en el comeback.
 - **Consejo:** Si no hay nada libre profundo, lanza corto y asegura la siguiente oportunidad.
-
-### Banda y Reloj (se-05)
-- **Formación:** Spread · **Nivel:** Intermedio
-- **Rutas:** X: out · Z: out · Y: flat · C: hook
-- **Objetivo:** Ganar yardas y salir por la banda para cuidar el reloj.
-- **Descripción:** Outs a ambos lados. El receptor atrapa y sale del campo.
-- **Lectura principal:** X en el out.
-- **Lectura secundaria:** Z en el out del otro lado.
-- **Consejo:** Revisa las reglas de reloj de tu liga. En muchas, salir por la banda no detiene el tiempo.
 
 ### Primera Jugada (se-06)
 - **Formación:** Bunch · **Nivel:** Intermedio
@@ -1180,7 +1000,7 @@ Los diagramas se ven en la app (Biblioteca). Leyenda: X, Y, Z = receptores · C 
 - **Lectura secundaria:** Z en el out.
 - **Consejo:** Practica el ataque sin huddle: número de jugada en voz alta y todos a la línea.
 
-### Intercepción Evitada (se-09)
+### Cuidar la Ventaja (se-09)
 - **Formación:** Spread · **Nivel:** Principiante
 - **Rutas:** Y: flat · C: hook · X: go · Z: go
 - **Objetivo:** Jugada segura para proteger una ventaja.

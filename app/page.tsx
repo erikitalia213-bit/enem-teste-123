@@ -4,7 +4,6 @@ import {
   Check,
   CheckSquare,
   ClipboardList,
-  Clock,
   Crosshair,
   Dumbbell,
   FileX2,
@@ -16,7 +15,6 @@ import {
   School,
   ShieldCheck,
   ShieldHalf,
-  Shuffle,
   Smartphone,
   Timer,
   Trophy,
@@ -59,7 +57,7 @@ function demoData(): DemoData {
   return { sessions, wristband };
 }
 
-const PROBLEM_ICONS = [FileX2, AlarmClock, Shuffle, FolderX, Clock];
+const PROBLEM_ICONS = [FileX2, AlarmClock, FolderX];
 const FEATURE_ICONS = [PenTool, Library, Timer, Dumbbell, BookOpen, Watch, GraduationCap, Users];
 const BONUS_ICONS = [ClipboardList, CheckSquare, CalendarDays, Trophy, Crosshair, Hand];
 const SHOWCASE = ["pc-04", "pp-03", "rz-01", "cs-03", "sc-01", "mo-02"];
@@ -86,12 +84,16 @@ export default function LandingPage() {
           <div className="absolute inset-0 grid-bg opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" aria-hidden="true" />
           <div className="absolute left-1/2 top-0 -z-0 h-[480px] w-[900px] -translate-x-1/2 rounded-full bg-pitch/60 blur-[120px]" aria-hidden="true" />
           <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pb-24 pt-12 md:px-6 md:pt-20 lg:grid-cols-[1fr_1.05fr] lg:pb-32">
-            <div className="animate-fade-up">
+            <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-volt/30 bg-volt/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-volt">
                 <span className="h-1.5 w-1.5 rounded-full bg-volt" /> {COPY.hero.eyebrow}
               </p>
-              <h1 className="h-display text-[3.4rem] leading-[0.9] sm:text-7xl xl:text-[5.6rem]">
-                {COPY.hero.title.split(" ").slice(0, 2).join(" ")} <span className="text-volt">{COPY.hero.title.split(" ").slice(2).join(" ")}</span>
+              <h1 className="h-display text-[2.9rem] leading-[0.92] sm:text-7xl xl:text-[5.2rem]">
+                {COPY.hero.titleLines.map((l, i) => (
+                  <span key={l} className={i === COPY.hero.titleLines.length - 1 ? "block text-volt" : "block"}>
+                    {l}
+                  </span>
+                ))}
               </h1>
               <p className="mt-6 max-w-xl text-lg text-mist-2 sm:text-xl">{COPY.hero.subtitle}</p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -129,10 +131,16 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ================= DEMO ================= */}
+        <section id="demo" className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 pt-16 md:px-6">
+          <SectionTitle eyebrow="Demo en vivo" title={COPY.demo.title} subtitle={COPY.demo.subtitle} />
+          <Demo data={demoData()} />
+        </section>
+
         {/* ================= PROBLEMA ================= */}
         <section className="mx-auto max-w-7xl px-4 py-24 md:px-6">
           <SectionTitle title={COPY.problem.title} />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-4 sm:grid-cols-3">
             {COPY.problem.items.map((it, i) => {
               const Icon = PROBLEM_ICONS[i];
               return (
@@ -171,12 +179,6 @@ export default function LandingPage() {
               })}
             </div>
           </div>
-        </section>
-
-        {/* ================= DEMO ================= */}
-        <section id="demo" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-24 md:px-6">
-          <SectionTitle eyebrow="Demo en vivo" title={COPY.demo.title} subtitle={COPY.demo.subtitle} />
-          <Demo data={demoData()} />
         </section>
 
         {/* ================= CÓMO FUNCIONA ================= */}

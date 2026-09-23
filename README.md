@@ -16,7 +16,7 @@ Producto digital completo listo para vender en México: aplicación web, bibliot
 | Landing page | Hero, problema, sistema, demo interactiva real, cómo funciona, biblioteca, profesores, bonus, precio, garantía neutra, FAQ, footer | `/` · `app/page.tsx` |
 | App (dashboard) | Saludo, 8 herramientas, estadísticas, acceso rápido, jugada del día | `/app` |
 | Creador de jugadas | Campo 5x5 interactivo: mover jugadores, rutas por plantilla o punto por punto, colores, trazos, texto, zonas, motion, ataque/defensa, 7 formaciones, deshacer/rehacer, voltear, PNG, guardar/duplicar/borrar, agregar al playbook | `/app/crear` |
-| Biblioteca | **130 jugadas originales** en 13 categorías con diagrama, formación, objetivo, descripción, lecturas, consejo y nivel. Filtros + búsqueda | `/app/biblioteca` |
+| Biblioteca | **110 jugadas originales** (auditadas una por una) en 13 categorías con diagrama, formación, objetivo, descripción, lecturas, consejo y nivel. Filtros + búsqueda | `/app/biblioteca` |
 | Playbook | Varios playbooks, datos del equipo, 5 secciones, drag & drop, numeración automática, vista de impresión (1/2/4 por hoja), exportar/importar JSON | `/app/playbook` |
 | Tarjetas para muñequera | 6/9/12/18 jugadas, carta/A4, 3 tamaños, numeración configurable, hoja del coach | `/app/munequeras` |
 | Generador de entrenamientos | Edad, nivel, duración, jugadores y objetivo → sesión por reglas internas. Guardar, editar, duplicar, imprimir | `/app/entrenamientos` |

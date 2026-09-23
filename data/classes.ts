@@ -21,7 +21,7 @@ const classes: C[] = [
     main: ["Explica en 3 minutos: dos equipos, se avanza con pases, no hay contacto, se detiene al rival quitándole la flag.", "Cada alumno se coloca su cinturón. Revisa que las flags cuelguen a los lados.", "Juego 'Tag de colas' en un cuadro de 20x20: todos intentan quitar flags y proteger las propias (sin taparlas con las manos).", "En parejas: pases libres a 5 pasos para conocer el balón."],
     finalGame: ["'Lleva el balón a casa': equipos de 5. El equipo con balón intenta cruzar la línea contraria; la defensa los detiene quitando flags. Sin pases todavía."],
     cooldown: ["Caminata y respiración.", "Pregunta: ¿qué es lo que más les gustó? ¿Qué regla recuerdan?"],
-    safety: [...BASE_SAFETY, "Prohibido empujar, jalar ropa o tacklear.", "Las flags nunca se amarran; deben poder retirarse con facilidad."],
+    safety: [...BASE_SAFETY, "Prohibido empujar, jalar ropa o taclear.", "Las flags nunca se amarran; deben poder retirarse con facilidad."],
   },
   {
     title: "El pase",

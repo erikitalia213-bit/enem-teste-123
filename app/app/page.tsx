@@ -98,7 +98,7 @@ export default function Dashboard() {
           </h2>
           <ul className="divide-y divide-line">
             {[
-              { href: "/app/biblioteca/", icon: Library, t: "Biblioteca de 130 jugadas", d: "Filtra por categoría, nivel y formación." },
+              { href: "/app/biblioteca/", icon: Library, t: "Biblioteca de 110 jugadas", d: "Filtra por categoría, nivel y formación." },
               { href: "/app/bonus/entrenamientos-listos/", icon: Sparkles, t: "50 entrenamientos listos", d: "Elige uno y llévalo al campo hoy." },
               { href: "/app/munequeras/", icon: Watch, t: "Imprimir tarjetas para muñequera", d: "6, 9, 12 o 18 jugadas por tarjeta." },
               { href: "/app/tracker/", icon: BarChart3, t: "Registrar estadísticas", d: "Pases, recepciones, TD, INT y flags." },

@@ -35,7 +35,7 @@
 **Notas de seguridad**
 - Revisa que el área esté libre de piedras, hoyos y objetos.
 - Hidratación antes, durante y después de la clase.
-- Prohibido empujar, jalar ropa o tacklear.
+- Prohibido empujar, jalar ropa o taclear.
 - Las flags nunca se amarran; deben poder retirarse con facilidad.
 
 ---

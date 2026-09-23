@@ -49,7 +49,7 @@ export default function MisJugadasPage() {
                 <PenTool size={17} /> Crear mi primera jugada
               </LinkButton>
               <LinkButton href="/app/biblioteca/" variant="secondary">
-                Explorar 130 jugadas
+                Explorar la biblioteca
               </LinkButton>
             </div>
           }

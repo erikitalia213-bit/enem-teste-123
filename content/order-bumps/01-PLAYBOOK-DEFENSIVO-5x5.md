@@ -86,7 +86,7 @@ Tres defensores dividen el fondo en tercios. El apoyador cuida todo lo corto en 
 Cuatro defensores dividen el campo en cuatro carriles verticales.
 
 **Fortalezas**
-- Casi imposible completar pases profundos.
+- Dificulta mucho los pases profundos.
 - Buena contra cuatro verticales.
 
 **Debilidades**
@@ -495,7 +495,7 @@ Todos en el fondo, dentro de la zona de anotación. Se permite cualquier pase co
 
 **Fortalezas**
 - Evita el touchdown en la última jugada.
-- Muchos defensores para pelear el balón.
+- Muchos defensores para disputar el balón.
 
 **Debilidades**
 - Pases cortos totalmente libres.

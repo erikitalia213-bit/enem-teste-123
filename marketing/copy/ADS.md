@@ -5,7 +5,7 @@ Tono: coach a coach, español de México, directo, sin promesas de resultados de
 ## Hooks (primeras líneas)
 1. Coach, ¿todavía dibujas tus jugadas en hojas?
 2. Tu próximo entrenamiento puede estar listo en 10 segundos.
-3. 130 jugadas de tocho bandera listas para usar.
+3. 110 jugadas de tocho bandera listas para usar.
 4. Grita “¡07!” y todo tu equipo sabe qué jugada es.
 5. ¿Tu primer equipo de tocho bandera? No empieces desde cero.
 6. Profe: 20 clases de tocho bandera listas para tu grupo.
@@ -16,7 +16,7 @@ Tono: coach a coach, español de México, directo, sin promesas de resultados de
 **A — Dolor / solución**
 > Coach, si tus jugadas viven en hojas sueltas y fotos del celular, FLAGLAB es para ti.
 > ✅ Crea jugadas en un campo 5x5
-> ✅ 130 jugadas listas con diagrama y lecturas
+> ✅ 110 jugadas listas con diagrama y lecturas
 > ✅ Entrenamientos completos en segundos
 > ✅ Imprime tu playbook y tarjetas para muñequera
 > Acceso inmediato desde tu celular. Pago único.
@@ -31,7 +31,7 @@ Tono: coach a coach, español de México, directo, sin promesas de resultados de
 
 ## Titulares (≤ 40 caracteres)
 - Deja de improvisar tus entrenamientos
-- 130 jugadas de tocho bandera
+- 110 jugadas de tocho bandera
 - Tu playbook listo para imprimir
 - Entrenamientos en segundos
 - Tarjetas para muñequera en 1 minuto

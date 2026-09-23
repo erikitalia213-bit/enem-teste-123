@@ -25,7 +25,7 @@ Regenerar todo: `npm run creatives` · Solo exportar PNG después de editar los 
 **Copy sugerido para el anuncio (texto principal):**
 > Coach, si tus jugadas viven en hojas arrugadas y fotos del celular, esto es para ti. 🏈
 > Con FLAGLAB 5x5 diseñas jugadas, armas tu playbook y lo llevas al campo en minutos.
-> ✅ 130 jugadas listas ✅ Creador de jugadas ✅ Entrenamientos en segundos
+> ✅ 110 jugadas listas ✅ Creador de jugadas ✅ Entrenamientos en segundos
 > 👉 Conoce FLAGLAB
 
 **Titular:** Deja de improvisar tus entrenamientos · **Descripción:** Tocho bandera 5x5
@@ -38,17 +38,17 @@ Regenerar todo: `npm run creatives` · Solo exportar PNG después de editar los 
 | Elemento | Contenido |
 |---|---|
 | Hook | 100+ JUGADAS LISTAS PARA USAR |
-| Visual | Muchos diagramas flotando al fondo (desenfocados/rotados) que “entran” a un playbook digital blanco con 4 jugadas numeradas y la etiqueta “130 jugadas”. |
+| Visual | Muchos diagramas flotando al fondo (desenfocados/rotados) que “entran” a un playbook digital blanco con 4 jugadas numeradas y la etiqueta “110 jugadas”. |
 | Copy | Elige. Edita. Entrena. |
 | CTA | FLAGLAB 5x5 |
 | Emoción | Abundancia y ahorro de tiempo. |
 
 **Copy sugerido para el anuncio:**
-> ¿Te quedaste sin ideas de jugadas? 130 jugadas originales de tocho bandera 5x5, con diagrama, lecturas y consejo para el coach.
+> ¿Te quedaste sin ideas de jugadas? 110 jugadas originales de tocho bandera 5x5, con diagrama, lecturas y consejo para el coach.
 > Elige. Edita. Entrena.
 > Para principiantes, zona roja, conversiones, screens y más.
 
-**Titular:** 130 jugadas de tocho bandera · **Descripción:** Con diagrama y lecturas
+**Titular:** 110 jugadas de tocho bandera · **Descripción:** Con diagrama y lecturas
 
 ---
 

@@ -71,7 +71,7 @@
 
 ### Movilidad de cadera y hombro
 - **Objetivo:** Preparar cadera y hombros para cortes y lanzamientos.
-- **Edad:** 9-11, 12-14, 15-17, Adultos · **Nivel:** Principiante · **Jugadores:** Todo el equipo (mín. 1) · **Duración:** 6 min
+- **Edad:** 6-8, 9-11, 12-14, 15-17, Adultos · **Nivel:** Principiante · **Jugadores:** Todo el equipo (mín. 1) · **Duración:** 6 min
 - **Material:** Ninguno
 - **Organización:** Jugadores en fila o en círculo con espacio entre ellos.
 
@@ -100,7 +100,7 @@
 
 **Cómo hacerlo**
 1. A la señal, todos intentan quitar flags a los demás mientras protegen los suyos.
-2. Quien pierde las dos flags hace 5 saltos y regresa.
+2. Quien pierde las dos flags sale del cuadro, se las vuelve a colocar y regresa.
 3. Rondas de 60 segundos.
 
 **Variaciones**
@@ -494,7 +494,7 @@
 - Atacar de frente sin ángulo.
 - Dejar el lado de adentro abierto.
 
-> 💡 La banda es tu mejor defensor. Enseña a empujar al atacante hacia ella.
+> 💡 La banda es tu mejor defensor. Enseña a dirigir al atacante hacia ella con la posición del cuerpo, sin tocarlo.
 
 ### Retiro en ángulo
 - **Objetivo:** Perseguir con el ángulo correcto sin pasarse.
@@ -995,7 +995,7 @@
 - **Objetivo:** Atacar el balón en el punto más alto.
 - **Edad:** 6-8, 9-11, 12-14, 15-17, Adultos · **Nivel:** Principiante · **Jugadores:** 3-8 (mín. 2) · **Duración:** 8 min
 - **Material:** Balones
-- **Organización:** Defensor a 5 yardas del coach. El coach lanza pases altos.
+- **Organización:** Defensor a 5 yardas del coach. El coach lanza pases a media altura (6-8 años) o altos (9 años en adelante). Área libre de obstáculos y piso sin piedras.
 
 **Cómo hacerlo**
 1. El defensor sale hacia el balón.
@@ -1004,14 +1004,14 @@
 4. 10 repeticiones.
 
 **Variaciones**
-- Con un receptor compitiendo.
+- Con un receptor compitiendo (solo 12 años en adelante): cada uno ataca el balón desde su lado, sin chocar ni empujar.
 - Pases de más lejos.
 
 **Errores comunes**
 - Esperar a que el balón baje.
 - Atrapar con el pecho.
 
-> 💡 El balón es tanto del defensor como del receptor. Enséñales a pelearlo.
+> 💡 El balón es tanto del defensor como del receptor: enséñales a atacarlo con decisión, siempre sin contacto.
 
 ## Comunicación
 
@@ -1061,7 +1061,7 @@
 
 ### Teléfono de jugada
 - **Objetivo:** Mejorar la memoria de jugadas y la comunicación.
-- **Edad:** 6-8, 9-11, 12-14 · **Nivel:** Principiante · **Jugadores:** 6-12 (mín. 5) · **Duración:** 6 min
+- **Edad:** 6-8, 9-11, 12-14, 15-17 · **Nivel:** Principiante · **Jugadores:** 6-12 (mín. 5) · **Duración:** 6 min
 - **Material:** Tarjetas con jugadas
 - **Organización:** Equipo en fila.
 
@@ -1416,10 +1416,10 @@
 - **Objetivo:** Preparar el partido con tiempos y reglas reales.
 - **Edad:** 12-14, 15-17, Adultos · **Nivel:** Avanzado · **Jugadores:** 10+ (mín. 10) · **Duración:** 20 min
 - **Material:** Balones, Conos, Cinturones con flags, Cronómetro
-- **Organización:** Campo oficial. Tiempo real.
+- **Organización:** Campo con las medidas de tu liga. Tiempo real.
 
 **Cómo hacerlo**
-1. Dos tiempos cortos con reglas oficiales.
+1. Dos tiempos cortos con las reglas de tu liga.
 2. Llamadas desde la banda.
 3. Tiempos fuera y sustituciones.
 4. Análisis breve al final.
@@ -1495,7 +1495,7 @@
 
 **Variaciones**
 - En parejas platicando lo mejor del día.
-- Con los ojos cerrados en los últimos 10 pasos (en fila, tomados del hombro).
+- Cada jugador dice en voz alta una cosa que mejoró hoy.
 
 **Errores comunes**
 - Sentarse de golpe.
@@ -1505,7 +1505,7 @@
 
 ### Juego tranquilo de puntería
 - **Objetivo:** Cerrar con un reto divertido de baja intensidad.
-- **Edad:** 6-8, 9-11, 12-14 · **Nivel:** Principiante · **Jugadores:** Todo el equipo (mín. 2) · **Duración:** 5 min
+- **Edad:** 6-8, 9-11, 12-14, 15-17, Adultos · **Nivel:** Principiante · **Jugadores:** Todo el equipo (mín. 2) · **Duración:** 5 min
 - **Material:** Balones, Cubeta o aro
 - **Organización:** Cubeta o aro a 5 yardas.
 
