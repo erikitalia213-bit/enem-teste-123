@@ -10,6 +10,7 @@ import { DURATION_NOTES } from "@/data/trainingTemplates";
 import { generateTraining } from "@/lib/generator";
 import { uid } from "@/lib/field";
 import { useTrainings } from "@/lib/hooks";
+import { useContent } from "@/components/app/ContentProvider";
 import { AGE_GROUPS, DURATIONS, LEVELS, TRAINING_GOALS, type AgeGroup, type Level, type TrainingGoal, type TrainingSession } from "@/lib/types";
 import { KEYS, useStored } from "@/lib/storage";
 
@@ -25,6 +26,7 @@ export default function EntrenamientosPage() {
   const router = useRouter();
   const toast = useToast();
   const { items, upsert, remove } = useTrainings();
+  const drills = useContent().core.drills;
   const [prefs, setPrefs] = useStored<{ gen?: GenPrefs }>(KEYS.prefs, {});
   const g: GenPrefs = { age: "9-11", level: "Principiante", duration: 60, players: 10, goal: "Pase", ...prefs.gen };
   const setG = (patch: Partial<GenPrefs>) => setPrefs((p) => ({ ...p, gen: { ...g, ...p.gen, ...patch } }));
@@ -33,7 +35,7 @@ export default function EntrenamientosPage() {
   const resultRef = useRef<HTMLDivElement>(null);
 
   const generate = (nextSeed = seed) => {
-    const s = generateTraining({ ...g, seed: nextSeed * 7919 + g.players * 31 + g.duration });
+    const s = generateTraining({ ...g, seed: nextSeed * 7919 + g.players * 31 + g.duration }, drills);
     setSession(s);
     setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
   };

@@ -4,7 +4,8 @@ import { useDeferredValue, useMemo, useState } from "react";
 import { BookmarkPlus, PenTool, Search, SlidersHorizontal } from "lucide-react";
 import { PlayCard } from "@/components/plays/PlayCard";
 import { Button, EmptyState, LinkButton, PageHeader, cn, useToast } from "@/components/ui";
-import { PLAYS, PLAY_CATEGORIES } from "@/data/plays";
+import { PLAY_CATEGORIES } from "@/lib/constants";
+import { useContent } from "@/components/app/ContentProvider";
 import { FORMATIONS } from "@/lib/field";
 import { useAddToPlaybook } from "@/lib/hooks";
 import { LEVELS } from "@/lib/types";
@@ -15,6 +16,7 @@ const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCa
 
 export default function BibliotecaPage() {
   const toast = useToast();
+  const PLAYS = useContent().core.plays;
   const { add } = useAddToPlaybook();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string>("Todas");
@@ -32,7 +34,7 @@ export default function BibliotecaPage() {
         (formation === "Todas" || p.formation === formation) &&
         (!nq || norm(`${p.name} ${p.objective} ${p.description} ${p.category} ${p.tags?.join(" ") ?? ""}`).includes(nq)),
     );
-  }, [dq, cat, level, formation]);
+  }, [PLAYS, dq, cat, level, formation]);
 
   const reset = () => {
     setQ("");

@@ -7,11 +7,13 @@ import { BumpGate } from "@/components/app/BumpGate";
 import { LogoMark } from "@/components/brand/Logo";
 import { ClassView } from "@/components/content/ClassView";
 import { Button, Card, Field, PageHeader, cn } from "@/components/ui";
-import { DIPLOMA_TYPES, RUBRIC, RUBRIC_LEVELS, SCHOOL_KIT_CLASSES, SCHOOL_PLAN, SCHOOL_TOURNAMENT_GUIDE } from "@/data/schoolKit";
+import { DIPLOMA_TYPES } from "@/lib/constants";
+import { useContent } from "@/components/app/ContentProvider";
 
 type Tab = "clases" | "plan" | "evaluacion" | "torneo" | "diplomas";
 
-export default function KitEscolarPage() {
+function KitEscolar() {
+  const { classes: SCHOOL_KIT_CLASSES, plan: SCHOOL_PLAN, rubric: RUBRIC, rubricLevels: RUBRIC_LEVELS, tournamentGuide: SCHOOL_TOURNAMENT_GUIDE } = useContent().schoolKit!;
   const [tab, setTab] = useState<Tab>("clases");
   const [open, setOpen] = useState<string | null>(SCHOOL_KIT_CLASSES[0].id);
   const [printClass, setPrintClass] = useState<string | null>(null);
@@ -30,7 +32,6 @@ export default function KitEscolarPage() {
   ];
 
   return (
-    <BumpGate id="escolar">
       <div className="animate-fade-up">
         <PageHeader
           eyebrow="Extra"
@@ -253,6 +254,13 @@ export default function KitEscolarPage() {
           </div>
         )}
       </div>
+  );
+}
+
+export default function KitEscolarPage() {
+  return (
+    <BumpGate id="school_coach_kit">
+      <KitEscolar />
     </BumpGate>
   );
 }

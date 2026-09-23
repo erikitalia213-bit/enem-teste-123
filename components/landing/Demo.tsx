@@ -4,10 +4,11 @@ import { useMemo, useState } from "react";
 import { PenTool, Timer, Watch } from "lucide-react";
 import { PlayDiagram } from "@/components/diagram/PlayDiagram";
 import { cn } from "@/components/ui";
-import { PLAY_MAP } from "@/data/plays";
 import { ROUTE_TYPES, buildDiagram } from "@/lib/field";
-import { generateTraining } from "@/lib/generator";
-import { TRAINING_GOALS, type RouteType, type TrainingGoal } from "@/lib/types";
+import type { Diagram, RouteType, TrainingGoal } from "@/lib/types";
+
+export type DemoBlock = { id: string; phase: string; title: string; objective: string; minutes: number };
+export type DemoData = { sessions: Partial<Record<TrainingGoal, DemoBlock[]>>; wristband: { id: string; name: string; diagram: Diagram }[] };
 
 const DEMO_ROUTES = ROUTE_TYPES.filter((r) => r.id !== "custom" && r.id !== "screen");
 
@@ -54,15 +55,16 @@ function RouteDemo() {
   );
 }
 
-function TrainingDemo() {
-  const [goal, setGoal] = useState<TrainingGoal>("Flag pulling");
-  const session = useMemo(() => generateTraining({ age: "9-11", level: "Principiante", duration: 60, players: 10, goal, seed: 42 }), [goal]);
+function TrainingDemo({ sessions }: { sessions: DemoData["sessions"] }) {
+  const goals = Object.keys(sessions) as TrainingGoal[];
+  const [goal, setGoal] = useState<TrainingGoal>(goals[0]);
+  const blocks = sessions[goal] ?? [];
   return (
     <div className="grid gap-5 md:grid-cols-[240px_1fr]">
       <div>
         <p className="mb-2 text-sm text-mist-2">Objetivo del entrenamiento (9-11 años · 60 min):</p>
         <div className="flex flex-wrap gap-1.5 md:flex-col">
-          {TRAINING_GOALS.slice(0, 6).map((g) => (
+          {goals.map((g) => (
             <button key={g} type="button" aria-pressed={goal === g} onClick={() => setGoal(g)} className={cn("rounded-lg border px-3 py-2 text-left text-sm font-semibold", goal === g ? "border-volt bg-volt/15 text-volt" : "border-line-2 text-mist-2 hover:text-snow")}>
               {g}
             </button>
@@ -70,7 +72,7 @@ function TrainingDemo() {
         </div>
       </div>
       <ol className="space-y-2">
-        {session.blocks.map((b) => (
+        {blocks.map((b) => (
           <li key={b.id} className="flex items-center gap-3 rounded-xl border border-line bg-ink-2 p-3">
             <span className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-lg bg-volt text-ink">
               <span className="font-display text-xl font-extrabold leading-none">{b.minutes}</span>
@@ -88,19 +90,18 @@ function TrainingDemo() {
   );
 }
 
-function WristbandDemo() {
-  const ids = ["pc-01", "cs-10", "pr-06", "rz-02", "sc-01", "cv-01", "mo-10", "cz-01", "pp-01"];
+function WristbandDemo({ plays }: { plays: DemoData["wristband"] }) {
   return (
     <div className="grid items-center gap-6 md:grid-cols-[1fr_260px]">
       <div className="mx-auto w-full max-w-md rounded-xl bg-white p-2 shadow-2xl">
         <div className="grid grid-cols-3 border-2 border-[#111]">
-          {ids.map((id, i) => (
-            <div key={id} className="border border-[#bbb] p-1">
+          {plays.map((p, i) => (
+            <div key={p.id} className="border border-[#bbb] p-1">
               <div className="flex items-baseline gap-1">
                 <span className="font-display text-lg font-extrabold leading-none text-[#111]">{String(i + 1).padStart(2, "0")}</span>
-                <span className="truncate text-[0.55rem] font-bold uppercase text-[#111]">{PLAY_MAP[id].name}</span>
+                <span className="truncate text-[0.55rem] font-bold uppercase text-[#111]">{p.name}</span>
               </div>
-              <PlayDiagram diagram={PLAY_MAP[id].diagram} theme="print" compact showNotes={false} />
+              <PlayDiagram diagram={p.diagram} theme="print" compact showNotes={false} />
             </div>
           ))}
         </div>
@@ -125,7 +126,7 @@ const TABS = [
   { id: "muneca", label: "Imprime tu muñequera", icon: Watch },
 ] as const;
 
-export function Demo() {
+export function Demo({ data }: { data: DemoData }) {
   const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("jugada");
   return (
     <div className="card overflow-hidden">
@@ -141,8 +142,8 @@ export function Demo() {
       </div>
       <div className="p-4 sm:p-6" role="tabpanel">
         {tab === "jugada" && <RouteDemo />}
-        {tab === "entreno" && <TrainingDemo />}
-        {tab === "muneca" && <WristbandDemo />}
+        {tab === "entreno" && <TrainingDemo sessions={data.sessions} />}
+        {tab === "muneca" && <WristbandDemo plays={data.wristband} />}
       </div>
     </div>
   );

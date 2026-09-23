@@ -3,14 +3,15 @@
 import Link from "next/link";
 import { CalendarCheck, Printer } from "lucide-react";
 import { Badge, Button, Card, PageHeader, cn } from "@/components/ui";
-import { PLAN_30 } from "@/data/bonuses";
-import { getReadySession } from "@/data/readySessions";
+import { useContent } from "@/components/app/ContentProvider";
 import { KEYS, useStored } from "@/lib/storage";
 
 const TONE = { Entrenamiento: "volt", Coach: "sky", Descanso: "default", Partido: "amber" } as const;
 
 export default function Plan30Page() {
   const [done, setDone] = useStored<number[]>(KEYS.plan30, []);
+  const { plan30: PLAN_30, readySessions } = useContent().core;
+  const getReadySession = (id: string) => readySessions.find((s) => s.id === id);
   const pct = Math.round((done.length / PLAN_30.length) * 100);
   return (
     <div className="animate-fade-up">

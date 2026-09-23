@@ -1,11 +1,9 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import { BUMP_UNLOCK_CODES, type OrderBumpId } from "@/config";
-import { DEFENSE_MAP, type DefenseScheme } from "@/data/defense";
-import { PLAY_MAP } from "@/data/plays";
+import { useAccount, useContent } from "@/components/app/ContentProvider";
 import { KEYS, useCollection, useStored } from "./storage";
-import type { Play, Playbook, PlayRef, Player, TrackerSession, TrainingSession, DepthChart } from "./types";
+import type { DefenseScheme, Play, Playbook, PlayRef, Player, TrackerSession, TrainingSession, DepthChart } from "./types";
 
 /* ---------------- Perfil ---------------- */
 
@@ -15,9 +13,15 @@ export interface Profile {
   createdAt: number;
 }
 
+/**
+ * Nombre del coach y del equipo. Vienen de la cuenta (servidor) y el coach
+ * puede personalizarlos; la versión editada se guarda localmente.
+ */
 export function useProfile() {
-  const [profile, setProfile, hydrated] = useStored<Profile | null>(KEYS.profile, null);
-  return { profile, setProfile, hydrated };
+  const account = useAccount();
+  const [local, setLocal, hydrated] = useStored<Profile | null>(KEYS.profile, null);
+  const profile: Profile = local ?? { coachName: account.coachName, teamName: account.teamName, createdAt: 0 };
+  return { profile, setProfile: (p: Profile) => setLocal(p), hydrated };
 }
 
 /* ---------------- Colecciones ---------------- */
@@ -49,15 +53,28 @@ export function defenseAsPlay(s: DefenseScheme): Play {
   };
 }
 
+export function useLibraryMaps() {
+  const content = useContent();
+  return useMemo(
+    () => ({
+      plays: Object.fromEntries(content.core.plays.map((p) => [p.id, p])) as Record<string, Play>,
+      drills: Object.fromEntries(content.core.drills.map((d) => [d.id, d])),
+      defense: Object.fromEntries((content.defense?.schemes ?? []).map((d) => [d.id, d])) as Record<string, DefenseScheme>,
+    }),
+    [content],
+  );
+}
+
 export function useResolvePlay() {
   const { items } = usePlays();
+  const maps = useLibraryMaps();
   return useCallback(
     (ref: PlayRef): Play | undefined => {
-      if (ref.source === "library") return PLAY_MAP[ref.id];
-      if (ref.source === "defense") return DEFENSE_MAP[ref.id] ? defenseAsPlay(DEFENSE_MAP[ref.id]) : undefined;
+      if (ref.source === "library") return maps.plays[ref.id];
+      if (ref.source === "defense") return maps.defense[ref.id] ? defenseAsPlay(maps.defense[ref.id]) : undefined;
       return items.find((p) => p.id === ref.id);
     },
-    [items],
+    [items, maps],
   );
 }
 
@@ -120,18 +137,3 @@ export function useAddToPlaybook() {
   return { add, active, playbooks: items, setActive: (id: string) => setPrefs((p) => ({ ...p, activePlaybook: id })) };
 }
 
-/* ---------------- Order bumps ---------------- */
-
-export function useUnlocked(id: OrderBumpId) {
-  const [unlocks, setUnlocks] = useStored<string[]>(KEYS.unlocks, []);
-  const code = BUMP_UNLOCK_CODES[id];
-  const unlocked = !code || unlocks.includes(id);
-  const tryUnlock = (input: string) => {
-    if (input.trim().toUpperCase() === code.trim().toUpperCase()) {
-      setUnlocks((u) => Array.from(new Set([...u, id])));
-      return true;
-    }
-    return false;
-  };
-  return { unlocked, tryUnlock };
-}

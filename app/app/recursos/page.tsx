@@ -3,20 +3,20 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, CheckSquare, ClipboardList, Crosshair, Dumbbell, GraduationCap, Hand, Lock, ShieldHalf, Sparkles, Trophy, CalendarDays, School } from "lucide-react";
 import { Badge, PageHeader } from "@/components/ui";
-import { BONUSES } from "@/data/bonuses";
+import { useContent } from "@/components/app/ContentProvider";
 import { ORDER_BUMPS, type OrderBumpId } from "@/config";
-import { useUnlocked } from "@/lib/hooks";
+import { useHas } from "@/components/app/ContentProvider";
 
 const BONUS_ICONS = [ClipboardList, CheckSquare, CalendarDays, Trophy, Crosshair, Hand];
 
 const EXTRAS: { id: OrderBumpId; href: string; desc: string; icon: typeof ShieldHalf }[] = [
-  { id: "defensa", href: "/app/extras/playbook-defensivo/", desc: "30 esquemas defensivos con diagrama, conceptos y situaciones.", icon: ShieldHalf },
-  { id: "pack50", href: "/app/extras/pack-50-entrenamientos/", desc: "50 sesiones por tema: infantiles, posiciones, pretemporada y más.", icon: Dumbbell },
-  { id: "escolar", href: "/app/extras/kit-coach-escolar/", desc: "20 clases extra, planificación, evaluación, torneo y diplomas.", icon: School },
+  { id: "defensive_playbook", href: "/app/extras/playbook-defensivo/", desc: "30 esquemas defensivos con diagrama, conceptos y situaciones.", icon: ShieldHalf },
+  { id: "extra_trainings", href: "/app/extras/pack-50-entrenamientos/", desc: "50 sesiones por tema: infantiles, posiciones, pretemporada y más.", icon: Dumbbell },
+  { id: "school_coach_kit", href: "/app/extras/kit-coach-escolar/", desc: "20 clases extra, planificación, evaluación, torneo y diplomas.", icon: School },
 ];
 
 function ExtraCard({ e }: { e: (typeof EXTRAS)[number] }) {
-  const { unlocked } = useUnlocked(e.id);
+  const unlocked = useHas()(e.id);
   const Icon = e.icon;
   return (
     <Link href={e.href} className="card card-hover group flex gap-4 p-5">
@@ -35,6 +35,7 @@ function ExtraCard({ e }: { e: (typeof EXTRAS)[number] }) {
 }
 
 export default function RecursosPage() {
+  const BONUSES = useContent().core.bonuses;
   return (
     <div className="animate-fade-up">
       <PageHeader eyebrow="Recursos" title="Todo tu material" description="Manual, clases escolares, bonus y complementos. Todo se puede imprimir o guardar como PDF." />

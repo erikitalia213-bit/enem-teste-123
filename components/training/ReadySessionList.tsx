@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ChevronDown, Clock, Printer, Save, Search } from "lucide-react";
 import { Badge, Button, cn, levelTone, useToast } from "@/components/ui";
-import { DRILL_MAP } from "@/data/drills";
+import { useLibraryMaps } from "@/lib/hooks";
 import { blockFromDrill } from "@/lib/generator";
 import { uid } from "@/lib/field";
 import { useTrainings } from "@/lib/hooks";
-import { TRAINING_GOALS, type AgeGroup, type ReadySession, type TrainingSession } from "@/lib/types";
+import { TRAINING_GOALS, type AgeGroup, type Drill, type ReadySession, type TrainingSession } from "@/lib/types";
 
 function toAgeGroup(age: string): AgeGroup {
   const n = parseInt(age, 10);
@@ -20,7 +20,7 @@ function toAgeGroup(age: string): AgeGroup {
   return "Adultos";
 }
 
-export function readyToTraining(rs: ReadySession): TrainingSession {
+export function readyToTraining(rs: ReadySession, DRILL_MAP: Record<string, Drill>): TrainingSession {
   const age = toAgeGroup(rs.age);
   const now = Date.now();
   const goal = TRAINING_GOALS.find((g) => rs.focus.toLowerCase().includes(g.toLowerCase())) ?? "Juego completo";
@@ -45,6 +45,7 @@ export function readyToTraining(rs: ReadySession): TrainingSession {
 export function ReadySessionList({ sessions, groups }: { sessions: ReadySession[]; groups: string[] }) {
   const toast = useToast();
   const { upsert } = useTrainings();
+  const DRILL_MAP = useLibraryMaps().drills;
   const [group, setGroup] = useState(groups[0] ?? "Todas");
   const [q, setQ] = useState("");
   const [open, setOpen] = useState<string | null>(null);
@@ -131,7 +132,7 @@ export function ReadySessionList({ sessions, groups }: { sessions: ReadySession[
                     <Button
                       size="sm"
                       onClick={() => {
-                        upsert(readyToTraining(s));
+                        upsert(readyToTraining(s, DRILL_MAP));
                         toast("Guardado en tus entrenamientos. Ahí puedes editarlo.");
                       }}
                     >

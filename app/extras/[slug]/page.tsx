@@ -78,7 +78,7 @@ export default async function BumpPage({ params }: { params: Promise<{ slug: str
                 ¿Ya lo tienes? Ábrelo en la app →
               </Link>
             </div>
-            {id === "defensa" && (
+            {id === "defensive_playbook" && (
               <div className="grid grid-cols-2 gap-2">
                 {DEFENSE_SCHEMES.slice(0, 4).map((s) => (
                   <div key={s.id} className="card overflow-hidden">
@@ -88,7 +88,7 @@ export default async function BumpPage({ params }: { params: Promise<{ slug: str
                 ))}
               </div>
             )}
-            {id === "pack50" && (
+            {id === "extra_trainings" && (
               <div className="card p-4">
                 <p className="mb-2 text-sm font-semibold text-mist-2">Algunas sesiones del pack</p>
                 <ul className="space-y-1 text-sm">
@@ -101,7 +101,7 @@ export default async function BumpPage({ params }: { params: Promise<{ slug: str
                 </ul>
               </div>
             )}
-            {id === "escolar" && (
+            {id === "school_coach_kit" && (
               <div className="card p-4">
                 <p className="mb-2 text-sm font-semibold text-mist-2">Clases incluidas (21-40)</p>
                 <ol className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">

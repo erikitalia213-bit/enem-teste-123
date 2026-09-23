@@ -15,6 +15,9 @@ export const LOS_Y = 62;
 export const YD = 4;
 /** Línea de 7 yardas para el rusher (reglas comunes de 5x5). */
 export const RUSH_LINE_Y = LOS_Y - 7 * YD;
+/** Límites laterales jugables (1 yarda dentro de la banda). */
+export const SIDELINE_MIN = 4;
+export const SIDELINE_MAX = 96;
 
 export const ROUTE_COLORS = {
   primary: "#49F05A",
@@ -60,31 +63,31 @@ export const FORMATIONS: FormationDef[] = [
     id: "spread",
     name: "Spread",
     description: "Dos receptores abiertos y uno en el backfield junto al QB. Balanceada y fácil de leer.",
-    pos: { QB: QB_POS, C: C_POS, X: { x: 8, y: 64.5 }, Y: { x: 60, y: 73 }, Z: { x: 92, y: 64.5 } },
+    pos: { QB: QB_POS, C: C_POS, X: { x: 13, y: 64.5 }, Y: { x: 60, y: 73 }, Z: { x: 87, y: 64.5 } },
   },
   {
     id: "trips-right",
     name: "Trips Right",
     description: "Tres receptores del lado derecho. Sobrecarga un lado y abre espacio al otro.",
-    pos: { QB: QB_POS, C: C_POS, X: { x: 64, y: 65.5 }, Y: { x: 77, y: 65.5 }, Z: { x: 92, y: 64.5 } },
+    pos: { QB: QB_POS, C: C_POS, X: { x: 62, y: 65.5 }, Y: { x: 74, y: 65.5 }, Z: { x: 87, y: 64.5 } },
   },
   {
     id: "trips-left",
     name: "Trips Left",
     description: "Tres receptores del lado izquierdo. Espejo de Trips Right.",
-    pos: { QB: QB_POS, C: C_POS, X: { x: 8, y: 64.5 }, Y: { x: 23, y: 65.5 }, Z: { x: 36, y: 65.5 } },
+    pos: { QB: QB_POS, C: C_POS, X: { x: 13, y: 64.5 }, Y: { x: 26, y: 65.5 }, Z: { x: 38, y: 65.5 } },
   },
   {
     id: "twins",
     name: "Twins",
     description: "Dos receptores juntos de un lado y uno solo del otro. Ideal para combinaciones de dos rutas.",
-    pos: { QB: QB_POS, C: C_POS, X: { x: 8, y: 64.5 }, Y: { x: 76, y: 65.5 }, Z: { x: 88, y: 64.5 } },
+    pos: { QB: QB_POS, C: C_POS, X: { x: 13, y: 64.5 }, Y: { x: 74, y: 65.5 }, Z: { x: 87, y: 64.5 } },
   },
   {
     id: "stack",
     name: "Stack",
     description: "Dos receptores uno detrás del otro. Complica el cubrimiento hombre a hombre.",
-    pos: { QB: QB_POS, C: C_POS, X: { x: 8, y: 64.5 }, Y: { x: 80, y: 64.5 }, Z: { x: 80, y: 70.5 } },
+    pos: { QB: QB_POS, C: C_POS, X: { x: 13, y: 64.5 }, Y: { x: 80, y: 64.5 }, Z: { x: 80, y: 70.5 } },
   },
   {
     id: "bunch",
@@ -96,7 +99,7 @@ export const FORMATIONS: FormationDef[] = [
     id: "empty",
     name: "Empty",
     description: "Nadie en el backfield más que el QB. Receptores muy abiertos para estirar a la defensa.",
-    pos: { QB: QB_POS, C: C_POS, X: { x: 5, y: 64.5 }, Y: { x: 70, y: 65.5 }, Z: { x: 95, y: 64.5 } },
+    pos: { QB: QB_POS, C: C_POS, X: { x: 10, y: 64.5 }, Y: { x: 70, y: 65.5 }, Z: { x: 90, y: 64.5 } },
   },
 ];
 
@@ -200,11 +203,21 @@ export function buildRoutePoints(type: RouteType, start: Pt, opts: RouteOpts = {
   const i = insideSign(start, opts.dir);
   const o = -i;
   const d = opts.depth;
-  const rel = (pairs: [number, number][]): Pt[] =>
-    pairs.map(([dx, dy]) => ({
-      x: round1(clamp(start.x + dx * YD, 2, 98)),
+  // Convierte yardas relativas a puntos absolutos. Si la ruta se saldría por la banda,
+  // comprime proporcionalmente su desplazamiento horizontal para conservar la forma
+  // (en vez de "aplastarla" contra la línea lateral).
+  const rel = (pairs: [number, number][]): Pt[] => {
+    const xs = pairs.map(([dx]) => start.x + dx * YD);
+    let scale = 1;
+    for (const x of xs) {
+      if (x < SIDELINE_MIN && start.x - x > 0) scale = Math.min(scale, Math.max(0, start.x - SIDELINE_MIN) / (start.x - x));
+      if (x > SIDELINE_MAX && x - start.x > 0) scale = Math.min(scale, Math.max(0, SIDELINE_MAX - start.x) / (x - start.x));
+    }
+    return pairs.map(([dx, dy]) => ({
+      x: round1(clamp(start.x + dx * YD * scale, SIDELINE_MIN, SIDELINE_MAX)),
       y: round1(clamp(start.y + dy * YD, 3, 88)),
     }));
+  };
   const toTop = (yd: number) => Math.max(-((start.y - 5) / YD), -yd);
 
   switch (type) {

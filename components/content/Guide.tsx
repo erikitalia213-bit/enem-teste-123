@@ -3,10 +3,11 @@
 import { Printer } from "lucide-react";
 import { DrillCard } from "@/components/drills/DrillCard";
 import { Button, Card, PageHeader } from "@/components/ui";
-import { DRILL_MAP } from "@/data/drills";
-import type { GuideSection } from "@/data/bonuses";
+import { useLibraryMaps } from "@/lib/hooks";
+import type { GuideData } from "@/lib/content-types";
 
-export function Guide({ eyebrow, guide }: { eyebrow: string; guide: { title: string; intro: string; sections: GuideSection[]; drills: string[] } }) {
+export function Guide({ eyebrow, guide }: { eyebrow: string; guide: GuideData }) {
+  const DRILL_MAP = useLibraryMaps().drills;
   return (
     <div className="animate-fade-up">
       <PageHeader

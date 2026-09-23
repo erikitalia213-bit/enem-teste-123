@@ -1,5 +1,5 @@
 import { Lightbulb } from "lucide-react";
-import type { Block } from "@/data/manual";
+import type { Block } from "@/data/manual-types";
 
 export function Blocks({ blocks }: { blocks: Block[] }) {
   return (

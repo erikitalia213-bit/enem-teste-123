@@ -36,22 +36,7 @@ function d(
   return { id, name, category, level, ages, players: { min: players[0], ideal: players[1] }, material, duration, objective, setup, steps, variations, commonErrors, coachTip };
 }
 
-export const DRILL_CATEGORIES: DrillCategory[] = [
-  "Warm-up",
-  "Pase",
-  "Recepción",
-  "Rutas",
-  "Flag pulling",
-  "Agilidad",
-  "Velocidad",
-  "Ataque",
-  "Defensa",
-  "Comunicación",
-  "QB",
-  "Red Zone",
-  "Juego",
-  "Vuelta a la calma",
-];
+export { DRILL_CATEGORIES } from "@/lib/constants";
 
 export const DRILLS: Drill[] = [
   /* ======================= WARM-UP ======================= */

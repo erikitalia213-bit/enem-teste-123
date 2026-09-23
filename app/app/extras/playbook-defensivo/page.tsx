@@ -5,11 +5,13 @@ import { BookmarkPlus, Printer, ShieldCheck } from "lucide-react";
 import { BumpGate } from "@/components/app/BumpGate";
 import PlayDiagram from "@/components/diagram/PlayDiagram";
 import { Badge, Button, Card, PageHeader, cn, levelTone, useToast } from "@/components/ui";
-import { DEFENSE_CONCEPTS, DEFENSE_GROUPS, DEFENSE_SCHEMES, DEFENSE_SITUATIONS } from "@/data/defense";
+import { DEFENSE_GROUPS } from "@/lib/constants";
+import { useContent } from "@/components/app/ContentProvider";
 import { formationName } from "@/lib/field";
 import { defenseAsPlay, useAddToPlaybook } from "@/lib/hooks";
 
-export default function PlaybookDefensivoPage() {
+function PlaybookDefensivo() {
+  const { schemes: DEFENSE_SCHEMES, concepts: DEFENSE_CONCEPTS, situations: DEFENSE_SITUATIONS } = useContent().defense!;
   const toast = useToast();
   const { add } = useAddToPlaybook();
   const [group, setGroup] = useState<string>("Todas");
@@ -17,7 +19,6 @@ export default function PlaybookDefensivoPage() {
   const list = DEFENSE_SCHEMES.filter((s) => group === "Todas" || s.group === group);
 
   return (
-    <BumpGate id="defensa">
       <div className="animate-fade-up">
         <PageHeader
           eyebrow="Extra"
@@ -155,6 +156,13 @@ export default function PlaybookDefensivoPage() {
           </Card>
         )}
       </div>
+  );
+}
+
+export default function PlaybookDefensivoPage() {
+  return (
+    <BumpGate id="defensive_playbook">
+      <PlaybookDefensivo />
     </BumpGate>
   );
 }

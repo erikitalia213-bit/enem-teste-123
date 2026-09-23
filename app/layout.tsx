@@ -5,6 +5,7 @@ import "@fontsource/barlow-condensed/latin-700.css";
 import "@fontsource/barlow-condensed/latin-800.css";
 import "./globals.css";
 import { Analytics } from "@/components/Analytics";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ToastProvider } from "@/components/ui";
 import { BRAND } from "@/config";
 
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ToastProvider>{children}</ToastProvider>
         <Analytics />
+        <AnalyticsTracker />
       </body>
     </html>
   );

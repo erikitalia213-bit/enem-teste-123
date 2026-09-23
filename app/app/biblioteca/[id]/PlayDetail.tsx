@@ -6,17 +6,19 @@ import { ArrowLeft, BookmarkPlus, Download, PenTool, Printer } from "lucide-reac
 import PlayDiagram from "@/components/diagram/PlayDiagram";
 import { PlayCard } from "@/components/plays/PlayCard";
 import { PlayInfoBlocks } from "@/components/plays/PlayInfoBlocks";
-import { Badge, Button, LinkButton, levelTone, useToast } from "@/components/ui";
-import { PLAYS, PLAY_MAP } from "@/data/plays";
+import { Badge, Button, EmptyState, LinkButton, levelTone, useToast } from "@/components/ui";
+import { useContent } from "@/components/app/ContentProvider";
 import { FORMATION_MAP, formationName } from "@/lib/field";
 import { downloadSvgAsPng, slugify } from "@/lib/exportImage";
 import { useAddToPlaybook } from "@/lib/hooks";
 
 export function PlayDetail({ id }: { id: string }) {
-  const play = PLAY_MAP[id];
+  const PLAYS = useContent().core.plays;
+  const play = PLAYS.find((p) => p.id === id);
   const toast = useToast();
   const { add } = useAddToPlaybook();
   const ref = useRef<HTMLDivElement>(null);
+  if (!play) return <EmptyState title="Jugada no encontrada" action={<LinkButton href="/app/biblioteca/">Ir a la biblioteca</LinkButton>} />;
   const related = PLAYS.filter((p) => p.category === play.category && p.id !== play.id).slice(0, 3);
   const idx = PLAYS.findIndex((p) => p.id === id);
   const prev = PLAYS[idx - 1];

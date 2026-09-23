@@ -12,25 +12,16 @@
 import { LOS_Y, ROUTE_COLORS, offensePlayers } from "@/lib/field";
 import type { Diagram, DiagramPlayer, DiagramRoute, DiagramZone, FormationId, Level } from "@/lib/types";
 
-export type DefenseGroup = "Zona" | "Hombre" | "Presión" | "Mixtas" | "Situacionales";
-export const DEFENSE_GROUPS: DefenseGroup[] = ["Zona", "Hombre", "Presión", "Mixtas", "Situacionales"];
+import { DEFENSE_GROUPS } from "@/lib/constants";
+import type { DefenseGroup } from "@/lib/types";
+export { DEFENSE_GROUPS };
+export type { DefenseGroup };
 
 type Action = { z: [number, number, number, number] } | { d: [number, number] } | { m: string } | "rush" | undefined;
 type Def = [label: string, x: number, y: number, action?: Action];
 
-export interface DefenseScheme {
-  id: string;
-  name: string;
-  group: DefenseGroup;
-  level: Level;
-  vs: FormationId;
-  diagram: Diagram;
-  concept: string;
-  strengths: string[];
-  weaknesses: string[];
-  whenToUse: string;
-  coachTip: string;
-}
+import type { DefenseScheme } from "@/lib/types";
+export type { DefenseScheme };
 
 const ZONE_COLORS = ["#5AC8FA", "#49F05A", "#FFD23F", "#FF6BD6", "#9DA3A3"];
 

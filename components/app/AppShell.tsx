@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { useState, type ReactNode } from "react";
 import {
   BookOpen,
   ClipboardList,
@@ -24,6 +24,8 @@ import {
 import { Logo } from "@/components/brand/Logo";
 import { cn } from "@/components/ui";
 import { useProfile } from "@/lib/hooks";
+import { useAccount } from "@/components/app/ContentProvider";
+import { SignOutButton } from "@/components/app/SignOutButton";
 
 export const NAV = [
   { href: "/app/", label: "Inicio", icon: Home, exact: true },
@@ -54,8 +56,8 @@ function isActive(pathname: string, href: string, exact?: boolean) {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname() || "/app/";
-  const router = useRouter();
-  const { profile, hydrated } = useProfile();
+  const { profile } = useProfile();
+  const account = useAccount();
   const [menuOpen, setMenuOpen] = useState(false);
   const [lastPath, setLastPath] = useState(pathname);
 
@@ -63,23 +65,6 @@ export function AppShell({ children }: { children: ReactNode }) {
   if (lastPath !== pathname) {
     setLastPath(pathname);
     setMenuOpen(false);
-  }
-
-  useEffect(() => {
-    if (hydrated && !profile) router.replace("/entrar/");
-  }, [hydrated, profile, router]);
-
-  if (!hydrated || !profile) {
-    return (
-      <div className="flex min-h-dvh items-center justify-center" aria-busy="true">
-        <div className="flex flex-col items-center gap-4">
-          <Logo />
-          <div className="h-1 w-32 overflow-hidden rounded-full bg-line">
-            <div className="h-full w-1/2 animate-pulse rounded-full bg-volt" />
-          </div>
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -113,6 +98,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           <p className="text-xs text-mist">Coach</p>
           <p className="truncate font-semibold">{profile.coachName}</p>
           {profile.teamName && <p className="truncate text-xs text-volt">{profile.teamName}</p>}
+          <p className="mt-1 truncate text-[0.7rem] text-mist">{account.email}</p>
+          <SignOutButton className="mt-2 h-8 w-full justify-center rounded-lg px-2 text-xs" />
         </div>
       </aside>
 
@@ -133,6 +120,11 @@ export function AppShell({ children }: { children: ReactNode }) {
           </button>
         </header>
 
+        {account.mode === "dev" && (
+          <div role="status" className="no-print bg-amber px-4 py-1.5 text-center text-xs font-semibold text-ink">
+            Modo desarrollo sin autenticación (FLAGLAB_DEV_BYPASS_AUTH). Nunca se activa en producción.
+          </div>
+        )}
         <main id="contenido" className="mx-auto w-full max-w-7xl px-4 pb-28 pt-6 md:px-6 lg:px-10 lg:pb-12 lg:pt-10">
           {children}
         </main>

@@ -30,7 +30,7 @@ import {
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { HeroMockup } from "@/components/landing/HeroMockup";
-import { Demo } from "@/components/landing/Demo";
+import { Demo, type DemoData } from "@/components/landing/Demo";
 import { StickyCta } from "@/components/landing/StickyCta";
 import { CheckoutButton } from "@/components/landing/CheckoutButton";
 import { DiagramSvg } from "@/components/diagram/PlayDiagram";
@@ -40,6 +40,23 @@ import { CLASSES } from "@/data/classes";
 import { BONUSES } from "@/data/bonuses";
 import { GUARANTEE, ORDER_BUMPS, PRICING, formatPrice } from "@/config";
 import { formationName } from "@/lib/field";
+import { DRILLS } from "@/data/drills";
+import { generateTraining } from "@/lib/generator";
+import type { TrainingGoal } from "@/lib/types";
+
+const DEMO_GOALS: TrainingGoal[] = ["Flag pulling", "Pase", "Recepción", "Rutas", "Agilidad", "Defensa"];
+const WRIST_IDS = ["pc-01", "cs-10", "pp-01", "rz-02", "sc-01", "mo-10", "cz-01", "pp-03", "rz-01"];
+
+/** Datos de la demo calculados en el servidor: la página pública solo envía esta muestra. */
+function demoData(): DemoData {
+  const sessions: DemoData["sessions"] = {};
+  for (const goal of DEMO_GOALS) {
+    const t = generateTraining({ age: "9-11", level: "Principiante", duration: 60, players: 10, goal, seed: 42 }, DRILLS);
+    sessions[goal] = t.blocks.map((b) => ({ id: b.id, phase: b.phase, title: b.title, objective: b.objective, minutes: b.minutes }));
+  }
+  const wristband = WRIST_IDS.filter((id) => PLAY_MAP[id]).map((id) => ({ id, name: PLAY_MAP[id].name, diagram: PLAY_MAP[id].diagram }));
+  return { sessions, wristband };
+}
 
 const PROBLEM_ICONS = [FileX2, AlarmClock, Shuffle, FolderX, Clock];
 const FEATURE_ICONS = [PenTool, Library, Timer, Dumbbell, BookOpen, Watch, GraduationCap, Users];
@@ -157,7 +174,7 @@ export default function LandingPage() {
         {/* ================= DEMO ================= */}
         <section id="demo" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-24 md:px-6">
           <SectionTitle eyebrow="Demo en vivo" title={COPY.demo.title} subtitle={COPY.demo.subtitle} />
-          <Demo />
+          <Demo data={demoData()} />
         </section>
 
         {/* ================= CÓMO FUNCIONA ================= */}

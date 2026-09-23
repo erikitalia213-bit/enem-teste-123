@@ -5,10 +5,12 @@ import { AlertTriangle, ArrowLeft, Clock, Lightbulb, ListOrdered, Package, Print
 import { DrillCard } from "@/components/drills/DrillCard";
 import { DRILL_META } from "@/components/drills/drillMeta";
 import { Badge, Button, Card, levelTone } from "@/components/ui";
-import { DRILLS, DRILL_MAP } from "@/data/drills";
+import { useContent } from "@/components/app/ContentProvider";
 
 export function DrillDetail({ id }: { id: string }) {
-  const d = DRILL_MAP[id];
+  const DRILLS = useContent().core.drills;
+  const d = DRILLS.find((x) => x.id === id);
+  if (!d) return <Card className="p-8 text-center">Drill no encontrado.</Card>;
   const meta = DRILL_META[d.category];
   const Icon = meta.icon;
   const related = DRILLS.filter((x) => x.category === d.category && x.id !== d.id).slice(0, 3);

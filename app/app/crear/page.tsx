@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { SearchX } from "lucide-react";
 import { PlayCreator } from "@/components/creator/PlayCreator";
 import { EmptyState, LinkButton } from "@/components/ui";
-import { PLAY_MAP } from "@/data/plays";
+import { useContent } from "@/components/app/ContentProvider";
 import { cloneDiagram, uid } from "@/lib/field";
 import { newDiagramFor } from "@/lib/diagramOps";
 import { usePlays } from "@/lib/hooks";
@@ -36,15 +36,15 @@ function blankPlay(): Play {
   };
 }
 
-function fromLibrary(id: string): Play | null {
-  const lib = PLAY_MAP[id];
+function fromLibrary(lib: Play | undefined): Play | null {
   if (!lib) return null;
   const now = Date.now();
   return { ...lib, id: uid("jug"), name: lib.name, diagram: cloneDiagram(lib.diagram), source: "user", createdAt: now, updatedAt: now };
 }
 
 function NewCreator({ from }: { from: string | null }) {
-  const [initial] = useState<Play>(() => (from && fromLibrary(from)) || blankPlay());
+  const plays = useContent().core.plays;
+  const [initial] = useState<Play>(() => (from && fromLibrary(plays.find((p) => p.id === from))) || blankPlay());
   return <PlayCreator initial={initial} isNew />;
 }
 

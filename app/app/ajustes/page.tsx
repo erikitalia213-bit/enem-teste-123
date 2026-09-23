@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Download, LogOut, Save, Smartphone, Trash2, Upload } from "lucide-react";
+import { Download, Save, Smartphone, Trash2, Upload } from "lucide-react";
 import { Button, Card, Field, PageHeader, useToast } from "@/components/ui";
 import { useProfile, usePlays, usePlaybooks, useTrainings, useRoster, useTracker } from "@/lib/hooks";
+import { SignOutButton } from "@/components/app/SignOutButton";
 import { clearAll, downloadFile, exportAll, importAll } from "@/lib/storage";
 
 export default function AjustesPage() {
@@ -97,21 +98,13 @@ export default function AjustesPage() {
         <Card className="space-y-3 border-coral/25 p-5">
           <h2 className="font-display text-xl font-bold uppercase text-coral">Zona de cuidado</h2>
           <div className="flex flex-wrap gap-2">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                setProfile(null);
-                router.push("/entrar/");
-              }}
-            >
-              <LogOut size={17} /> Cambiar de coach
-            </Button>
+            <SignOutButton />
             <Button
               variant="danger"
               onClick={() => {
                 if (!window.confirm("Se borrarán TODAS tus jugadas, playbooks, entrenamientos, equipo y estadísticas de este dispositivo. ¿Continuar?")) return;
                 clearAll();
-                router.push("/entrar/");
+                router.push("/app/");
               }}
             >
               <Trash2 size={17} /> Borrar todos mis datos

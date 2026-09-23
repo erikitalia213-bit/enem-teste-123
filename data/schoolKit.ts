@@ -213,13 +213,4 @@ export const SCHOOL_TOURNAMENT_GUIDE: { step: string; detail: string }[] = [
   { step: "Cierre", detail: "Entrega de diplomas, foto grupal y agradecimiento a quienes apoyaron." },
 ];
 
-export const DIPLOMA_TYPES = [
-  "Campeón del Torneo",
-  "Subcampeón del Torneo",
-  "Juego Limpio",
-  "Mejor Compañero",
-  "Mejor Atrapada",
-  "Mejor Defensa",
-  "Espíritu Deportivo",
-  "Participación Destacada",
-];
+export { DIPLOMA_TYPES } from "@/lib/constants";

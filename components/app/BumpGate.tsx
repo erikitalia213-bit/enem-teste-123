@@ -1,18 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Lock } from "lucide-react";
-import { Button, Card } from "@/components/ui";
+import { Card } from "@/components/ui";
 import { ORDER_BUMPS, formatPrice, type OrderBumpId } from "@/config";
-import { useUnlocked } from "@/lib/hooks";
+import { useHas } from "@/components/app/ContentProvider";
 
-/** Muestra el contenido de un order bump solo si está desbloqueado (config.ts → BUMP_UNLOCK_CODES). */
+/**
+ * Muestra un complemento solo si la cuenta tiene el entitlement.
+ * El contenido del complemento ni siquiera llega al navegador si no lo tiene
+ * (lo decide el servidor en lib/server/content.ts); esto solo muestra el aviso.
+ */
 export function BumpGate({ id, children }: { id: OrderBumpId; children: ReactNode }) {
-  const { unlocked, tryUnlock } = useUnlocked(id);
-  const [code, setCode] = useState("");
-  const [error, setError] = useState(false);
-  if (unlocked) return <>{children}</>;
+  const has = useHas();
+  if (has(id)) return <>{children}</>;
   const bump = ORDER_BUMPS[id];
   return (
     <Card className="mx-auto max-w-lg p-8 text-center">
@@ -20,23 +22,8 @@ export function BumpGate({ id, children }: { id: OrderBumpId; children: ReactNod
         <Lock size={26} />
       </span>
       <h1 className="h-display mt-4 text-4xl">{bump.name}</h1>
-      <p className="mt-2 text-mist-2">Este complemento no está activado en tu cuenta. Si ya lo compraste, escribe el código que recibiste.</p>
-      <form
-        className="mt-5 flex gap-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const ok = tryUnlock(code);
-          setError(!ok);
-        }}
-      >
-        <label className="flex-1">
-          <span className="sr-only">Código de desbloqueo</span>
-          <input className="input h-11 uppercase" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Código" />
-        </label>
-        <Button type="submit">Activar</Button>
-      </form>
-      {error && <p role="alert" className="mt-2 text-sm text-coral">Código incorrecto.</p>}
-      <Link href={`/extras/${bump.slug}/`} className="mt-5 inline-block text-sm font-semibold text-volt hover:underline">
+      <p className="mt-2 text-mist-2">Este complemento no está incluido en tu cuenta. Si ya lo compraste con este mismo correo, la activación puede tardar unos minutos.</p>
+      <Link href={`/extras/${bump.slug}/`} className="mt-5 inline-flex h-11 items-center rounded-xl bg-volt px-5 font-semibold text-ink">
         Conocer {bump.name} · {formatPrice(bump.price)}
       </Link>
     </Card>

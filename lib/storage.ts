@@ -19,25 +19,36 @@ export interface StorageDriver {
 }
 
 export const STORAGE_PREFIX = "flaglab:v1:";
+/** Prefijo activo: cada usuario autenticado tiene su propio espacio en el navegador. */
+let prefix = `${STORAGE_PREFIX}anon:`;
+
+/** Cambia el espacio de almacenamiento al del usuario (lo llama ContentProvider). */
+export function setStorageNamespace(userId: string) {
+  const next = `${STORAGE_PREFIX}u:${userId}:`;
+  if (next === prefix) return;
+  prefix = next;
+  cache.clear();
+  listeners.forEach((set) => set.forEach((fn) => fn()));
+}
 
 const localDriver: StorageDriver = {
   read: (key) => {
     try {
-      return window.localStorage.getItem(STORAGE_PREFIX + key);
+      return window.localStorage.getItem(prefix + key);
     } catch {
       return null;
     }
   },
   write: (key, value) => {
     try {
-      window.localStorage.setItem(STORAGE_PREFIX + key, value);
+      window.localStorage.setItem(prefix + key, value);
     } catch (err) {
       console.warn("FLAGLAB: no se pudo guardar en este navegador", err);
     }
   },
   remove: (key) => {
     try {
-      window.localStorage.removeItem(STORAGE_PREFIX + key);
+      window.localStorage.removeItem(prefix + key);
     } catch {
       /* noop */
     }
@@ -45,8 +56,8 @@ const localDriver: StorageDriver = {
   keys: () => {
     try {
       return Object.keys(window.localStorage)
-        .filter((k) => k.startsWith(STORAGE_PREFIX))
-        .map((k) => k.slice(STORAGE_PREFIX.length));
+        .filter((k) => k.startsWith(prefix))
+        .map((k) => k.slice(prefix.length));
     } catch {
       return [];
     }
@@ -72,8 +83,8 @@ function emit(key: string) {
 
 if (typeof window !== "undefined") {
   window.addEventListener("storage", (e) => {
-    if (e.key && e.key.startsWith(STORAGE_PREFIX)) {
-      const k = e.key.slice(STORAGE_PREFIX.length);
+    if (e.key && e.key.startsWith(prefix)) {
+      const k = e.key.slice(prefix.length);
       cache.delete(k);
       emit(k);
     }
@@ -185,7 +196,6 @@ export const KEYS = {
   tournament: "tournament",
   checklist: "checklist",
   plan30: "plan30",
-  unlocks: "unlocks",
   prefs: "prefs",
 } as const;
 
@@ -209,8 +219,10 @@ export function exportAll(): string {
 export function importAll(json: string): number {
   const parsed = JSON.parse(json) as { app?: string; data?: Record<string, unknown> };
   if (!parsed || typeof parsed !== "object" || !parsed.data) throw new Error("Archivo de respaldo no válido");
+  const allowed = new Set<string>(Object.values(KEYS));
   let n = 0;
   for (const [k, v] of Object.entries(parsed.data)) {
+    if (!allowed.has(k)) continue;
     writeKey(k, v);
     n++;
   }

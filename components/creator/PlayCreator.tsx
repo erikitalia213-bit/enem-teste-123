@@ -25,7 +25,7 @@ import {
 import { Badge, Button, Card, Field, IconButton, PageHeader, Segmented, cn, useToast } from "@/components/ui";
 import PlayDiagram from "@/components/diagram/PlayDiagram";
 import { EditorField, type Mode, type Selection } from "./EditorField";
-import { PLAY_CATEGORIES } from "@/data/plays";
+import { PLAY_CATEGORIES } from "@/lib/constants";
 import {
   COLOR_OPTIONS,
   EXTRA_ROUTE_TYPES,

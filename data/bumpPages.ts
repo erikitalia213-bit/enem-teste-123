@@ -5,7 +5,7 @@
 import type { OrderBumpId } from "@/config";
 
 export const BUMP_PAGES: Record<OrderBumpId, { tagline: string; intro: string; includes: string[]; forWho: string[]; appPath: string }> = {
-  defensa: {
+  defensive_playbook: {
     tagline: "Tu defensa, organizada y lista para el partido.",
     intro: "30 esquemas defensivos originales con diagrama, explicación, fortalezas, debilidades, cuándo usarlos y consejo para el coach. Además, conceptos clave y una guía de defensa por situación.",
     includes: [
@@ -19,7 +19,7 @@ export const BUMP_PAGES: Record<OrderBumpId, { tagline: string; intro: string; i
     forWho: ["Coaches que quieren dejar de improvisar en defensa", "Equipos que reciben muchos puntos por pases largos o cruces", "Categorías juveniles que empiezan a usar zona y hombre"],
     appPath: "/app/extras/playbook-defensivo/",
   },
-  pack50: {
+  extra_trainings: {
     tagline: "50 sesiones más, organizadas por tema.",
     intro: "Un pack adicional de entrenamientos completos con tiempos y ejercicios, pensados para situaciones concretas de tu temporada.",
     includes: [
@@ -34,7 +34,7 @@ export const BUMP_PAGES: Record<OrderBumpId, { tagline: string; intro: string; i
     forWho: ["Coaches que entrenan 2-3 veces por semana", "Academias con varias categorías", "Quien quiere variedad sin repetir sesiones"],
     appPath: "/app/extras/pack-50-entrenamientos/",
   },
-  escolar: {
+  school_coach_kit: {
     tagline: "Todo lo que un profesor necesita para una unidad completa.",
     intro: "Complementa las 20 clases incluidas con 20 clases más, planificación, evaluación con rúbrica, torneo escolar y diplomas editables.",
     includes: [

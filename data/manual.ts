@@ -5,21 +5,8 @@
  *  imprimir o guardar como PDF.
  * ============================================================ */
 
-export type Block =
-  | { t: "p"; text: string }
-  | { t: "h"; text: string }
-  | { t: "ul"; items: string[] }
-  | { t: "ol"; items: string[] }
-  | { t: "tip"; text: string }
-  | { t: "table"; head: string[]; rows: string[][] };
-
-export interface Chapter {
-  id: string;
-  number: number; // 0 = introducción
-  title: string;
-  summary: string;
-  blocks: Block[];
-}
+import type { Block, Chapter } from "./manual-types";
+export type { Block, Chapter };
 
 const p = (text: string): Block => ({ t: "p", text });
 const h = (text: string): Block => ({ t: "h", text });

@@ -332,3 +332,21 @@ export interface ReadySession {
   blocks: { drillId: string; minutes: number; note?: string }[];
   coachNote: string;
 }
+
+/* ---------------- Defensa (complemento) ---------------- */
+
+export type DefenseGroup = "Zona" | "Hombre" | "Presión" | "Mixtas" | "Situacionales";
+
+export interface DefenseScheme {
+  id: string;
+  name: string;
+  group: DefenseGroup;
+  level: Level;
+  vs: FormationId;
+  diagram: Diagram;
+  concept: string;
+  strengths: string[];
+  weaknesses: string[];
+  whenToUse: string;
+  coachTip: string;
+}

@@ -5,10 +5,11 @@ import { useState } from "react";
 import { Clock, GraduationCap, Printer, Users } from "lucide-react";
 import { ClassView } from "@/components/content/ClassView";
 import { Button, PageHeader } from "@/components/ui";
-import { CLASSES } from "@/data/classes";
+import { useContent } from "@/components/app/ContentProvider";
 
 export default function ClasesPage() {
   const [printAll, setPrintAll] = useState(false);
+  const CLASSES = useContent().core.classes;
   return (
     <div className="animate-fade-up">
       <PageHeader

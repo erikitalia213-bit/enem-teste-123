@@ -4,8 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Dumbbell, FolderOpen, Library, PenTool, Shapes, Timer, Users, Watch, BarChart3, Zap, Sparkles } from "lucide-react";
 import PlayDiagram from "@/components/diagram/PlayDiagram";
 import { Badge, LinkButton, Stat, levelTone } from "@/components/ui";
-import { PLAYS } from "@/data/plays";
-import { DRILLS } from "@/data/drills";
+import { useContent } from "@/components/app/ContentProvider";
 import { usePlaybooks, usePlays, useProfile, useRoster, useTrainings } from "@/lib/hooks";
 
 const CARDS = [
@@ -13,15 +12,15 @@ const CARDS = [
   { href: "/app/jugadas/", title: "Mis jugadas", desc: "Tus diseños guardados.", icon: Shapes },
   { href: "/app/playbook/", title: "Mi playbook", desc: "Organiza e imprime tus jugadas.", icon: BookOpen },
   { href: "/app/entrenamientos/", title: "Generar entrenamiento", desc: "Sesiones completas en segundos.", icon: Timer, accent: true },
-  { href: "/app/drills/", title: "Biblioteca de drills", desc: `${DRILLS.length} ejercicios con instrucciones.`, icon: Dumbbell },
+  { href: "/app/drills/", title: "Biblioteca de drills", desc: "Ejercicios con instrucciones paso a paso.", icon: Dumbbell },
   { href: "/app/munequeras/", title: "Wristbands", desc: "Tarjetas para muñequera numeradas.", icon: Watch },
   { href: "/app/equipo/", title: "Mi equipo", desc: "Roster y depth chart.", icon: Users },
   { href: "/app/recursos/", title: "Recursos", desc: "Manual, clases, bonus y guías.", icon: FolderOpen },
 ];
 
-function dayIndex() {
+function dayIndex(n: number) {
   const d = new Date();
-  return (d.getFullYear() * 372 + d.getMonth() * 31 + d.getDate()) % PLAYS.length;
+  return (d.getFullYear() * 372 + d.getMonth() * 31 + d.getDate()) % n;
 }
 
 export default function Dashboard() {
@@ -30,7 +29,8 @@ export default function Dashboard() {
   const { items: trainings } = useTrainings();
   const { items: playbooks } = usePlaybooks();
   const { items: roster } = useRoster();
-  const playOfDay = PLAYS[dayIndex()];
+  const PLAYS = useContent().core.plays;
+  const playOfDay = PLAYS[dayIndex(PLAYS.length)];
   const firstName = profile?.coachName.replace(/^coach\s+/i, "").split(" ").slice(0, 2).join(" ");
 
   return (

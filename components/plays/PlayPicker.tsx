@@ -4,14 +4,13 @@ import { useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
 import PlayDiagram from "@/components/diagram/PlayDiagram";
 import { Button, Modal, cn } from "@/components/ui";
-import { DEFENSE_SCHEMES } from "@/data/defense";
-import { PLAYS, PLAY_CATEGORIES } from "@/data/plays";
-import { defenseAsPlay, usePlays, useUnlocked } from "@/lib/hooks";
+import { PLAY_CATEGORIES } from "@/lib/constants";
+import { useContent } from "@/components/app/ContentProvider";
+import { defenseAsPlay, usePlays } from "@/lib/hooks";
 import type { Play, PlayRef } from "@/lib/types";
 
 type Tab = "library" | "user" | "defense";
 
-const DEFENSE_PLAYS = DEFENSE_SCHEMES.map(defenseAsPlay);
 
 export function PlayPicker({
   open,
@@ -27,7 +26,10 @@ export function PlayPicker({
   exclude?: PlayRef[];
 }) {
   const { items: userPlays } = usePlays();
-  const { unlocked: defenseUnlocked } = useUnlocked("defensa");
+  const content = useContent();
+  const PLAYS = content.core.plays;
+  const DEFENSE_PLAYS = useMemo(() => (content.defense?.schemes ?? []).map(defenseAsPlay), [content]);
+  const defenseUnlocked = Boolean(content.defense);
   const [tab, setTab] = useState<Tab>("library");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("Todas");
@@ -39,7 +41,7 @@ export function PlayPicker({
     const source = tab === "library" ? PLAYS : tab === "user" ? userPlays : DEFENSE_PLAYS;
     const n = q.trim().toLowerCase();
     return source.filter((p) => (tab !== "library" || cat === "Todas" || p.category === cat) && (!n || p.name.toLowerCase().includes(n)));
-  }, [tab, userPlays, q, cat]);
+  }, [tab, userPlays, q, cat, PLAYS, DEFENSE_PLAYS]);
 
   const toggle = (p: Play) => {
     const src: PlayRef["source"] = tab === "library" ? "library" : tab === "user" ? "user" : "defense";

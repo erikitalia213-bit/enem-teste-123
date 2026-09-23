@@ -4,9 +4,10 @@ import { Printer, BookOpen } from "lucide-react";
 import { Blocks } from "@/components/content/Blocks";
 import { LogoMark } from "@/components/brand/Logo";
 import { Button, PageHeader } from "@/components/ui";
-import { CHAPTERS, MANUAL_SUBTITLE, MANUAL_TITLE } from "@/data/manual";
+import { useContent } from "@/components/app/ContentProvider";
 
 export default function ManualPage() {
+  const { chapters: CHAPTERS, manualTitle: MANUAL_TITLE, manualSubtitle: MANUAL_SUBTITLE } = useContent().core;
   return (
     <div className="animate-fade-up">
       <PageHeader

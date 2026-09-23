@@ -6,7 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowDown, ArrowLeft, ArrowUp, Check, Copy, Pencil, Plus, Printer, Trash2 } from "lucide-react";
 import { BlockCard, Timeline, blockStarts } from "@/components/training/SessionView";
 import { Badge, Button, Card, EmptyState, Field, IconButton, LinkButton, useToast } from "@/components/ui";
-import { DRILLS, DRILL_CATEGORIES, getDrill } from "@/data/drills";
+import { DRILL_CATEGORIES } from "@/lib/constants";
+import { useContent } from "@/components/app/ContentProvider";
 import { blockFromDrill } from "@/lib/generator";
 import { uid } from "@/lib/field";
 import { useTrainings } from "@/lib/hooks";
@@ -16,6 +17,8 @@ function Editor({ initial, startEditing }: { initial: TrainingSession; startEdit
   const router = useRouter();
   const toast = useToast();
   const { upsert, remove } = useTrainings();
+  const DRILLS = useContent().core.drills;
+  const getDrill = (id: string) => DRILLS.find((d) => d.id === id);
   const [s, setS] = useState<TrainingSession>(initial);
   const [editing, setEditing] = useState(startEditing);
   const [addDrill, setAddDrill] = useState("");

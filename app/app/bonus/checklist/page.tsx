@@ -2,11 +2,12 @@
 
 import { CheckSquare, Printer, RotateCcw } from "lucide-react";
 import { Button, Card, PageHeader, cn } from "@/components/ui";
-import { MATCH_CHECKLIST } from "@/data/bonuses";
+import { useContent } from "@/components/app/ContentProvider";
 import { KEYS, useStored } from "@/lib/storage";
 
 export default function ChecklistPage() {
   const [done, setDone] = useStored<string[]>(KEYS.checklist, []);
+  const MATCH_CHECKLIST = useContent().core.checklist;
   const total = MATCH_CHECKLIST.reduce((a, g) => a + g.items.length, 0);
   const pct = Math.round((done.length / total) * 100);
   const toggle = (key: string) => setDone((d) => (d.includes(key) ? d.filter((x) => x !== key) : [...d, key]));

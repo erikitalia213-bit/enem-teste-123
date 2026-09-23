@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Printer } from "lucide-react";
 import { ClassView } from "@/components/content/ClassView";
 import { Button } from "@/components/ui";
-import { CLASSES, getClass } from "@/data/classes";
+import { useContent } from "@/components/app/ContentProvider";
+import { EmptyState } from "@/components/ui";
 
 export function ClassDetail({ id }: { id: string }) {
-  const c = getClass(id)!;
+  const CLASSES = useContent().core.classes;
+  const c = CLASSES.find((x) => x.id === id);
+  if (!c) return <EmptyState title="Clase no encontrada" />;
   const prev = CLASSES[c.number - 2];
   const next = CLASSES[c.number];
   return (

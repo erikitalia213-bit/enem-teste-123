@@ -19,7 +19,11 @@ export function CheckoutButton({ children, className, size = "lg", location = "l
   return (
     <a
       href={href}
-      onClick={() => track("InitiateCheckout", { value: PRICING.offer, currency: "MXN", content_name: "FLAGLAB 5x5", location })}
+      onClick={(e) => {
+        const url = checkoutUrl();
+        e.currentTarget.href = url;
+        track("InitiateCheckout", { value: PRICING.offer, currency: "MXN", content_name: "FLAGLAB 5x5", content_ids: ["core_flaglab"], location });
+      }}
       {...(external ? { rel: "noopener" } : {})}
       className={cn(
         "group inline-flex items-center justify-center gap-2 rounded-2xl bg-volt font-display font-extrabold uppercase tracking-wide text-ink shadow-[0_14px_40px_-12px_rgba(73,240,90,0.7)] transition-all hover:bg-[#62f771] hover:shadow-[0_18px_50px_-12px_rgba(73,240,90,0.85)] active:translate-y-px",

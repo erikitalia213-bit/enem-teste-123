@@ -5,12 +5,14 @@ import { Search } from "lucide-react";
 import { DrillCard } from "@/components/drills/DrillCard";
 import { DRILL_META } from "@/components/drills/drillMeta";
 import { Button, EmptyState, PageHeader, cn } from "@/components/ui";
-import { DRILLS, DRILL_CATEGORIES } from "@/data/drills";
+import { DRILL_CATEGORIES } from "@/lib/constants";
+import { useContent } from "@/components/app/ContentProvider";
 import { AGE_GROUPS, LEVELS } from "@/lib/types";
 
 const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 export default function DrillsPage() {
+  const DRILLS = useContent().core.drills;
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("Todas");
   const [level, setLevel] = useState("Todos");
@@ -25,7 +27,7 @@ export default function DrillsPage() {
         (age === "Todas" || d.ages.includes(age as (typeof AGE_GROUPS)[number])) &&
         (!n || norm(`${d.name} ${d.objective} ${d.category}`).includes(n)),
     );
-  }, [q, cat, level, age]);
+  }, [DRILLS, q, cat, level, age]);
 
   return (
     <div className="animate-fade-up">

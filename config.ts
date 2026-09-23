@@ -1,22 +1,36 @@
 /**
  * ============================================================
- *  FLAGLAB 5x5 — CONFIGURACIÓN CENTRAL
+ *  FLAGLAB 5x5 — CONFIGURACIÓN CENTRAL (pública)
  * ============================================================
- *  Todo lo comercial se cambia aquí: precios, checkout,
- *  analytics, códigos de acceso y datos de la marca.
- *  No necesitas tocar componentes para lanzar.
+ *  Precios, textos comerciales, links de checkout y analytics.
+ *  Todo lo que está aquí puede llegar al navegador: NUNCA pongas
+ *  llaves secretas en este archivo. Los secretos van en variables
+ *  de entorno SIN el prefijo NEXT_PUBLIC_ (ver .env.example).
  * ============================================================
  */
 
+import type { ProductId } from "@/lib/entitlements";
+
 const env = (value: string | undefined, fallback = "") => (value && value.trim() ? value.trim() : fallback);
 
-/* ---------------- Marca ---------------- */
+/* ---------------- Marca y contacto ---------------- */
 export const BRAND = {
   name: "FLAGLAB 5x5",
   shortName: "FLAGLAB",
-  tagline: "Planea entrenamientos, crea jugadas y organiza tu equipo de tocho bandera en minutos.",
-  supportEmail: "", // ej. "soporte@tudominio.com" (vacío = no se muestra)
-  siteUrl: env(process.env.NEXT_PUBLIC_SITE_URL, "https://flaglab5x5.com"),
+  tagline: "Crea jugadas, organiza tu playbook y prepara entrenamientos de tocho bandera 5x5.",
+  supportEmail: env(process.env.NEXT_PUBLIC_SUPPORT_EMAIL, ""),
+  siteUrl: env(process.env.NEXT_PUBLIC_SITE_URL, "http://localhost:3000"),
+};
+
+/** Datos legales para el Aviso de Privacidad y los Términos. Complétalos antes de lanzar. */
+export const LEGAL = {
+  /** Nombre o razón social del responsable (persona física o moral). */
+  owner: env(process.env.NEXT_PUBLIC_LEGAL_OWNER, ""),
+  /** Domicilio para oír y recibir notificaciones. */
+  address: env(process.env.NEXT_PUBLIC_LEGAL_ADDRESS, ""),
+  /** Correo para solicitudes de privacidad (derechos ARCO). */
+  privacyEmail: env(process.env.NEXT_PUBLIC_PRIVACY_EMAIL, env(process.env.NEXT_PUBLIC_SUPPORT_EMAIL, "")),
+  lastUpdated: "23 de septiembre de 2026",
 };
 
 /* ---------------- Moneda y precios ---------------- */
@@ -32,46 +46,33 @@ export const PRICING = {
   offer: 199,
 };
 
-/* ---------------- Checkout ----------------
- * Pega aquí tu link de Hotmart, Kiwify, Stripe Payment Link, Mercado Pago, etc.
- * También puedes definir NEXT_PUBLIC_CHECKOUT_URL en .env.local.
- * Mientras sea "#", los botones llevan a la sección de precio.
+/* ---------------- Checkout (plataforma externa) ----------------
+ * El pago ocurre en Hotmart, Kiwify u otra plataforma. Aquí solo va el link.
+ * NEXT_PUBLIC_CHECKOUT_PROVIDER: "hotmart" | "kiwify" | "generic"
+ * Mientras no haya link, los botones llevan a la sección de precio.
  */
-export const CHECKOUT_URL = env(process.env.NEXT_PUBLIC_CHECKOUT_URL, "#");
+export type CheckoutProvider = "hotmart" | "kiwify" | "generic";
+export const CHECKOUT_PROVIDER = env(process.env.NEXT_PUBLIC_CHECKOUT_PROVIDER, "generic") as CheckoutProvider;
+export const CHECKOUT_URL = env(process.env.NEXT_PUBLIC_CHECKOUT_URL, "");
 
-/** Parámetros UTM que se reenvían al checkout si llegan en la URL de la landing. */
-export const FORWARDED_QUERY_PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid", "src", "sck"];
+/** Parámetros de atribución que se guardan en la visita y se reenvían al checkout. */
+export const ATTRIBUTION_PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid", "src", "sck"] as const;
 
-/* ---------------- Order bumps ----------------
- * Productos complementarios. Normalmente se configuran dentro de tu
- * plataforma de pago; aquí solo se usan para mostrarlos en la landing
- * y para desbloquear su contenido dentro de la app.
+/* ---------------- Complementos (order bumps) ----------------
+ * El id coincide con el entitlement que otorga el webhook.
+ * checkoutUrl solo es necesario si vendes el complemento por separado.
  */
-export type OrderBumpId = "defensa" | "pack50" | "escolar";
+export type OrderBumpId = Exclude<ProductId, "core_flaglab">;
 
 export const ORDER_BUMPS: Record<OrderBumpId, { name: string; price: number; slug: string; checkoutUrl: string }> = {
-  defensa: { name: "Playbook Defensivo 5x5", price: 79, slug: "playbook-defensivo", checkoutUrl: "#" },
-  pack50: { name: "Pack 50 Entrenamientos Extra", price: 99, slug: "pack-50-entrenamientos", checkoutUrl: "#" },
-  escolar: { name: "Kit Coach Escolar", price: 79, slug: "kit-coach-escolar", checkoutUrl: "#" },
+  defensive_playbook: { name: "Playbook Defensivo 5x5", price: 79, slug: "playbook-defensivo", checkoutUrl: env(process.env.NEXT_PUBLIC_CHECKOUT_URL_DEFENSIVE, "") },
+  extra_trainings: { name: "Pack 50 Entrenamientos Extra", price: 99, slug: "pack-50-entrenamientos", checkoutUrl: env(process.env.NEXT_PUBLIC_CHECKOUT_URL_EXTRA_TRAININGS, "") },
+  school_coach_kit: { name: "Kit Coach Escolar", price: 79, slug: "kit-coach-escolar", checkoutUrl: env(process.env.NEXT_PUBLIC_CHECKOUT_URL_SCHOOL_KIT, "") },
 };
 
-/* ---------------- Acceso a la app ----------------
- * ACCESS_CODE vacío = cualquiera que tenga el link entra a la app.
- * Si pones un código (ej. "COACH2026"), se pedirá al entrar.
- * Es una barrera simple del lado del cliente, NO es seguridad real.
- * Para cuentas reales, conecta Supabase (ver docs/SUPABASE.md).
- */
-export const ACCESS_CODE: string = "";
-
-/** Códigos para desbloquear order bumps dentro de la app. Vacío = desbloqueado. */
-export const BUMP_UNLOCK_CODES: Record<OrderBumpId, string> = {
-  defensa: "",
-  pack50: "",
-  escolar: "",
-};
-
-/* ---------------- Analytics ----------------
+/* ---------------- Analytics (IDs públicos) ----------------
  * Vacío = no se carga ningún script de tracking.
+ * El evento Purchase se envía desde el servidor (webhook), nunca desde el navegador.
  */
 export const META_PIXEL_ID = env(process.env.NEXT_PUBLIC_META_PIXEL_ID, "");
 export const GA_ID = env(process.env.NEXT_PUBLIC_GA_ID, "");
