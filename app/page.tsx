@@ -27,6 +27,7 @@ import {
   FolderX,
   AlarmClock,
 } from "lucide-react";
+import { TrackOnView } from "@/components/AnalyticsTracker";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { HeroMockup } from "@/components/landing/HeroMockup";
@@ -77,6 +78,7 @@ export default function LandingPage() {
   const savings = Math.round((1 - PRICING.offer / PRICING.regular) * 100);
   return (
     <>
+      <TrackOnView event="ViewContent" params={{ content_ids: ["core_flaglab"], content_type: "product", content_name: "FLAGLAB 5x5", value: PRICING.offer, currency: "MXN" }} />
       <SiteHeader />
       <main id="contenido">
         {/* ================= HERO ================= */}

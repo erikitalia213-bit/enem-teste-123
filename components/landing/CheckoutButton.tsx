@@ -3,26 +3,29 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
-import { PRICING } from "@/config";
+import { ORDER_BUMPS, PRICING, type OrderBumpId } from "@/config";
 import { track } from "@/lib/analytics";
 import { checkoutUrl } from "@/lib/checkout";
 
-/** Botón de compra centralizado: usa CHECKOUT_URL de config.ts y reenvía UTMs. */
-export function CheckoutButton({ children, className, size = "lg", location = "landing" }: { children: React.ReactNode; className?: string; size?: "md" | "lg" | "xl"; location?: string }) {
+/**
+ * Botón de compra centralizado: usa el link de checkout configurado y reenvía UTMs/fbclid.
+ * `product` = complemento vendido por separado (si tiene su propio link).
+ */
+export function CheckoutButton({ children, className, size = "lg", location = "landing", product }: { children: React.ReactNode; className?: string; size?: "md" | "lg" | "xl"; location?: string; product?: OrderBumpId }) {
   const [href, setHref] = useState("/#precio");
   useEffect(() => {
     // La URL final depende de los parámetros de la visita (UTMs), solo disponibles en el navegador.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHref(checkoutUrl());
-  }, []);
+    setHref(checkoutUrl(product));
+  }, [product]);
   const external = href.startsWith("http");
   return (
     <a
       href={href}
       onClick={(e) => {
-        const url = checkoutUrl();
-        e.currentTarget.href = url;
-        track("InitiateCheckout", { value: PRICING.offer, currency: "MXN", content_name: "FLAGLAB 5x5", content_ids: ["core_flaglab"], location });
+        e.currentTarget.href = checkoutUrl(product);
+        const item = product ? { value: ORDER_BUMPS[product].price, content_name: ORDER_BUMPS[product].name, content_ids: [product] } : { value: PRICING.offer, content_name: "FLAGLAB 5x5", content_ids: ["core_flaglab"] };
+        track("InitiateCheckout", { ...item, currency: "MXN", content_type: "product", location });
       }}
       {...(external ? { rel: "noopener" } : {})}
       className={cn(

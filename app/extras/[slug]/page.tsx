@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TrackOnView } from "@/components/AnalyticsTracker";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Check, Users } from "lucide-react";
 import { SiteHeader } from "@/components/landing/SiteHeader";
@@ -32,6 +33,7 @@ export default async function BumpPage({ params }: { params: Promise<{ slug: str
   const page = BUMP_PAGES[id];
   return (
     <>
+      <TrackOnView event="ViewContent" params={{ content_ids: [id], content_type: "product", content_name: ORDER_BUMPS[id].name, value: ORDER_BUMPS[id].price, currency: "MXN" }} />
       <SiteHeader />
       <main id="contenido" className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <Link href="/" className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-mist hover:text-snow">
@@ -74,6 +76,11 @@ export default async function BumpPage({ params }: { params: Promise<{ slug: str
               <p className="mt-3 text-xs text-mist">
                 FLAGLAB 5x5: {formatPrice(PRICING.offer)} · {bump.name}: +{formatPrice(bump.price)}
               </p>
+              {bump.checkoutUrl && (
+                <CheckoutButton size="md" product={id} className="mt-3 w-full bg-transparent text-volt shadow-none ring-1 ring-volt/50 hover:bg-volt/10" location={`bump-solo-${id}`}>
+                  Ya tengo FLAGLAB: comprar solo esto
+                </CheckoutButton>
+              )}
               <Link href={page.appPath} className="mt-4 inline-block text-sm font-semibold text-volt hover:underline">
                 ¿Ya lo tienes? Ábrelo en la app →
               </Link>
