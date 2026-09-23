@@ -1,0 +1,14 @@
+{
+  "name": "FLAGLAB 5x5",
+  "short_name": "FLAGLAB",
+  "description": "Sistema digital para coaches de tocho bandera 5x5.",
+  "start_url": "/app/",
+  "display": "standalone",
+  "background_color": "#070909",
+  "theme_color": "#070909",
+  "lang": "es-MX",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
