@@ -28,6 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title, description, images: ["/og.png"] },
   manifest: "/manifest.webmanifest",
+  icons: { icon: "/icon.svg", apple: "/apple-touch-icon.png" },
   formatDetection: { telephone: false },
 };
 

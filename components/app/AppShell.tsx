@@ -83,7 +83,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-dvh lg:grid lg:grid-cols-[250px_1fr]">
+    <div className="app-shell min-h-dvh lg:grid lg:grid-cols-[250px_1fr]">
       {/* Sidebar desktop */}
       <aside className="sticky top-0 hidden h-dvh flex-col border-r border-line bg-ink-2/60 px-3 py-5 lg:flex">
         <Link href="/app/" className="mb-6 px-2">

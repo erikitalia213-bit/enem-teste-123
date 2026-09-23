@@ -50,7 +50,7 @@ function WristbandCard({ plays, layout, start, showNames, size, copy }: { plays:
   const fs = layout >= 12 ? 0.5 : 0.62;
   return (
     <div
-      className="print-avoid overflow-hidden border-2 border-[#111] bg-white text-[#111]"
+      className="wb-card print-avoid overflow-hidden border-2 border-[#111] bg-white text-[#111]"
       style={{ width: `${s.w}cm`, height: `${s.h}cm`, display: "grid", gridTemplateColumns: `repeat(${g.cols}, 1fr)`, gridTemplateRows: `repeat(${g.rows}, 1fr)` }}
       aria-label={`Tarjeta ${copy}`}
     >
@@ -134,6 +134,7 @@ function Wristbands() {
     <div className="animate-fade-up">
       <style>{`@media print { @page { size: ${paper.css}; margin: 12mm; } }`}</style>
       <PageHeader
+        className="no-print"
         eyebrow="Wristbands"
         title="Tarjetas para muñequera"
         description="Elige tus jugadas y FLAGLAB genera tarjetas numeradas con mini diagrama, listas para imprimir y recortar."

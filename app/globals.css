@@ -179,6 +179,12 @@ body {
   .print-only {
     display: block !important;
   }
+  .app-shell {
+    display: block !important;
+  }
+  main#contenido {
+    max-width: none !important;
+  }
   .print-page {
     break-after: page;
   }
@@ -198,6 +204,9 @@ body {
     color: #111 !important;
     border-color: #d5d9d9 !important;
     box-shadow: none !important;
+  }
+  .print-sheet .wb-card {
+    border-color: #111 !important;
   }
   .print-sheet .print-muted {
     color: #555 !important;

@@ -395,6 +395,7 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
               </div>
             )}
 
+            <div className="mx-auto w-full" style={{ maxWidth: "max(320px, calc((100dvh - 230px) * 1.11))" }}>
             <EditorField
               diagram={diagram}
               selection={selection}
@@ -413,6 +414,7 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
               onFinishDraft={finishDraft}
               onErase={onErase}
             />
+            </div>
             <p className="mt-2 px-1 text-xs text-mist">
               Consejo: selecciona un jugador y elige una ruta en el panel. Arrastra los puntos verdes para ajustarla. Atajos: Ctrl+Z deshacer · Supr borrar · flechas mover.
             </p>
