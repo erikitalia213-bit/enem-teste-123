@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { CalendarClock, ClipboardCheck, ListOrdered, Minus, Plus, Printer, Settings2, Shuffle, Table2, Trash2, Trophy, Users } from "lucide-react";
 import { Button, Card, EmptyState, Field, IconButton, PageHeader, cn, useToast } from "@/components/ui";
 import { uid } from "@/lib/field";
@@ -123,7 +123,7 @@ export default function KitTorneoPage() {
   const [newTeam, setNewTeam] = useState("");
   const teamName = (id: string) => t.teams.find((x) => x.id === id)?.name ?? "—";
 
-  const standings = useMemo(() => {
+  const standings = (() => {
     const rows = t.teams.map((team) => ({ id: team.id, name: team.name, pj: 0, g: 0, e: 0, p: 0, pf: 0, pc: 0, pts: 0 }));
     const get = (id: string) => rows.find((r) => r.id === id);
     for (const m of t.matches) {
@@ -155,7 +155,7 @@ export default function KitTorneoPage() {
       }
     }
     return rows.sort((x, y) => y.pts - x.pts || y.pf - y.pc - (x.pf - x.pc) || y.pf - x.pf);
-  }, [t.teams, t.matches, t.pointsWin, t.pointsTie]);
+  })();
 
   const ourMatches = t.matches.filter((m) => m.home === t.ourTeam || m.away === t.ourTeam).sort((a, b) => a.time.localeCompare(b.time));
 

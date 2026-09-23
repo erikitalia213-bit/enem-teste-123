@@ -4,9 +4,8 @@ import Link from "next/link";
 import { X } from "lucide-react";
 import { createContext, useCallback, useContext, useEffect, useId, useRef, useState, type ComponentProps, type ReactNode } from "react";
 
-export function cn(...classes: (string | false | null | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import { cn } from "@/lib/cn";
+export { cn };
 
 /* ---------------- Botones ---------------- */
 

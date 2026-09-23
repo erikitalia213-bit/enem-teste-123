@@ -68,7 +68,7 @@ function WristbandCard({ plays, layout, start, showNames, size, copy }: { plays:
                 </span>
               )}
             </div>
-            <div className="min-h-0 flex-1">{p && <PlayDiagram diagram={p.diagram} theme="print" compact showNotes={false} className="h-full w-full" />}</div>
+            <div className="relative min-h-0 flex-1"><div className="absolute inset-0">{p && <PlayDiagram diagram={p.diagram} theme="print" fit showNotes={false} className="h-full w-full" />}</div></div>
           </div>
         );
       })}

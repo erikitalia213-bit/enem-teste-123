@@ -327,9 +327,9 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
         }
       />
 
-      <div className="grid gap-4 xl:grid-cols-[270px_minmax(0,1fr)_300px]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_300px] 2xl:grid-cols-[270px_minmax(0,1fr)_300px]">
         {/* -------- Centro: campo -------- */}
-        <div className="order-1 min-w-0 xl:order-2">
+        <div className="order-1 min-w-0 2xl:order-2">
           <div className="card p-2 sm:p-3">
             <div className="mb-2 flex flex-wrap items-center gap-1.5" role="toolbar" aria-label="Herramientas del campo">
               {tools.map((t) => {
@@ -425,7 +425,7 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
         </div>
 
         {/* -------- Izquierda: datos -------- */}
-        <div className="order-2 space-y-4 xl:order-1">
+        <div className="order-3 space-y-4 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0 2xl:order-1 2xl:col-span-1 2xl:block 2xl:space-y-4">
           <Card className="space-y-4 p-4">
             <h2 className="font-display text-xl font-bold uppercase">Datos de la jugada</h2>
             <Field label="Nombre">
@@ -513,7 +513,7 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
         </div>
 
         {/* -------- Derecha: inspector -------- */}
-        <div className="order-3 space-y-4">
+        <div className="order-2 space-y-4 2xl:order-3">
           <Card className="p-4">
             {selectedPlayer ? (
               <PlayerInspector

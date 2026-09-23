@@ -31,7 +31,7 @@ export default function Dashboard() {
   const { items: playbooks } = usePlaybooks();
   const { items: roster } = useRoster();
   const playOfDay = PLAYS[dayIndex()];
-  const firstName = profile?.coachName.split(" ").slice(0, 2).join(" ");
+  const firstName = profile?.coachName.replace(/^coach\s+/i, "").split(" ").slice(0, 2).join(" ");
 
   return (
     <div className="animate-fade-up">

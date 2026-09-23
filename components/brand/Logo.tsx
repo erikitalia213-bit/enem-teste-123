@@ -1,4 +1,4 @@
-import { cn } from "@/components/ui";
+import { cn } from "@/lib/cn";
 
 /** Isotipo de FLAGLAB: una flag de cinturón estilizada sobre una cuadrícula de campo. */
 export function LogoMark({ size = 32, className }: { size?: number; className?: string }) {

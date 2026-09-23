@@ -156,14 +156,31 @@ interface PlayDiagramProps {
   compact?: boolean;
   showRushLine?: boolean;
   showNotes?: boolean;
+  /** Ajusta la vista al contenido (jugadores y rutas). Ideal para muñequeras. */
+  fit?: boolean;
 }
 
-function PlayDiagramBase({ diagram, theme = "field", className, title, compact = false, showRushLine, showNotes = true }: PlayDiagramProps) {
+function fitBox(d: Diagram) {
+  const xs: number[] = [];
+  const ys: number[] = [];
+  d.players.forEach((p) => (xs.push(p.x), ys.push(p.y)));
+  d.routes.forEach((r) => r.points.forEach((p) => (xs.push(p.x), ys.push(p.y))));
+  d.zones.forEach((z) => (xs.push(z.x - z.rx, z.x + z.rx), ys.push(z.y - z.ry, z.y + z.ry)));
+  if (!xs.length) return `0 0 ${FIELD_W} ${FIELD_H}`;
+  const pad = 5;
+  const x0 = Math.max(0, Math.min(...xs) - pad);
+  const x1 = Math.min(FIELD_W, Math.max(...xs) + pad);
+  const y0 = Math.max(0, Math.min(...ys) - pad);
+  const y1 = Math.min(FIELD_H, Math.max(...ys) + pad);
+  return `${x0} ${y0} ${x1 - x0} ${y1 - y0}`;
+}
+
+function PlayDiagramBase({ diagram, theme = "field", className, title, compact = false, showRushLine, showNotes = true, fit = false }: PlayDiagramProps) {
   const hasDefense = diagram.players.some((p) => p.team === "D");
-  const vb = compact ? `0 4 ${FIELD_W} ${FIELD_H - 4}` : `0 0 ${FIELD_W} ${FIELD_H}`;
+  const vb = fit ? fitBox(diagram) : compact ? `0 4 ${FIELD_W} ${FIELD_H - 4}` : `0 0 ${FIELD_W} ${FIELD_H}`;
   const idPrefix = `pd${Math.abs(hashCode(JSON.stringify(diagram.players.map((p) => [p.x, p.y])) + (title ?? "")))}`;
   return (
-    <svg viewBox={vb} className={className} role="img" aria-label={title ? `Diagrama: ${title}` : "Diagrama de jugada"} preserveAspectRatio="xMidYMid meet">
+    <svg viewBox={vb} className={className ?? "block h-auto w-full"} role="img" aria-label={title ? `Diagrama: ${title}` : "Diagrama de jugada"} preserveAspectRatio="xMidYMid meet">
       {title && <title>{title}</title>}
       <FieldBackground theme={theme} showRushLine={showRushLine ?? hasDefense} idPrefix={idPrefix} />
       {diagram.zones.map((z) => (
@@ -198,5 +215,7 @@ function hashCode(s: string) {
   return h;
 }
 
+/** Versión sin memo (útil en Server Components). */
+export const DiagramSvg = PlayDiagramBase;
 export const PlayDiagram = memo(PlayDiagramBase);
 export default PlayDiagram;

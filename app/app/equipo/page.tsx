@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ArrowDown, ArrowUp, Pencil, Plus, Printer, Trash2, UserPlus, Users, Wand2, X } from "lucide-react";
-import { Badge, Button, Card, EmptyState, Field, IconButton, Modal, PageHeader, cn, useToast } from "@/components/ui";
+import { Badge, Button, EmptyState, Field, IconButton, Modal, PageHeader, cn, useToast } from "@/components/ui";
 import { uid } from "@/lib/field";
 import { useDepthChart, useProfile, useRoster } from "@/lib/hooks";
 import type { Player } from "@/lib/types";
