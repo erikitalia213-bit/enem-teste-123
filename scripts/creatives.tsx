@@ -139,7 +139,7 @@ function creative2() {
 
 /* ---------------- Creativo 3: muñequera ---------------- */
 function creative3() {
-  const ids = ["pc-01", "cs-10", "pr-06", "rz-02", "sc-01", "cv-01"];
+  const ids = ["pc-01", "cs-10", "pp-01", "rz-02", "sc-01", "mo-10"];
   const cells = ids
     .map((id, i) => `<div style="border:1px solid #bbb;padding:6px"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-family:'Barlow Condensed';font-size:40px;color:#111;line-height:1">0${i + 1}</b><span style="font-family:'Barlow Condensed';font-weight:700;font-size:20px;color:#111">${PLAY_MAP[id].name.toUpperCase()}</span></div>${svg(PLAY_MAP[id], "print", "", true)}</div>`)
     .join("");

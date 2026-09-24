@@ -21,6 +21,8 @@ import {
   X,
   FilePlus2,
   ShieldHalf,
+  ZoomIn,
+  ZoomOut,
 } from "lucide-react";
 import { Badge, Button, Card, Field, IconButton, PageHeader, Segmented, cn, useToast } from "@/components/ui";
 import PlayDiagram from "@/components/diagram/PlayDiagram";
@@ -98,6 +100,7 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
   const [draft, setDraft] = useState<Pt[] | null>(null);
   const [draftPlayerId, setDraftPlayerId] = useState<string | null>(null);
   const [snapToGrid, setSnapToGrid] = useState(true);
+  const [zoom, setZoom] = useState(1);
   const [dirty, setDirty] = useState(isNew);
   const exportRef = useRef<HTMLDivElement>(null);
 
@@ -364,6 +367,12 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
               <IconButton label={snapToGrid ? "Desactivar ajuste a cuadrícula" : "Activar ajuste a cuadrícula"} onClick={() => setSnapToGrid((v) => !v)} className={snapToGrid ? "text-volt" : ""}>
                 <Grid3x3 size={18} />
               </IconButton>
+              <IconButton label="Alejar" onClick={() => setZoom((z) => Math.max(1, z - 0.5))} disabled={zoom <= 1}>
+                <ZoomOut size={18} />
+              </IconButton>
+              <IconButton label="Acercar" onClick={() => setZoom((z) => Math.min(2.5, z + 0.5))} disabled={zoom >= 2.5}>
+                <ZoomIn size={18} />
+              </IconButton>
               <IconButton label="Descargar imagen PNG" onClick={exportPng}>
                 <Download size={18} />
               </IconButton>
@@ -395,7 +404,8 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
               </div>
             )}
 
-            <div className="mx-auto w-full" style={{ maxWidth: "max(320px, calc((100dvh - 230px) * 1.11))" }}>
+            <div className={cn("mx-auto w-full", zoom > 1 && "max-h-[75dvh] overflow-auto overscroll-contain rounded-2xl")} style={zoom > 1 ? undefined : { maxWidth: "max(320px, calc((100dvh - 230px) * 1.11))" }}>
+            <div style={zoom > 1 ? { width: `${zoom * 100}%` } : undefined}>
             <EditorField
               diagram={diagram}
               selection={selection}
@@ -414,6 +424,7 @@ export function PlayCreator({ initial, isNew }: { initial: Play; isNew: boolean 
               onFinishDraft={finishDraft}
               onErase={onErase}
             />
+            </div>
             </div>
             <p className="mt-2 px-1 text-xs text-mist">
               Consejo: selecciona un jugador y elige una ruta en el panel. Arrastra los puntos verdes para ajustarla. Atajos: Ctrl+Z deshacer · Supr borrar · flechas mover.

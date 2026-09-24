@@ -164,7 +164,9 @@ export function EditorField(props: Props) {
       ref={svgRef}
       viewBox={`0 0 ${FIELD_W} ${FIELD_H}`}
       className="block h-auto w-full select-none rounded-2xl"
-      style={{ touchAction: "none", cursor }}
+      // El fondo permite desplazar la página y hacer pinch-zoom en celular;
+      // jugadores, puntos, notas y zonas bloquean el gesto para poder arrastrarlos.
+      style={{ touchAction: mode === "draw" || mode === "text" ? "pinch-zoom" : "manipulation", cursor }}
       role="application"
       aria-label="Campo de juego editable. Usa la barra de herramientas y el panel lateral para editar."
       onPointerDown={onBackgroundDown}
@@ -192,7 +194,7 @@ export function EditorField(props: Props) {
             strokeWidth={sel ? 0.6 : 0.35}
             strokeDasharray="1 0.8"
             onPointerDown={(e) => startZone(e, z.id)}
-            style={{ cursor: mode === "select" ? "move" : undefined }}
+            style={{ cursor: mode === "select" ? "move" : undefined, touchAction: "none" }}
           />
         );
       })}
@@ -210,19 +212,12 @@ export function EditorField(props: Props) {
             {related &&
               mode === "select" &&
               r.points.map((p, i) => (
-                <circle
-                  key={i}
-                  cx={p.x}
-                  cy={p.y}
-                  r={sel ? 1.5 : 1.1}
-                  fill="#070909"
-                  stroke="#49F05A"
-                  strokeWidth={0.45}
-                  onPointerDown={(e) => startPoint(e, r.id, i)}
-                  style={{ cursor: "grab" }}
-                >
+                <g key={i} onPointerDown={(e) => startPoint(e, r.id, i)} style={{ cursor: "grab", touchAction: "none" }}>
+                  {/* Área táctil amplia e invisible (~10 mm en celular) */}
+                  <circle cx={p.x} cy={p.y} r={3.2} fill="transparent" />
+                  <circle cx={p.x} cy={p.y} r={sel ? 1.5 : 1.1} fill="#070909" stroke="#49F05A" strokeWidth={0.45} />
                   <title>Arrastra para ajustar la ruta</title>
-                </circle>
+                </g>
               ))}
           </g>
         );
@@ -253,7 +248,7 @@ export function EditorField(props: Props) {
           <g
             key={p.id}
             onPointerDown={(e) => startPlayer(e, p.id)}
-            style={{ cursor: mode === "select" ? "grab" : "pointer" }}
+            style={{ cursor: mode === "select" ? "grab" : "pointer", touchAction: "none" }}
             role="button"
             tabIndex={0}
             aria-label={`Jugador ${p.label} (${p.role})${sel ? ", seleccionado" : ""}`}
@@ -276,7 +271,7 @@ export function EditorField(props: Props) {
         const sel = selection?.kind === "note" && selection.id === n.id;
         const w = Math.max(6, n.text.length * 1.45);
         return (
-          <g key={n.id} onPointerDown={(e) => startNote(e, n.id)} style={{ cursor: mode === "select" ? "move" : "pointer" }}>
+          <g key={n.id} onPointerDown={(e) => startNote(e, n.id)} style={{ cursor: mode === "select" ? "move" : "pointer", touchAction: "none" }}>
             <rect x={n.x - w / 2 - 1} y={n.y - 3} width={w + 2} height={4.4} rx={0.8} fill={sel ? "rgba(73,240,90,0.15)" : "transparent"} stroke={sel ? "#49F05A" : "transparent"} strokeWidth={0.3} strokeDasharray="0.8 0.6" />
             <text x={n.x} y={n.y} textAnchor="middle" fontSize={2.6} fontWeight={600} fill={n.color ?? "#FFFFFF"} style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}>
               {n.text}

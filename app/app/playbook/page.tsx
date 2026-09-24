@@ -1,5 +1,6 @@
 "use client";
 
+import { plural } from "@/lib/cn";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { ArrowDown, ArrowUp, BookOpen, Download, FileUp, GripVertical, Plus, Printer, Trash2, Watch, X } from "lucide-react";
@@ -100,7 +101,7 @@ export default function PlaybookPage() {
       <PageHeader
         eyebrow="Mi playbook"
         title={pb.teamName || "Mi playbook"}
-        description={`${countPlays(pb)} jugadas · Arrastra para reordenar o usa las flechas.`}
+        description={`${plural(countPlays(pb), "jugada", "jugadas")} · Arrastra para reordenar o usa las flechas.`}
         actions={
           <>
             <LinkButton href={`/app/playbook/imprimir/?id=${pb.id}`}>

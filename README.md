@@ -38,17 +38,18 @@ Requisitos: **Node.js 20+**.
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+cp .env.example .env.local   # para probar sin Supabase: FLAGLAB_DEV_BYPASS_AUTH=true
+npm run dev                  # http://localhost:3000
 ```
 
 ## Build de producción
 
 ```bash
-npm run build        # exporta el sitio estático a /out
-npm start            # sirve /out en http://localhost:3000
+npm run build
+npm start            # next start en http://localhost:3000
 ```
 
-Sube la carpeta `out/` a Vercel, Netlify, Cloudflare Pages o cualquier hosting (ver `docs/DEPLOY.md`).
+Necesita un hosting con Node (Vercel recomendado). Ver `docs/DEPLOY.md`, `docs/SUPABASE.md` y `docs/CHECKOUT.md`, y antes de lanzar `LAUNCH-CHECKLIST.md`. El informe de auditoría está en `FINAL-AUDIT.md`.
 
 Otros comandos:
 
@@ -56,7 +57,11 @@ Otros comandos:
 |---|---|
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript |
-| `npm run validate` | Valida integridad de jugadas, drills y sesiones (duplicados, minutos, referencias) |
+| `npm run validate` | Valida jugadas, drills y sesiones (duplicados, similitud, minutos, edades, jugadores) |
+| `npm test` | Pruebas unitarias: checkout/UTM, webhooks, generador (6000 combinaciones), diagramas, playbook |
+| `npm run audit:plays` | Auditoría de las 110 jugadas (duplicados, rutas imposibles, lecturas incoherentes) |
+| `npm run leak-scan` | Tras `npm run build`: confirma que ningún texto de pago está en los archivos públicos |
+| `tests/e2e/` | Pruebas de punta a punta con navegador real y Supabase simulado (ver su README) |
 | `npm run content:export` | Regenera los Markdown de `/content` |
 | `npm run creatives` | Regenera creativos (HTML + PNG), `public/og.png` e íconos (requiere Chromium; `CHROMIUM_PATH=/ruta` si no está en `/opt/pw-browsers/chromium`) |
 
@@ -68,7 +73,7 @@ Otros comandos:
 `config.ts`
 ```ts
 export const PRICING = { regular: 599, offer: 199 };
-export const ORDER_BUMPS = { defensa: { price: 79, … }, pack50: { price: 99, … }, escolar: { price: 79, … } };
+export const ORDER_BUMPS = { defensive_playbook: { price: 79, … }, extra_trainings: { price: 99, … }, school_coach_kit: { price: 79, … } };
 ```
 El formato `MX$199` se aplica automáticamente en toda la landing.
 
@@ -112,31 +117,21 @@ Las versiones en Markdown de todos los documentos están en `/content`.
 
 ---
 
-## Agregar checkout y acceso
-
-1. Crea el producto en Hotmart, Kiwify, Stripe o Mercado Pago y pega el link en `CHECKOUT_URL`.
-2. Configura los order bumps en tu plataforma con los precios de `config.ts`.
-3. En el correo de entrega envía el link `https://tudominio.com/entrar/`.
-4. Opcional: `ACCESS_CODE` y `BUMP_UNLOCK_CODES` en `config.ts` (barrera simple del lado del cliente).
-5. Para cuentas reales y sincronización, conecta Supabase (`docs/SUPABASE.md`).
-
-## Analytics
-`.env.local`:
-```
-NEXT_PUBLIC_META_PIXEL_ID=
-NEXT_PUBLIC_GA_ID=
-```
-Vacío = no se carga ningún script. Con IDs: `PageView` + `InitiateCheckout` en cada botón de compra.
+## Accesos, checkout y analítica
+- **Cuentas**: Supabase Auth (correo + contraseña o enlace por correo). Cada compra se registra en `entitlements` vía webhook y el usuario solo recibe el contenido de lo que compró. Ver `docs/SUPABASE.md`.
+- **Checkout**: links por variables de entorno (`NEXT_PUBLIC_CHECKOUT_URL`…); se reenvían UTMs y fbclid. Hotmart y Kiwify con webhooks en `/api/webhooks/*`. Ver `docs/CHECKOUT.md`.
+- **Analítica**: PageView, ViewContent, Lead e InitiateCheckout en el navegador; Purchase solo desde el servidor al confirmarse el pago.
+- Lista completa de variables: `.env.example`. Ningún secreto va en el frontend.
 
 ---
 
 ## Datos del usuario
-Todo se guarda en el navegador (`localStorage`, prefijo `flaglab:v1:`): jugadas, playbooks, entrenamientos, equipo, depth chart, tracker, torneo y preferencias. En **Ajustes** el coach puede exportar/importar un respaldo JSON. Arquitectura lista para Supabase (`lib/storage.ts → StorageDriver`).
+Las jugadas, playbooks, entrenamientos, equipo, tracker y preferencias se guardan en el navegador (`localStorage`, prefijo `flaglab:v1:u:<usuario>:`). En **Ajustes** se exporta/importa un respaldo JSON para cambiar de dispositivo.
 
 ## Estructura
 Ver `docs/ARQUITECTURA.md`.
 
 ## Calidad
 - `npm run build`, `npm run lint` y `npm run validate` sin errores.
-- QA con navegador real (Playwright) en desktop 1440, tablet 820 y móvil 390: sin errores de consola ni scroll horizontal en landing y todas las rutas de la app; flujo completo probado (crear jugada → playbook → muñequeras → entrenamiento → equipo → tracker).
+- Ver `FINAL-AUDIT.md` para el detalle de lo probado y las limitaciones conocidas.
 - Accesibilidad: contraste alto, labels en formularios, `focus-visible`, navegación por teclado (atajos en el creador), textos alternativos en diagramas, `prefers-reduced-motion`.

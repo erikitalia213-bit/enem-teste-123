@@ -1,5 +1,6 @@
 "use client";
 
+import { plural } from "@/lib/cn";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowDown, ArrowUp, BookOpen, Plus, Printer, Sparkles, Watch, X } from "lucide-react";
@@ -27,12 +28,14 @@ interface WristbandConfig {
 
 const DEFAULT: WristbandConfig = { refs: [], layout: 9, paper: "carta", size: "m", start: 1, showNames: true, coachSheet: true };
 
+// Celdas horizontales: los diagramas son más anchos que altos, así se aprovecha mejor el espacio.
 const GRID: Record<Layout, { cols: number; rows: number }> = {
-  6: { cols: 3, rows: 2 },
+  6: { cols: 2, rows: 3 },
   9: { cols: 3, rows: 3 },
-  12: { cols: 4, rows: 3 },
-  18: { cols: 6, rows: 3 },
+  12: { cols: 3, rows: 4 },
+  18: { cols: 3, rows: 6 },
 };
+const GAP_CM = 0.15;
 const SIZES: Record<Size, { w: number; h: number; label: string }> = {
   s: { w: 8, h: 5, label: "Chica 8 × 5 cm" },
   m: { w: 9.5, h: 6, label: "Mediana 9.5 × 6 cm" },
@@ -40,35 +43,50 @@ const SIZES: Record<Size, { w: number; h: number; label: string }> = {
 };
 // Área útil con márgenes de 12 mm
 const PAPER: Record<Paper, { w: number; h: number; label: string; css: string }> = {
-  carta: { w: 19.1, h: 25.5, label: "Carta", css: "letter" },
+  carta: { w: 19.19, h: 25.49, label: "Carta", css: "letter" },
   a4: { w: 18.6, h: 27.3, label: "A4", css: "A4" },
 };
 
 function WristbandCard({ plays, layout, start, showNames, size, copy }: { plays: (Play | null)[]; layout: Layout; start: number; showNames: boolean; size: Size; copy: number }) {
   const g = GRID[layout];
   const s = SIZES[size];
-  const fs = layout >= 12 ? 0.5 : 0.62;
+  const cellH = s.h / g.rows; // cm
+  // 6 y 9: número + nombre arriba. 12 y 18: número en una franja lateral para que el diagrama use toda la altura.
+  const strip = layout >= 12;
+  const numCm = Math.min(0.5, Math.max(0.3, cellH * 0.42));
   return (
     <div
       className="wb-card print-avoid overflow-hidden border-2 border-[#111] bg-white text-[#111]"
-      style={{ width: `${s.w}cm`, height: `${s.h}cm`, display: "grid", gridTemplateColumns: `repeat(${g.cols}, 1fr)`, gridTemplateRows: `repeat(${g.rows}, 1fr)` }}
+      style={{ width: `${s.w}cm`, height: `${s.h}cm`, display: "grid", gridTemplateColumns: `repeat(${g.cols}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${g.rows}, minmax(0, 1fr))` }}
       aria-label={`Tarjeta ${copy}`}
     >
       {Array.from({ length: layout }).map((_, i) => {
         const p = plays[i];
-        return (
-          <div key={i} className="relative flex min-h-0 flex-col border-[0.5px] border-[#bbb]" style={{ padding: "0.06cm" }}>
-            <div className="flex items-baseline gap-1 leading-none">
-              <span className="font-display font-extrabold" style={{ fontSize: `${fs * 1.5}rem` }}>
-                {pad2(start + i)}
+        const num = pad2(start + i);
+        return strip ? (
+          <div key={i} className="flex min-h-0 min-w-0 border-[0.5px] border-[#bbb]">
+            <span className="flex shrink-0 items-center justify-center border-r-[0.5px] border-[#bbb] font-display font-extrabold leading-none" style={{ width: `${numCm * 1.25}cm`, fontSize: `${numCm}cm` }}>
+              {num}
+            </span>
+            <div className="relative min-h-0 min-w-0 flex-1">
+              <div className="absolute inset-[0.04cm]">{p && <PlayDiagram diagram={p.diagram} theme="print" fit mini showNotes={false} className="h-full w-full" />}</div>
+            </div>
+          </div>
+        ) : (
+          <div key={i} className="flex min-h-0 min-w-0 flex-col border-[0.5px] border-[#bbb]" style={{ padding: "0.06cm" }}>
+            <div className="flex min-w-0 items-baseline gap-1 leading-none">
+              <span className="font-display font-extrabold" style={{ fontSize: `${numCm}cm` }}>
+                {num}
               </span>
               {showNames && p && (
-                <span className="truncate font-bold uppercase" style={{ fontSize: `${fs * 0.75}rem` }}>
+                <span className="truncate font-bold uppercase" style={{ fontSize: `${numCm * 0.5}cm` }}>
                   {p.name}
                 </span>
               )}
             </div>
-            <div className="relative min-h-0 flex-1"><div className="absolute inset-0">{p && <PlayDiagram diagram={p.diagram} theme="print" fit showNotes={false} className="h-full w-full" />}</div></div>
+            <div className="relative min-h-0 flex-1">
+              <div className="absolute inset-0">{p && <PlayDiagram diagram={p.diagram} theme="print" fit mini={layout === 9} showNotes={false} className="h-full w-full" />}</div>
+            </div>
           </div>
         );
       })}
@@ -95,7 +113,7 @@ function Wristbands() {
     if (!pb) return;
     const refs = flattenPlaybook(pb).map((f) => f.ref);
     set({ refs, start: 1 });
-    toast(`${refs.length} jugadas cargadas de ${pb.teamName}`);
+    toast(`${plural(refs.length, "jugada cargada", "jugadas cargadas")} de ${pb.teamName}`);
   };
 
   // Si llega ?playbook=ID desde Mi playbook, carga sus jugadas una vez.
@@ -118,8 +136,10 @@ function Wristbands() {
 
   const size = SIZES[c.size];
   const paper = PAPER[c.paper];
-  const cols = Math.max(1, Math.floor(paper.w / size.w));
-  const rows = Math.max(1, Math.floor(paper.h / size.h));
+  // Cabe n tarjetas si n·ancho + (n−1)·separación ≤ área útil
+  const cols = Math.max(1, Math.floor((paper.w + GAP_CM) / (size.w + GAP_CM)));
+  // 1.2 cm reservados para el encabezado de la hoja
+  const rows = Math.max(1, Math.floor((paper.h - 1.2 + GAP_CM) / (size.h + GAP_CM)));
   const copiesPerSheet = cols * rows;
 
   const move = (i: number, dir: -1 | 1) => {
@@ -135,7 +155,7 @@ function Wristbands() {
       <style>{`@media print { @page { size: ${paper.css}; margin: 12mm; } }`}</style>
       <PageHeader
         className="no-print"
-        eyebrow="Wristbands"
+        eyebrow="Muñequeras"
         title="Tarjetas para muñequera"
         description="Elige tus jugadas y FLAGLAB genera tarjetas numeradas con mini diagrama, listas para imprimir y recortar."
         actions={
@@ -183,7 +203,7 @@ function Wristbands() {
             {(id) => <input id={id} type="number" min={1} max={99} className="input" value={c.start} onChange={(e) => set({ start: Math.max(1, Math.min(99, Number(e.target.value) || 1)) })} />}
           </Field>
           <label className="flex items-center gap-2 text-sm font-semibold">
-            <input type="checkbox" className="h-4 w-4 accent-[#49F05A]" checked={c.showNames} onChange={(e) => set({ showNames: e.target.checked })} /> Mostrar nombre corto
+            <input type="checkbox" className="h-4 w-4 accent-[#49F05A]" checked={c.showNames} onChange={(e) => set({ showNames: e.target.checked })} /> Mostrar nombre corto (6 y 9 jugadas; en 12 y 18 los nombres van en la hoja del coach)
           </label>
           <label className="flex items-center gap-2 text-sm font-semibold">
             <input type="checkbox" className="h-4 w-4 accent-[#49F05A]" checked={c.coachSheet} onChange={(e) => set({ coachSheet: e.target.checked })} /> Incluir hoja del coach
@@ -223,15 +243,15 @@ function Wristbands() {
           {c.refs.length === 0 ? (
             <EmptyState icon={<Watch size={22} />} title="Elige tus jugadas" description="Carga tu playbook o agrega jugadas de la biblioteca. Se numeran automáticamente: 01, 02, 03…" action={<Button onClick={() => setPickerOpen(true)}><BookOpen size={17} /> Elegir jugadas</Button>} />
           ) : (
-            <ol className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
               {c.refs.map((ref, i) => {
                 const p = plays[i];
                 return (
                   <li key={`${ref.source}-${ref.id}-${i}`} className="flex items-center gap-2 rounded-xl border border-line bg-ink-2 p-2">
-                    <span className="w-7 text-center font-display text-lg font-bold text-volt">{pad2(c.start + i)}</span>
+                    <span className="w-7 shrink-0 text-center font-display text-lg font-bold text-volt">{pad2(c.start + i)}</span>
                     <div className="w-16 shrink-0 overflow-hidden rounded border border-line">{p && <PlayDiagram diagram={p.diagram} compact showNotes={false} />}</div>
                     <span className="min-w-0 flex-1 truncate text-sm font-semibold">{p?.name ?? "No disponible"}</span>
-                    <span className="flex">
+                    <span className="flex shrink-0">
                       <IconButton label="Subir" className="h-7 w-7" disabled={i === 0} onClick={() => move(i, -1)}>
                         <ArrowUp size={14} />
                       </IconButton>
@@ -249,7 +269,7 @@ function Wristbands() {
           )}
           {c.refs.length > perCard && (
             <p className="mt-3 text-sm text-amber">
-              Tienes {c.refs.length} jugadas: se generarán {cardGroups.length} tarjetas distintas de {perCard} jugadas.
+              Tienes {plural(c.refs.length, "jugada", "jugadas")}: se generarán {plural(cardGroups.length, "tarjeta distinta", "tarjetas distintas")} de {perCard} jugadas.
             </p>
           )}
         </Card>
@@ -257,7 +277,7 @@ function Wristbands() {
 
       {/* Hoja generada */}
       {generated && c.refs.length > 0 && (
-        <div ref={sheetRef} className="mt-8 scroll-mt-20">
+        <div ref={sheetRef} className="mt-8 scroll-mt-20 print:mt-0">
           <h2 className="no-print h-display mb-3 text-2xl">Vista previa de la hoja</h2>
           <div className="print-sheet space-y-6 overflow-x-auto print:space-y-0">
             {cardGroups.map((group, gi) => (
@@ -265,7 +285,7 @@ function Wristbands() {
                 <p className="mb-2 text-[0.7rem] font-semibold text-[#666] print-muted">
                   FLAGLAB 5x5 · Tarjeta {gi + 1} · Jugadas {pad2(c.start + gi * perCard)}–{pad2(c.start + gi * perCard + group.length - 1)} · Recorta por la línea negra
                 </p>
-                <div className="grid w-fit gap-[0.2cm]" style={{ gridTemplateColumns: `repeat(${cols}, ${size.w}cm)` }}>
+                <div className="grid w-fit" style={{ gap: `${GAP_CM}cm`, gridTemplateColumns: `repeat(${cols}, ${size.w}cm)` }}>
                   {Array.from({ length: copiesPerSheet }).map((_, k) => (
                     <WristbandCard key={k} plays={group} layout={c.layout} start={c.start + gi * perCard} showNames={c.showNames} size={c.size} copy={k + 1} />
                   ))}

@@ -11,7 +11,7 @@ import type { Diagram, DiagramPlayer, DiagramRoute, Pt } from "@/lib/types";
 
 export type DiagramTheme = "field" | "print";
 
-export function FieldBackground({ theme = "field", showRushLine = false, idPrefix = "f" }: { theme?: DiagramTheme; showRushLine?: boolean; idPrefix?: string }) {
+export function FieldBackground({ theme = "field", showRushLine = false, idPrefix = "f", minimal = false }: { theme?: DiagramTheme; showRushLine?: boolean; idPrefix?: string; minimal?: boolean }) {
   const print = theme === "print";
   const lines: number[] = [];
   for (let y = LOS_Y - 5 * YD; y > 0; y -= 5 * YD) lines.push(y);
@@ -32,10 +32,10 @@ export function FieldBackground({ theme = "field", showRushLine = false, idPrefi
           <rect x={0} y={0} width={FIELD_W} height={FIELD_H} fill={`url(#${idPrefix}-grass)`} />
         </>
       )}
-      {lines.map((y) => (
+      {!minimal && lines.map((y) => (
         <line key={y} x1={0} x2={FIELD_W} y1={y} y2={y} stroke={print ? "#cfd4d4" : "rgba(255,255,255,0.10)"} strokeWidth={0.35} />
       ))}
-      {ticks.map((y) => (
+      {!minimal && ticks.map((y) => (
         <g key={`t${y}`}>
           <line x1={1} x2={3} y1={y} y2={y} stroke={print ? "#dfe3e3" : "rgba(255,255,255,0.12)"} strokeWidth={0.3} />
           <line x1={97} x2={99} y1={y} y2={y} stroke={print ? "#dfe3e3" : "rgba(255,255,255,0.12)"} strokeWidth={0.3} />
@@ -44,7 +44,7 @@ export function FieldBackground({ theme = "field", showRushLine = false, idPrefi
       {showRushLine && (
         <line x1={0} x2={FIELD_W} y1={RUSH_LINE_Y} y2={RUSH_LINE_Y} stroke={print ? "#e57a5a" : "rgba(255,122,89,0.45)"} strokeWidth={0.35} strokeDasharray="1.2 1.2" />
       )}
-      <line x1={0} x2={FIELD_W} y1={LOS_Y} y2={LOS_Y} stroke={print ? "#8a9191" : "rgba(157,163,163,0.55)"} strokeWidth={0.5} />
+      <line x1={0} x2={FIELD_W} y1={LOS_Y} y2={LOS_Y} stroke={print ? "#8a9191" : "rgba(157,163,163,0.55)"} strokeWidth={minimal ? 0.9 : 0.5} />
     </g>
   );
 }
@@ -83,14 +83,16 @@ export function RoutePath({
   }
   const dash = route.style === "dashed" ? "1.6 1.1" : route.style === "dotted" ? "0.4 1" : undefined;
   const sw = highlighted ? width * 1.6 : width;
+  // Flechas proporcionales al grosor (en muñequeras las rutas son más gruesas)
+  const k = Math.max(1, width / 0.9);
   return (
     <g>
       <path d={pathD(start, pts)} fill="none" stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={dash} />
       {route.end === "arrow" && (
-        <path d="M -1.9 -1.25 L 0.35 0 L -1.9 1.25 Z" fill={color} transform={`translate(${last.x} ${last.y}) rotate(${angle})`} />
+        <path d="M -1.9 -1.25 L 0.35 0 L -1.9 1.25 Z" fill={color} transform={`translate(${last.x} ${last.y}) rotate(${angle}) scale(${k})`} />
       )}
       {route.end === "block" && (
-        <line x1={-1.4} x2={1.4} y1={0} y2={0} stroke={color} strokeWidth={sw * 1.1} strokeLinecap="round" transform={`translate(${last.x} ${last.y}) rotate(${angle + 90})`} />
+        <line x1={-1.4 * k} x2={1.4 * k} y1={0} y2={0} stroke={color} strokeWidth={sw * 1.1} strokeLinecap="round" transform={`translate(${last.x} ${last.y}) rotate(${angle + 90})`} />
       )}
     </g>
   );
@@ -158,6 +160,8 @@ interface PlayDiagramProps {
   showNotes?: boolean;
   /** Ajusta la vista al contenido (jugadores y rutas). Ideal para muñequeras. */
   fit?: boolean;
+  /** Diagrama miniatura para impresión pequeña: rutas y jugadores más gruesos, campo sin líneas de yarda. */
+  mini?: boolean;
 }
 
 function fitBox(d: Diagram) {
@@ -175,14 +179,14 @@ function fitBox(d: Diagram) {
   return `${x0} ${y0} ${x1 - x0} ${y1 - y0}`;
 }
 
-function PlayDiagramBase({ diagram, theme = "field", className, title, compact = false, showRushLine, showNotes = true, fit = false }: PlayDiagramProps) {
+function PlayDiagramBase({ diagram, theme = "field", className, title, compact = false, showRushLine, showNotes = true, fit = false, mini = false }: PlayDiagramProps) {
   const hasDefense = diagram.players.some((p) => p.team === "D");
   const vb = fit ? fitBox(diagram) : compact ? `0 4 ${FIELD_W} ${FIELD_H - 4}` : `0 0 ${FIELD_W} ${FIELD_H}`;
   const idPrefix = `pd${Math.abs(hashCode(JSON.stringify(diagram.players.map((p) => [p.x, p.y])) + (title ?? "")))}`;
   return (
     <svg viewBox={vb} className={className ?? "block h-auto w-full"} role="img" aria-label={title ? `Diagrama: ${title}` : "Diagrama de jugada"} preserveAspectRatio="xMidYMid meet">
       {title && <title>{title}</title>}
-      <FieldBackground theme={theme} showRushLine={showRushLine ?? hasDefense} idPrefix={idPrefix} />
+      <FieldBackground theme={theme} showRushLine={mini ? false : showRushLine ?? hasDefense} idPrefix={idPrefix} minimal={mini} />
       {diagram.zones.map((z) => (
         <g key={z.id}>
           <ellipse cx={z.x} cy={z.y} rx={z.rx} ry={z.ry} fill={z.color} fillOpacity={theme === "print" ? 0.18 : 0.16} stroke={z.color} strokeOpacity={0.6} strokeWidth={0.35} strokeDasharray="1 0.8" />
@@ -194,10 +198,10 @@ function PlayDiagramBase({ diagram, theme = "field", className, title, compact =
         </g>
       ))}
       {diagram.routes.map((r) => (
-        <RoutePath key={r.id} route={r} start={routeStart(diagram, r)} theme={theme} width={compact ? 1 : 0.75} />
+        <RoutePath key={r.id} route={r} start={routeStart(diagram, r)} theme={theme} width={mini ? 1.9 : compact ? 1 : 0.75} />
       ))}
       {diagram.players.map((p) => (
-        <PlayerMark key={p.id} player={p} theme={theme} />
+        <PlayerMark key={p.id} player={p} theme={theme} scale={mini ? 1.3 : 1} />
       ))}
       {showNotes &&
         diagram.notes.map((n) => (
