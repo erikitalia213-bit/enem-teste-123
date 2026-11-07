@@ -6,7 +6,7 @@ Rodada 1 de anúncios (Meta Ads). Produto: e-book *Ceia Sem Açúcar* — 50 rec
 
 | Arquivo | Ângulo | Formato | Hook | Posicionamento |
 |---|---|---|---|---|
-| `videos/Criativo1-Dor-Comer-Junto.mp4` | Dor: ficar de fora da sobremesa | Ilustração animada, voz feminina (Keren) | "Quer comer junto com a sua família no Natal… mas sem açúcar?" | Reels e Stories |
+| `videos/Criativo1-Dor-Comer-Junto.mp4` | Dor: ficar de fora da sobremesa | Ilustração animada, voz feminina (Keren) | "Cansou de ficar só na vontade, vendo a família comer a sobremesa? Coma a mesma coisa que eles… só que sem açúcar." | Reels e Stories |
 | `videos/Criativo2-Organizacao-Quem-Recebe.mp4` | Identidade: quem recebe e organiza a ceia | Vídeo real + páginas dos bônus, voz masculina (Will) | "Vai ter alguém na ceia que não pode comer açúcar? Salva esse vídeo antes do dia 24." | Reels e Stories |
 | `videos/Criativo3-Mecanismo-UGC.mp4` | Mecanismo: a troca certa de ingredientes | UGC (apresentadora gerada no Google Flow) | "O segredo de uma ceia sem açúcar não é tirar o açúcar. É trocar." | Reels e Stories |
 | `imagens/Imagem1-Dois-Cardapios-4x5.jpg` | Controle: uma ceia para todos | Comparativo | "Dois cardápios no Natal? Não precisa." | Feed |
