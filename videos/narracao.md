@@ -27,6 +27,11 @@ Segue as 5 linhas do checklist na tela, na mesma ordem.
 Mãe de ARMY, salva esse vídeo. <break time="0.4s"/> Esse é o checklist de Natal que a sua filha vai amar: <break time="0.3s"/> colorir ouvindo as músicas favoritas… <break time="0.3s"/> escrever as memórias de Natal… <break time="0.3s"/> imprimir e colecionar photocards… <break time="0.3s"/> montar o calendário de dois mil e vinte e sete… <break time="0.3s"/> e presentear a amiga ARMY. <break time="0.4s"/> Tudo num kit só, por dezenove e noventa. Toca em Saiba mais!
 ```
 
+### Vídeo 3, variação "manda pra amiga" (fala com a própria fã, feita para compartilhar)
+```
+Manda esse vídeo pra sua amiga ARMY. <break time="0.4s"/> Esse é o nosso checklist de Natal: <break time="0.3s"/> colorir ouvindo BTS no repeat… <break time="0.3s"/> escrever as memórias desse ano… <break time="0.3s"/> imprimir e trocar photocards… <break time="0.3s"/> montar o calendário de dois mil e vinte e sete… <break time="0.3s"/> e dar um de presente pra sua melhor amiga. <break time="0.4s"/> Tudo num kit só, por dezenove e noventa. Toca em Saiba mais!
+```
+
 ### Hooks alternativos para testar (troque só a primeira frase)
 1. Se sua filha é ARMY, esse é o presente de Natal que ela vai amar.
 2. Não sabe o que dar pra sua filha que ama BTS? Eu resolvo.
