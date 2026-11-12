@@ -1,5 +1,38 @@
 # Narração para ElevenLabs: Meu Natal ARMY
 
+## Versão 2: hook para pais (sua filha é ARMY)
+
+Fala direto com mãe/pai que procura presente de Natal para a filha fã de BTS.
+Cada texto tem uns 38 palavras, que cabem em ~15s numa fala animada.
+Se a voz falar "BTS" estranho, escreva **"Bí Tí És"**; para "ARMY", **"Ármi"**.
+
+### Vídeo 1, "Folheie o kit"
+```
+Se sua filha é ARMY, para tudo e olha isso. <break time="0.3s"/> Um kit de Natal pra imprimir em casa: <break time="0.2s"/> oitenta desenhos pra colorir, diário de músicas, memórias de Natal <break time="0.2s"/> e calendário três dê. <break time="0.3s"/> Só dezenove e noventa. Toca em Saiba mais!
+```
+
+### Vídeo 2, "Tudo isso por R$ 19,90"
+```
+Sua filha ama BTS? <break time="0.2s"/> Esse presente custa menos que um lanche. <break time="0.3s"/> São oitenta desenhos pra colorir, <break time="0.2s"/> mil e quinhentos photocards, <break time="0.2s"/> sete calendários três dê <break time="0.2s"/> e ainda três diários de bônus. <break time="0.3s"/> Kit completo por dezenove e noventa. Garanta o dela!
+```
+
+### Vídeo 3, "Checklist do Natal ARMY"
+```
+Mãe de ARMY, salva esse vídeo. <break time="0.3s"/> Nesse Natal ela vai colorir ouvindo as músicas favoritas, <break time="0.2s"/> escrever as memórias, <break time="0.2s"/> colecionar photocards <break time="0.2s"/> e montar o calendário de dois mil e vinte e sete. <break time="0.3s"/> Tudo num kit só, por dezenove e noventa. Toca em Saiba mais!
+```
+
+### Hooks alternativos para testar (troque só a primeira frase)
+1. Se sua filha é ARMY, esse é o presente de Natal que ela vai amar.
+2. Não sabe o que dar pra sua filha que ama BTS? Eu resolvo.
+3. Sua filha vive ouvindo BTS? Então você precisa ver isso.
+4. Mãe, pai: o presente mais barato que sua filha ARMY vai amar.
+5. Esse Natal, dá pra sua filha ARMY um presente que ela vai lembrar.
+6. Sua filha pediu presente do BTS? Olha esse por dezenove e noventa.
+
+---
+
+## Versão 1: fala para a própria fã
+
 Cada vídeo tem 15s. Os textos foram escritos para caber no tempo de cada cena,
 numa fala animada um pouco acima do normal (velocidade 1.05 a 1.1).
 
