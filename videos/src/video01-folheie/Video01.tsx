@@ -9,6 +9,7 @@ import {
   Fundo,
   Imagem,
   Legenda,
+  Narracao,
   Preco,
   PropsVideo,
   TextoGancho,
@@ -16,6 +17,7 @@ import {
 } from '../compartilhado/componentes';
 import {IMAGENS} from '../compartilhado/imagens';
 import {LARGURA, cores} from '../compartilhado/tema';
+import {ARQUIVO_NARRACAO, VELOCIDADE, tempos, trechos} from './narracao';
 import {textos} from './textos';
 
 // Capa + páginas folheadas, na ordem.
@@ -28,17 +30,17 @@ const paginas = [
   IMAGENS.calendario,
 ];
 
-const FIM_GANCHO = 60; // 2s
-const POR_PAGINA = 48; // 1,6s por página
+// Os tempos vêm de narracao.ts (casados com a fala)
+const FIM_GANCHO = tempos.inicioPaginas[1]; // 2s
 const DURACAO_VIRADA = 18;
-const FIM_FOLHEAR = FIM_GANCHO + (paginas.length - 1) * POR_PAGINA; // 300 = 10s
+const FIM_FOLHEAR = tempos.inicioFinal;
 
 const PAG_L = 640;
 const PAG_A = 905;
 const PAG_TOPO = 470;
 
 /** Frame em que a página `k` aparece totalmente (capa = 0). */
-const inicioPagina = (k: number) => (k === 0 ? 0 : FIM_GANCHO + (k - 1) * POR_PAGINA);
+const inicioPagina = (k: number) => (k < paginas.length ? tempos.inicioPaginas[k] : FIM_FOLHEAR);
 /** Frame em que a página `k` começa a virar. */
 const inicioVirada = (k: number) => inicioPagina(k + 1) - 14;
 
@@ -145,11 +147,12 @@ const Livro: React.FC = () => {
   );
 };
 
-export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha}) => {
+export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha, temNarracao = false}) => {
   const frame = useCurrentFrame();
   return (
     <Fundo>
-      <Trilha ativa={temTrilha} />
+      <Trilha ativa={temTrilha} volume={temNarracao ? 0.22 : 0.8} />
+      <Narracao arquivo={ARQUIVO_NARRACAO} ativa={temNarracao} trechos={trechos} velocidade={VELOCIDADE} />
 
       {/* 0–10s: capa + folhear */}
       <Sequence durationInFrames={FIM_FOLHEAR} layout="none">
@@ -161,7 +164,12 @@ export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha}) => {
           <Etiqueta texto={textos.etiqueta} topo={300} />
         </Sequence>
         {textos.legendas.map((leg, i) => (
-          <Sequence key={leg} from={inicioPagina(i + 1) - 6} durationInFrames={POR_PAGINA} layout="none">
+          <Sequence
+            key={leg}
+            from={inicioPagina(i + 1) - 6}
+            durationInFrames={inicioPagina(i + 2) - inicioPagina(i + 1)}
+            layout="none"
+          >
             <Legenda texto={leg} topo={1418} />
           </Sequence>
         ))}
@@ -175,10 +183,10 @@ export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha}) => {
           <FinalKit />
         </div>
         <div style={{position: 'absolute', top: 1190, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-          <Preco texto={textos.preco} atraso={10} />
+          <Preco texto={textos.preco} atraso={tempos.atrasoPreco} />
         </div>
         <div style={{position: 'absolute', top: 1385, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-          <CTA texto={textos.cta} atraso={22} tamanho={46} />
+          <CTA texto={textos.cta} atraso={tempos.atrasoCTA} tamanho={46} />
         </div>
       </Sequence>
       <Flash em={FIM_GANCHO} />

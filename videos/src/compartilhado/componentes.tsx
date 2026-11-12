@@ -7,44 +7,99 @@ import {
   Img,
   interpolate,
   random,
+  Sequence,
   spring,
   staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
 import {TRILHA} from './imagens';
-import {ALTURA, DURACAO, LARGURA, LIMITE_INFERIOR, cores, estiloTexto, fonte} from './tema';
+import {ALTURA, LARGURA, LIMITE_INFERIOR, cores, estiloTexto, fonte} from './tema';
 
 /* ------------------------------------------------------------------ */
 /* Áudio opcional                                                      */
 /* ------------------------------------------------------------------ */
 
-export type PropsVideo = {temTrilha: boolean};
-
-/** Confere se public/trilha.mp3 existe antes de montar o vídeo. */
-export const verificarTrilha: CalculateMetadataFunction<PropsVideo> = async ({props}) => {
-  let temTrilha = false;
-  try {
-    const res = await fetch(staticFile(TRILHA), {method: 'HEAD'});
-    temTrilha = res.ok && !(res.headers.get('content-type') ?? '').includes('text/html');
-  } catch {
-    temTrilha = false;
-  }
-  return {props: {...props, temTrilha}};
+export type PropsVideo = {
+  temTrilha: boolean;
+  /** Arquivo de narração dentro de public/ (opcional). */
+  narracao?: string;
+  temNarracao?: boolean;
 };
 
+const existe = async (arquivo: string) => {
+  try {
+    const res = await fetch(staticFile(arquivo), {method: 'HEAD'});
+    return res.ok && !(res.headers.get('content-type') ?? '').includes('text/html');
+  } catch {
+    return false;
+  }
+};
+
+/** Confere se public/trilha.mp3 e a narração existem antes de montar o vídeo. */
+export const verificarTrilha: CalculateMetadataFunction<PropsVideo> = async ({props}) => {
+  const temTrilha = await existe(TRILHA);
+  const temNarracao = props.narracao ? await existe(props.narracao) : false;
+  return {props: {...props, temTrilha, temNarracao}};
+};
+
+/** Música de fundo. Com narração, fica mais baixa para a voz aparecer. */
 export const Trilha: React.FC<{ativa: boolean; volume?: number}> = ({ativa, volume = 0.8}) => {
+  const {durationInFrames: d} = useVideoConfig();
   if (!ativa) return null;
   return (
     <Html5Audio
       src={staticFile(TRILHA)}
       volume={(f) =>
-        interpolate(f, [0, 12, DURACAO - 20, DURACAO], [0, volume, volume, 0], {
+        interpolate(f, [0, 12, d - 20, d], [0, volume, volume, 0], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         })
       }
     />
+  );
+};
+
+/** Um trecho da narração: de/ate em segundos no arquivo original, emFrame no vídeo. */
+export type TrechoNarracao = {de: number; ate: number; emFrame: number; texto?: string};
+
+/** Duração em frames de um trecho já acelerado. */
+export const framesDoTrecho = (t: TrechoNarracao, velocidade: number, fps = 30) =>
+  Math.ceil(((t.ate - t.de) * fps) / velocidade);
+
+/**
+ * Toca cada frase da narração no frame certo. Assim dá para encurtar pausas e
+ * acelerar levemente a voz (o tom é preservado) sem editar o MP3.
+ */
+export const Narracao: React.FC<{
+  arquivo: string;
+  ativa: boolean;
+  trechos: TrechoNarracao[];
+  velocidade?: number;
+  volume?: number;
+}> = ({arquivo, ativa, trechos, velocidade = 1, volume = 1}) => {
+  const {fps} = useVideoConfig();
+  if (!ativa) return null;
+  return (
+    <>
+      {trechos.map((t) => (
+        <Sequence
+          key={t.de}
+          from={t.emFrame}
+          durationInFrames={framesDoTrecho(t, velocidade, fps) + 2}
+          layout="none"
+          name={t.texto ?? 'narração'}
+        >
+          <Html5Audio
+            src={staticFile(arquivo)}
+            trimBefore={Math.round(t.de * fps)}
+            durationInFrames={Math.round((t.ate - t.de) * fps)}
+            playbackRate={velocidade}
+            volume={volume}
+          />
+        </Sequence>
+      ))}
+    </>
   );
 };
 
