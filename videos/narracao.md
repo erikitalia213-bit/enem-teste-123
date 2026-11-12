@@ -21,6 +21,12 @@ Sua filha ama BTS? <break time="0.2s"/> Esse presente custa menos que um lanche.
 Mãe de ARMY, salva esse vídeo. <break time="0.3s"/> Nesse Natal ela vai colorir ouvindo as músicas favoritas, <break time="0.2s"/> escrever as memórias, <break time="0.2s"/> colecionar photocards <break time="0.2s"/> e montar o calendário de dois mil e vinte e sete. <break time="0.3s"/> Tudo num kit só, por dezenove e noventa. Toca em Saiba mais!
 ```
 
+### Vídeo 3 (versão final para gravar)
+Segue as 5 linhas do checklist na tela, na mesma ordem.
+```
+Mãe de ARMY, salva esse vídeo. <break time="0.4s"/> Esse é o checklist de Natal que a sua filha vai amar: <break time="0.3s"/> colorir ouvindo as músicas favoritas… <break time="0.3s"/> escrever as memórias de Natal… <break time="0.3s"/> imprimir e colecionar photocards… <break time="0.3s"/> montar o calendário de dois mil e vinte e sete… <break time="0.3s"/> e presentear a amiga ARMY. <break time="0.4s"/> Tudo num kit só, por dezenove e noventa. Toca em Saiba mais!
+```
+
 ### Hooks alternativos para testar (troque só a primeira frase)
 1. Se sua filha é ARMY, esse é o presente de Natal que ela vai amar.
 2. Não sabe o que dar pra sua filha que ama BTS? Eu resolvo.
