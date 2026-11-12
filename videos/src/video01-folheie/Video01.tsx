@@ -18,6 +18,7 @@ import {
 import {IMAGENS} from '../compartilhado/imagens';
 import {LARGURA, cores} from '../compartilhado/tema';
 import {ARQUIVO_NARRACAO, VELOCIDADE, tempos, trechos} from './narracao';
+import {Legendas} from '../compartilhado/legendas';
 import {textos} from './textos';
 
 // Capa + páginas folheadas, na ordem.
@@ -160,9 +161,6 @@ export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha, temNarracao = f
         {frame < FIM_GANCHO + 4 ? (
           <TextoGancho texto={textos.gancho} topo={268} tamanho={90} saida={FIM_GANCHO - 6} />
         ) : null}
-        <Sequence from={FIM_GANCHO} layout="none">
-          <Etiqueta texto={textos.etiqueta} topo={300} />
-        </Sequence>
         {textos.legendas.map((leg, i) => (
           <Sequence
             key={leg}
@@ -170,7 +168,7 @@ export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha, temNarracao = f
             durationInFrames={inicioPagina(i + 2) - inicioPagina(i + 1)}
             layout="none"
           >
-            <Legenda texto={leg} topo={1418} />
+            <Legenda texto={leg} topo={300} />
           </Sequence>
         ))}
       </Sequence>
@@ -179,18 +177,20 @@ export const Video01Folheie: React.FC<PropsVideo> = ({temTrilha, temNarracao = f
       <Sequence from={FIM_FOLHEAR} layout="none">
         <Coracoes />
         <Etiqueta texto={textos.tituloFinal} topo={280} />
-        <div style={{position: 'absolute', top: 410, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 380, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <FinalKit />
         </div>
-        <div style={{position: 'absolute', top: 1190, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 1125, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <Preco texto={textos.preco} atraso={tempos.atrasoPreco} />
         </div>
-        <div style={{position: 'absolute', top: 1385, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 1285, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <CTA texto={textos.cta} atraso={tempos.atrasoCTA} tamanho={46} />
         </div>
       </Sequence>
       <Flash em={FIM_GANCHO} />
       <Flash em={FIM_FOLHEAR} duracao={10} />
+
+      <Legendas trechos={trechos} velocidade={VELOCIDADE} ativa={temNarracao} />
     </Fundo>
   );
 };

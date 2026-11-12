@@ -7,6 +7,7 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_01, tempos as tempos01} from './vid
 import {Video02Oferta} from './video02-oferta/Video02';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './video02-oferta/narracao';
 import {Video03Checklist} from './video03-checklist/Video03';
+import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_03, tempos as tempos03} from './video03-checklist/narracao';
 
 const base = {
   durationInFrames: DURACAO,
@@ -33,6 +34,12 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={tempos02.duracao}
       defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_02}}
     />
-    <Composition id="NatalArmy03-Checklist" component={Video03Checklist} {...base} />
+    <Composition
+      id="NatalArmy03-Checklist"
+      component={Video03Checklist}
+      {...base}
+      durationInFrames={tempos03.duracao}
+      defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_03}}
+    />
   </>
 );

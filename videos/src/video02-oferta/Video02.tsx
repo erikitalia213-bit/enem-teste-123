@@ -19,6 +19,7 @@ import {
 import {IMAGENS} from '../compartilhado/imagens';
 import {LARGURA, cores, estiloTexto} from '../compartilhado/tema';
 import {ARQUIVO_NARRACAO, VELOCIDADE, tempos, trechos} from './narracao';
+import {Legendas} from '../compartilhado/legendas';
 import {textos} from './textos';
 
 // Uma imagem por item de `textos.itens`
@@ -176,25 +177,25 @@ export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha, temNarracao = fa
             <div style={estiloTexto(84)}>{textos.tituloFinal}</div>
           </Entrada>
         </div>
-        <div style={{position: 'absolute', top: 420, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 400, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <Entrada atraso={4} de={0.7}>
             <Flutuar amplitude={10}>
               <Imagem src={IMAGENS.kitCompleto} largura={900} altura={675} />
             </Flutuar>
           </Entrada>
         </div>
-        <div style={{position: 'absolute', top: 330, left: 790}}>
+        <div style={{position: 'absolute', top: 310, left: 790}}>
           <Selo linhas={textos.selo} tamanho={240} atraso={26} />
         </div>
-        <div style={{position: 'absolute', top: 1115, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 1085, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <Preco texto={textos.preco} tamanho={140} atraso={tempos.atrasoPreco} />
         </div>
-        <div style={{position: 'absolute', top: 1280, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 1245, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <Entrada atraso={tempos.atrasoDetalhe}>
             <div style={estiloTexto(54)}>{textos.detalhe}</div>
           </Entrada>
         </div>
-        <div style={{position: 'absolute', top: 1385, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div style={{position: 'absolute', top: 1320, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
           <CTA texto={textos.cta} atraso={tempos.atrasoCTA} tamanho={56} />
         </div>
       </Sequence>
@@ -202,6 +203,8 @@ export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha, temNarracao = fa
       <Flash em={SEGUNDO_GANCHO} />
       <Flash em={FIM_GANCHO} />
       <Flash em={FIM_EMPILHAR} duracao={10} />
+
+      <Legendas trechos={trechos} velocidade={VELOCIDADE} ativa={temNarracao} />
     </Fundo>
   );
 };

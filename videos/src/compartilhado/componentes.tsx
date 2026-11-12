@@ -61,7 +61,14 @@ export const Trilha: React.FC<{ativa: boolean; volume?: number}> = ({ativa, volu
 };
 
 /** Um trecho da narração: de/ate em segundos no arquivo original, emFrame no vídeo. */
-export type TrechoNarracao = {de: number; ate: number; emFrame: number; texto?: string};
+export type TrechoNarracao = {
+  de: number;
+  ate: number;
+  emFrame: number;
+  texto?: string;
+  /** Texto da legenda na tela (vazio = sem legenda neste trecho). */
+  legenda?: string;
+};
 
 /** Duração em frames de um trecho já acelerado. */
 export const framesDoTrecho = (t: TrechoNarracao, velocidade: number, fps = 30) =>

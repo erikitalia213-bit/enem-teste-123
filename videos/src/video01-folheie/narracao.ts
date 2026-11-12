@@ -9,12 +9,12 @@ export const VELOCIDADE = 1.1;
 
 export const trechos: TrechoNarracao[] = [
   {de: 0.0, ate: 1.68, emFrame: 3, texto: 'POV: seu Natal ARMY esse ano'},
-  {de: 2.0, ate: 5.5, emFrame: 58, texto: 'Oitenta desenhos… diário criativo de bônus'},
-  {de: 5.7, ate: 8.6, emFrame: 158, texto: 'espaço pras suas músicas, suas memórias de Natal'},
-  {de: 8.92, ate: 11.7, emFrame: 241, texto: 'e calendário três dê de 2027'},
-  {de: 12.08, ate: 14.36, emFrame: 322, texto: 'Tudo isso por só dezenove e noventa'},
-  {de: 14.62, ate: 16.01, emFrame: 389, texto: 'Baixa e imprime hoje'},
-  {de: 16.26, ate: 17.4, emFrame: 431, texto: 'Toca em Saiba mais!'},
+  {de: 2.0, ate: 5.5, emFrame: 58, texto: 'Oitenta desenhos… diário criativo de bônus', legenda: '80 desenhos pra colorir, um diário criativo de bônus,'},
+  {de: 5.7, ate: 8.6, emFrame: 158, texto: 'espaço pras suas músicas, suas memórias de Natal', legenda: 'espaço pras suas músicas, suas memórias de Natal…'},
+  {de: 8.92, ate: 11.7, emFrame: 241, texto: 'e calendário três dê de 2027', legenda: 'e calendário 3D de 2027.'},
+  {de: 12.08, ate: 14.36, emFrame: 322, texto: 'Tudo isso por só dezenove e noventa', legenda: 'Tudo isso por só R$ 19,90.'},
+  {de: 14.62, ate: 16.01, emFrame: 389, texto: 'Baixa e imprime hoje', legenda: 'Baixa e imprime hoje.'},
+  {de: 16.26, ate: 17.4, emFrame: 431, texto: 'Toca em Saiba mais!', legenda: 'Toca em Saiba mais!'},
 ];
 
 // Momentos da animação casados com a fala (em frames, 30fps)

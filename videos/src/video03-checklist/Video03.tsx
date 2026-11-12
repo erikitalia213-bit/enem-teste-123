@@ -8,6 +8,7 @@ import {
   Flutuar,
   Fundo,
   Imagem,
+  Narracao,
   Preco,
   PropsVideo,
   TextoGancho,
@@ -15,6 +16,8 @@ import {
 } from '../compartilhado/componentes';
 import {IMAGENS} from '../compartilhado/imagens';
 import {LARGURA, cores, estiloTexto, fonte} from '../compartilhado/tema';
+import {Legendas} from '../compartilhado/legendas';
+import {ARQUIVO_NARRACAO, VELOCIDADE, tempos, trechos} from './narracao';
 import {textos} from './textos';
 
 // Uma imagem por linha do checklist (paisagem = true para imagens horizontais)
@@ -26,12 +29,12 @@ const imagensItens: {src: string; paisagem?: boolean}[] = [
   {src: IMAGENS.kitCompleto, paisagem: true},
 ];
 
-const FIM_GANCHO = 60;
-const POR_ITEM = 60; // 2s por linha
-const ATRASO_CHECK = 26;
-const FIM_LISTA = FIM_GANCHO + textos.itens.length * POR_ITEM; // 360 = 12s
+// Os tempos vêm de narracao.ts (casados com a fala)
+const FIM_GANCHO = tempos.inicioNota;
+const ATRASO_CHECK = tempos.atrasoCheck;
+const FIM_LISTA = tempos.inicioFinal;
 
-const inicioItem = (i: number) => FIM_GANCHO + i * POR_ITEM;
+const inicioItem = (i: number) => tempos.inicioItens[i];
 
 const corTextoNota = '#2A1B4A';
 
@@ -163,16 +166,16 @@ const Nota: React.FC = () => {
 const Polaroids: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const atual = Math.min(imagensItens.length - 1, Math.floor((frame - FIM_GANCHO) / POR_ITEM));
+  const atual = tempos.inicioItens.filter((f) => frame >= f).length - 1;
   return (
-    <div style={{position: 'absolute', top: 1060, left: 0, right: 0, height: 500}}>
+    <div style={{position: 'absolute', top: 1030, left: 0, right: 0, height: 420}}>
       {imagensItens.map((img, i) => {
         if (i > atual) return null;
         const t = frame - inicioItem(i);
         const s = spring({frame: t, fps, config: {damping: 11, stiffness: 140}});
         const idade = atual - i; // 0 = mais recente
-        const l = img.paisagem ? 600 : 345;
-        const a = img.paisagem ? 450 : 470;
+        const l = img.paisagem ? 520 : 300;
+        const a = img.paisagem ? 390 : 405;
         const lado = i % 2 === 0 ? -1 : 1;
         const x = LARGURA / 2 - l / 2 + (idade === 0 ? 0 : lado * (150 + idade * 20));
         return (
@@ -181,7 +184,7 @@ const Polaroids: React.FC = () => {
             style={{
               position: 'absolute',
               left: x,
-              top: (500 - a) / 2 + (idade === 0 ? 0 : 20),
+              top: (420 - a) / 2 + (idade === 0 ? 0 : 16),
               zIndex: i,
               transform: `scale(${interpolate(s, [0, 1], [0.3, idade === 0 ? 1 : 0.8])}) rotate(${
                 idade === 0 ? lado * 3 : lado * 10
@@ -223,9 +226,10 @@ const GanchoFundo: React.FC = () => {
   );
 };
 
-export const Video03Checklist: React.FC<PropsVideo> = ({temTrilha}) => (
+export const Video03Checklist: React.FC<PropsVideo> = ({temTrilha, temNarracao = false}) => (
   <Fundo>
-    <Trilha ativa={temTrilha} />
+    <Trilha ativa={temTrilha} volume={temNarracao ? 0.22 : 0.8} />
+    <Narracao arquivo={ARQUIVO_NARRACAO} ativa={temNarracao} trechos={trechos} velocidade={VELOCIDADE} />
 
     {/* 0–2s: gancho */}
     <Sequence durationInFrames={FIM_GANCHO + 4} layout="none">
@@ -247,22 +251,24 @@ export const Video03Checklist: React.FC<PropsVideo> = ({temTrilha}) => (
           <div style={estiloTexto(88)}>{textos.tituloFinal}</div>
         </Entrada>
       </div>
-      <div style={{position: 'absolute', top: 430, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+      <div style={{position: 'absolute', top: 410, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
         <Entrada atraso={4} de={0.7}>
           <Flutuar amplitude={10}>
-            <Imagem src={IMAGENS.kitCompleto} largura={920} altura={690} />
+            <Imagem src={IMAGENS.kitCompleto} largura={900} altura={675} />
           </Flutuar>
         </Entrada>
       </div>
-      <div style={{position: 'absolute', top: 1160, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-        <Preco texto={textos.preco} tamanho={150} atraso={8} />
+      <div style={{position: 'absolute', top: 1105, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <Preco texto={textos.preco} tamanho={150} atraso={tempos.atrasoPreco} />
       </div>
-      <div style={{position: 'absolute', top: 1380, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-        <CTA texto={textos.cta} atraso={18} tamanho={56} />
+      <div style={{position: 'absolute', top: 1300, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <CTA texto={textos.cta} atraso={tempos.atrasoCTA} tamanho={56} />
       </div>
     </Sequence>
 
     <Flash em={FIM_GANCHO} />
     <Flash em={FIM_LISTA} duracao={10} />
+
+    <Legendas trechos={trechos} velocidade={VELOCIDADE} ativa={temNarracao} />
   </Fundo>
 );
