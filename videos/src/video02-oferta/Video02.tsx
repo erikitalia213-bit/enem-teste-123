@@ -9,6 +9,7 @@ import {
   Flutuar,
   Fundo,
   Imagem,
+  Narracao,
   Preco,
   PropsVideo,
   Selo,
@@ -17,14 +18,16 @@ import {
 } from '../compartilhado/componentes';
 import {IMAGENS} from '../compartilhado/imagens';
 import {LARGURA, cores, estiloTexto} from '../compartilhado/tema';
+import {ARQUIVO_NARRACAO, VELOCIDADE, tempos, trechos} from './narracao';
 import {textos} from './textos';
 
 // Uma imagem por item de `textos.itens`
 const imagensItens = [IMAGENS.colorir, IMAGENS.cartoes, IMAGENS.calendario, IMAGENS.diarioCapa];
 
-const FIM_GANCHO = 60;
-const POR_ITEM = 66; // 2,2s
-const FIM_EMPILHAR = FIM_GANCHO + imagensItens.length * POR_ITEM + 6; // 330 = 11s
+// Os tempos vêm de narracao.ts (casados com a fala)
+const SEGUNDO_GANCHO = tempos.segundoGancho;
+const FIM_GANCHO = tempos.inicioItens[0];
+const FIM_EMPILHAR = tempos.inicioFinal;
 
 // Imagem grande (entrada) e posição final no mosaico 2x2
 const GRANDE = {l: 600, a: 848, x: (LARGURA - 600) / 2, y: 600};
@@ -36,7 +39,7 @@ const tiles = [
   {x: 560, y: 1040, r: -3},
 ];
 
-const inicioItem = (i: number) => FIM_GANCHO + i * POR_ITEM;
+const inicioItem = (i: number) => tempos.inicioItens[i];
 
 const Mosaico: React.FC = () => {
   const frame = useCurrentFrame();
@@ -104,39 +107,52 @@ const CabecalhoItem: React.FC<{i: number}> = ({i}) => {
   );
 };
 
-const GanchoFundo: React.FC = () => {
+const GanchoFundo: React.FC<{src: string; largura: number; altura: number; topo: number; giro: number}> = ({
+  src,
+  largura,
+  altura,
+  topo,
+  giro,
+}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const s = spring({frame: frame - 4, fps, config: {damping: 13}});
+  const s = spring({frame: frame - 2, fps, config: {damping: 13}});
   return (
     <div
       style={{
         position: 'absolute',
-        top: 720,
+        top: topo,
         left: 0,
         right: 0,
         display: 'flex',
         justifyContent: 'center',
-        transform: `scale(${interpolate(s, [0, 1], [1.4, 1]) + frame * 0.002}) rotate(-3deg)`,
+        transform: `scale(${interpolate(s, [0, 1], [1.4, 1]) + frame * 0.002}) rotate(${giro}deg)`,
         opacity: s,
       }}
     >
       <Flutuar amplitude={10}>
-        <Imagem src={IMAGENS.kitCompleto} largura={960} altura={720} />
+        <Imagem src={src} largura={largura} altura={altura} />
       </Flutuar>
     </div>
   );
 };
 
-export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha}) => {
+export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha, temNarracao = false}) => {
   return (
     <Fundo>
-      <Trilha ativa={temTrilha} />
+      <Trilha ativa={temTrilha} volume={temNarracao ? 0.22 : 0.8} />
+      <Narracao arquivo={ARQUIVO_NARRACAO} ativa={temNarracao} trechos={trechos} velocidade={VELOCIDADE} />
 
-      {/* 0–2s: gancho */}
-      <Sequence durationInFrames={FIM_GANCHO + 4} layout="none">
-        <GanchoFundo />
-        <TextoGancho texto={textos.gancho} topo={270} tamanho={84} saida={FIM_GANCHO - 6} />
+      {/* Gancho, cena 1: "Sua filha ama BTS?" */}
+      <Sequence durationInFrames={SEGUNDO_GANCHO} layout="none">
+        <GanchoFundo src={IMAGENS.hero} largura={640} altura={853} topo={620} giro={2} />
+        <TextoGancho texto={textos.gancho} topo={300} tamanho={110} />
+      </Sequence>
+
+      {/* Gancho, cena 2: "Esse presente custa menos que um lanche" */}
+      <Sequence from={SEGUNDO_GANCHO} durationInFrames={FIM_GANCHO - SEGUNDO_GANCHO + 4} layout="none">
+        <GanchoFundo src={IMAGENS.kitCompleto} largura={960} altura={720} topo={760} giro={-3} />
+        <TextoGancho texto={textos.gancho2} topo={280} tamanho={100} largura={860} saida={FIM_GANCHO - SEGUNDO_GANCHO - 6} />
       </Sequence>
 
       {/* 2–11s: empilhamento de valor */}
@@ -145,7 +161,7 @@ export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha}) => {
         <Sequence
           key={item.rotulo}
           from={inicioItem(i)}
-          durationInFrames={i === textos.itens.length - 1 ? FIM_EMPILHAR - inicioItem(i) : POR_ITEM}
+          durationInFrames={(i === textos.itens.length - 1 ? FIM_EMPILHAR : inicioItem(i + 1)) - inicioItem(i)}
           layout="none"
         >
           <CabecalhoItem i={i} />
@@ -171,18 +187,19 @@ export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha}) => {
           <Selo linhas={textos.selo} tamanho={240} atraso={26} />
         </div>
         <div style={{position: 'absolute', top: 1115, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-          <Preco texto={textos.preco} tamanho={140} atraso={10} />
+          <Preco texto={textos.preco} tamanho={140} atraso={tempos.atrasoPreco} />
         </div>
         <div style={{position: 'absolute', top: 1280, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-          <Entrada atraso={16}>
+          <Entrada atraso={tempos.atrasoDetalhe}>
             <div style={estiloTexto(54)}>{textos.detalhe}</div>
           </Entrada>
         </div>
         <div style={{position: 'absolute', top: 1385, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-          <CTA texto={textos.cta} atraso={22} tamanho={56} />
+          <CTA texto={textos.cta} atraso={tempos.atrasoCTA} tamanho={56} />
         </div>
       </Sequence>
 
+      <Flash em={SEGUNDO_GANCHO} />
       <Flash em={FIM_GANCHO} />
       <Flash em={FIM_EMPILHAR} duracao={10} />
     </Fundo>

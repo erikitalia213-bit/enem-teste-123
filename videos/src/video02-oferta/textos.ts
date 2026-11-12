@@ -1,6 +1,8 @@
 // Vídeo 2, "Tudo isso por R$ 19,90". Troque os textos aqui para testar ganchos.
 export const textos = {
-  gancho: 'Sua filha ama BTS? Esse presente custa menos que um lanche 👀',
+  // Gancho em 2 cenas (casadas com a narração)
+  gancho: 'Sua filha ama BTS? 💜',
+  gancho2: 'Esse presente custa menos que um lanche 👀',
   // Empilhamento de valor: número que sobe + rótulo (mesma ordem das imagens no Video02.tsx)
   itens: [
     {numero: 80, prefixo: '', rotulo: 'desenhos pra colorir'},

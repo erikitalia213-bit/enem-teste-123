@@ -5,6 +5,7 @@ import {ALTURA, DURACAO, FPS, LARGURA} from './compartilhado/tema';
 import {Video01Folheie} from './video01-folheie/Video01';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_01, tempos as tempos01} from './video01-folheie/narracao';
 import {Video02Oferta} from './video02-oferta/Video02';
+import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './video02-oferta/narracao';
 import {Video03Checklist} from './video03-checklist/Video03';
 
 const base = {
@@ -25,7 +26,13 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={tempos01.duracao}
       defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_01}}
     />
-    <Composition id="NatalArmy02-Oferta" component={Video02Oferta} {...base} />
+    <Composition
+      id="NatalArmy02-Oferta"
+      component={Video02Oferta}
+      {...base}
+      durationInFrames={tempos02.duracao}
+      defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_02}}
+    />
     <Composition id="NatalArmy03-Checklist" component={Video03Checklist} {...base} />
   </>
 );
