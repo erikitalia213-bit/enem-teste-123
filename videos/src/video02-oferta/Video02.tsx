@@ -136,7 +136,7 @@ export const Video02Oferta: React.FC<PropsVideo> = ({temTrilha}) => {
       {/* 0–2s: gancho */}
       <Sequence durationInFrames={FIM_GANCHO + 4} layout="none">
         <GanchoFundo />
-        <TextoGancho texto={textos.gancho} topo={300} tamanho={100} saida={FIM_GANCHO - 6} />
+        <TextoGancho texto={textos.gancho} topo={270} tamanho={84} saida={FIM_GANCHO - 6} />
       </Sequence>
 
       {/* 2–11s: empilhamento de valor */}
