@@ -7,6 +7,7 @@ import {mkdirSync} from 'node:fs';
 
 const videos = [
   {id: 'NatalArmy01-Folheie', arquivo: 'natal-army-01-folheie'},
+  {id: 'NatalArmy01-Impresso', arquivo: 'natal-army-01-impresso'},
   {id: 'NatalArmy02-Oferta', arquivo: 'natal-army-02-oferta'},
   {id: 'NatalArmy03-Checklist', arquivo: 'natal-army-03-checklist'},
   // Anúncios UGC (src/video04-ugc/anuncios.ts): adicione aqui cada id novo

@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import {PropsVideo, verificarTrilha} from './compartilhado/componentes';
 import {ALTURA, DURACAO, FPS, LARGURA} from './compartilhado/tema';
 import {Video01Folheie} from './video01-folheie/Video01';
+import {Video01Impresso} from './video01-folheie/Video01Impresso';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_01, tempos as tempos01} from './video01-folheie/narracao';
 import {Video02Oferta} from './video02-oferta/Video02';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './video02-oferta/narracao';
@@ -29,6 +30,13 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="NatalArmy01-Folheie"
       component={Video01Folheie}
+      {...base}
+      durationInFrames={tempos01.duracao}
+      defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_01}}
+    />
+    <Composition
+      id="NatalArmy01-Impresso"
+      component={Video01Impresso}
       {...base}
       durationInFrames={tempos01.duracao}
       defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_01}}
