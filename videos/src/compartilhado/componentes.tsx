@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   AbsoluteFill,
-  CalculateMetadataFunction,
   Easing,
   Html5Audio,
   Img,
@@ -37,7 +36,7 @@ const existe = async (arquivo: string) => {
 };
 
 /** Confere se public/trilha.mp3 e a narração existem antes de montar o vídeo. */
-export const verificarTrilha: CalculateMetadataFunction<PropsVideo> = async ({props}) => {
+export const verificarTrilha = async <T extends PropsVideo>({props}: {props: T}) => {
   const temTrilha = await existe(TRILHA);
   const temNarracao = props.narracao ? await existe(props.narracao) : false;
   return {props: {...props, temTrilha, temNarracao}};

@@ -30,7 +30,15 @@ export const CLIPES = {
       {de: 5.06, ate: 7.9, legenda: 'esse é o presente de Natal.'},
     ],
   },
-  // maeGancho2: {...}, maeGancho3: {...}, maeProva: {...}, maeCTA: {...}
+  maeProva: {
+    arquivo: 'clipes/mae-prova.mp4',
+    duracao: 7.8,
+    frases: [
+      {de: 0.0, ate: 4.0, legenda: 'É um kit pra imprimir em casa: desenho pra colorir, photocards,'},
+      {de: 4.17, ate: 7.8, legenda: 'calendário… dá pra fazer junto com ela.'},
+    ],
+  },
+  // maeGancho2: {...}, maeGancho3: {...}
 } satisfies Record<string, Clipe>;
 
 export type Anuncio = {
@@ -52,7 +60,7 @@ const finalPadrao = {
 };
 
 export const ANUNCIOS: Anuncio[] = [
-  {id: 'UGC-Mae-Gancho1', clipes: [CLIPES.maeGancho1], final: finalPadrao},
+  {id: 'UGC-Mae-Gancho1', clipes: [CLIPES.maeGancho1, CLIPES.maeProva], final: finalPadrao},
 ];
 
 export const SEGUNDOS_FINAL = 4.5;

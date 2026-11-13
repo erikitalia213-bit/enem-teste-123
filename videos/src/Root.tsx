@@ -7,6 +7,8 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_01, tempos as tempos01} from './vid
 import {Video02Oferta} from './video02-oferta/Video02';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './video02-oferta/narracao';
 import {Video03Checklist} from './video03-checklist/Video03';
+import {ANUNCIOS} from './video04-ugc/anuncios';
+import {VideoUGC, duracaoAnuncio} from './video04-ugc/VideoUGC';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_03, tempos as tempos03} from './video03-checklist/narracao';
 
 const base = {
@@ -41,5 +43,15 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={tempos03.duracao}
       defaultProps={{temTrilha: false, narracao: ARQUIVO_NARRACAO_03}}
     />
+    {ANUNCIOS.map((a) => (
+      <Composition
+        key={a.id}
+        id={a.id}
+        component={VideoUGC}
+        {...base}
+        durationInFrames={duracaoAnuncio(a)}
+        defaultProps={{temTrilha: false, anuncio: a}}
+      />
+    ))}
   </>
 );

@@ -9,6 +9,8 @@ const videos = [
   {id: 'NatalArmy01-Folheie', arquivo: 'natal-army-01-folheie'},
   {id: 'NatalArmy02-Oferta', arquivo: 'natal-army-02-oferta'},
   {id: 'NatalArmy03-Checklist', arquivo: 'natal-army-03-checklist'},
+  // Anúncios UGC (src/video04-ugc/anuncios.ts): adicione aqui cada id novo
+  {id: 'UGC-Mae-Gancho1', arquivo: 'ugc-mae-gancho1'},
 ];
 
 const filtro = process.argv[2];
