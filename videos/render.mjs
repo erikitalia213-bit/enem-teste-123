@@ -7,14 +7,12 @@ import {mkdirSync} from 'node:fs';
 
 const videos = [
   {id: 'NatalArmy01-Folheie', arquivo: 'natal-army-01-folheie'},
-  {id: 'NatalArmy01-Impresso', arquivo: 'natal-army-01-impresso'},
   {id: 'NatalArmy02-Oferta', arquivo: 'natal-army-02-oferta'},
   {id: 'NatalArmy03-Checklist', arquivo: 'natal-army-03-checklist'},
   // Anúncios UGC (src/video04-ugc/anuncios.ts): adicione aqui cada id novo
   {id: 'UGC-Mae-Gancho1', arquivo: 'ugc-mae-gancho1'},
   {id: 'Fundo-Personagem', arquivo: 'fundo-para-personagem'},
-  {id: 'Impresso-A-Photocard', arquivo: 'impresso-a-photocard'},
-  {id: 'Impresso-B-Incompleto', arquivo: 'impresso-b-incompleto'},
+  {id: 'Folheie-Nova', arquivo: 'natal-army-01-nova-narracao'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},
   {id: 'Apresentadora-B-UltimoMinuto', arquivo: 'apresentadora-b-ultimo-minuto'},
