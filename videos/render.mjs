@@ -13,6 +13,7 @@ const videos = [
   {id: 'UGC-Mae-Gancho1', arquivo: 'ugc-mae-gancho1'},
   {id: 'Fundo-Personagem', arquivo: 'fundo-para-personagem'},
   {id: 'Folheie-Nova', arquivo: 'natal-army-01-nova-narracao'},
+  {id: 'Edit-TikTok', arquivo: 'natal-army-edit-tiktok'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},
   {id: 'Apresentadora-B-UltimoMinuto', arquivo: 'apresentadora-b-ultimo-minuto'},

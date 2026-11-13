@@ -9,7 +9,8 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './vid
 import {Video03Checklist} from './video03-checklist/Video03';
 import {ANUNCIOS} from './video04-ugc/anuncios';
 import {ROTEIROS} from './video06-apresentadora/roteiros';
-import {ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
+import {ROTEIRO_TIKTOK, ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
+import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/VideoImpressoNarrado';
 import {Video01Narrado, duracaoFolheie} from './video01-folheie/Video01Narrado';
 import {textos as textosFundo} from './video07-fundo/textos';
 import {VideoFundo} from './video07-fundo/VideoFundo';
@@ -76,6 +77,13 @@ export const RemotionRoot: React.FC = () => (
       {...base}
       durationInFrames={duracaoFolheie(ROTEIROS_IMPRESSO[1])}
       defaultProps={{temTrilha: false, roteiro: ROTEIROS_IMPRESSO[1]}}
+    />
+    <Composition
+      id={ROTEIRO_TIKTOK.id}
+      component={VideoImpressoNarrado}
+      {...base}
+      durationInFrames={duracaoImpresso(ROTEIRO_TIKTOK)}
+      defaultProps={{temTrilha: false, roteiro: ROTEIRO_TIKTOK}}
     />
   </>
 );

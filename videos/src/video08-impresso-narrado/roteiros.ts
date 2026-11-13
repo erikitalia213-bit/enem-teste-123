@@ -1,3 +1,4 @@
+import {IMAGENS} from '../compartilhado/imagens';
 import {Fala} from '../compartilhado/tempoFala';
 
 // Criativo 1 "kit impresso" com a narração nova (copy de resposta direta).
@@ -5,8 +6,10 @@ import {Fala} from '../compartilhado/tempoFala';
 // Cada cena entra quando a voz fala a palavra-chave.
 
 export type Cena =
-  | {tipo: 'clipe'; palavra?: string; ocorrencia?: number; arquivo: string; de: number; velocidade?: number; zoom?: number; focoY?: string; rotulo?: string}
+  | {tipo: 'clipe'; palavra?: string; ocorrencia?: number; arquivo: string; de: number; velocidade?: number; zoom?: number; focoY?: string; rotulo?: string; volume?: number}
   | {tipo: 'folhas'; palavra: string; ocorrencia?: number; rotulo: string}
+  /** Páginas reais do kit na frente, com um clipe desfocado atrás. */
+  | {tipo: 'paginas'; palavra: string; ocorrencia?: number; rotulo: string; imagens: string[]; fundo: string; fundoDe: number}
   | {tipo: 'final'; palavra: string; ocorrencia?: number};
 
 export type RoteiroImpresso = Fala & {
@@ -73,3 +76,23 @@ export const ROTEIROS_IMPRESSO: RoteiroImpresso[] = [
     cenas: cenas(),
   },
 ];
+
+// Edição com os vídeos do TikTok (com autorização dos criadores) + páginas reais do kit.
+// O som original dos vídeos fica mudo (volume 0); só a narração toca.
+const T = 'clipes/tiktok/';
+export const ROTEIRO_TIKTOK: RoteiroImpresso = {
+  ...ROTEIROS_IMPRESSO[1],
+  id: 'Edit-TikTok',
+  arquivo: 'natal-army-edit-tiktok',
+  cenas: [
+    {tipo: 'clipe', arquivo: T + 'photocards-camisa.mp4', de: 1.0, velocidade: 1.15, volume: 0},
+    {tipo: 'clipe', palavra: 'todo', arquivo: T + 'caixa-photocards.mp4', de: 0, volume: 0, rotulo: 'Merch cara 💸'},
+    {tipo: 'clipe', palavra: 'frete', arquivo: T + 'caixa-photocards.mp4', de: 16, volume: 0, rotulo: 'Frete que atrasa 📦'},
+    {tipo: 'clipe', palavra: 'descobri', arquivo: T + 'diario-diy.mp4', de: 8, zoom: 1.16, volume: 0, rotulo: 'Kit pra imprimir em casa ✦'},
+    {tipo: 'clipe', palavra: 'são', arquivo: T + 'photocards-camisa.mp4', de: 6, volume: 0, rotulo: '1.500 photocards'},
+    {tipo: 'paginas', palavra: '80', imagens: [IMAGENS.colorir], fundo: T + 'livro-colorir.mp4', fundoDe: 12, rotulo: '80 desenhos pra colorir'},
+    {tipo: 'paginas', palavra: 'diários', imagens: [IMAGENS.journal, IMAGENS.diarioMusicas], fundo: T + 'diario-diy.mp4', fundoDe: 30, rotulo: 'Diários de bônus'},
+    {tipo: 'paginas', palavra: 'calendários', imagens: [IMAGENS.calendario], fundo: T + 'caixa-photocards.mp4', fundoDe: 18, rotulo: '7 calendários 3D 2027'},
+    {tipo: 'final', palavra: 'tudo'},
+  ],
+};

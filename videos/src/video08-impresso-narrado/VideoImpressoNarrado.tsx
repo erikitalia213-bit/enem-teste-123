@@ -31,7 +31,7 @@ const Clipe: React.FC<{cena: Extract<Cena, {tipo: 'clipe'}>; dur: number}> = ({c
         src={staticFile(cena.arquivo)}
         trimBefore={Math.round(cena.de * FPS)}
         playbackRate={cena.velocidade ?? 1}
-        volume={0.2}
+        volume={cena.volume ?? 0.2}
         style={{
           width: '100%',
           height: '100%',
@@ -41,6 +41,39 @@ const Clipe: React.FC<{cena: Extract<Cena, {tipo: 'clipe'}>; dur: number}> = ({c
           filter: 'contrast(1.06) saturate(1.12) brightness(1.02)',
         }}
       />
+      <Sombras />
+    </AbsoluteFill>
+  );
+};
+
+/** Páginas reais do kit na frente de um clipe desfocado. */
+const Paginas: React.FC<{imagens: string[]; fundo: string; fundoDe: number}> = ({imagens, fundo, fundoDe}) => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const n = imagens.length;
+  return (
+    <AbsoluteFill style={{overflow: 'hidden', backgroundColor: '#000'}}>
+      <OffthreadVideo
+        src={staticFile(fundo)}
+        trimBefore={Math.round(fundoDe * FPS)}
+        muted
+        style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)', filter: 'blur(16px) brightness(0.75) saturate(1.15)'}}
+      />
+      {imagens.map((src, i) => {
+        const s = spring({frame: frame - i * 6, fps, config: {damping: 14, stiffness: 120}});
+        const l = n === 1 ? 640 : 500;
+        const a = Math.round(l * 1.414);
+        const x = n === 1 ? (1080 - l) / 2 : i === 0 ? 70 : 510;
+        const y = n === 1 ? 480 : i === 0 ? 520 : 600;
+        const rot = n === 1 ? -3 : i === 0 ? -8 : 7;
+        return (
+          <div key={src} style={{position: 'absolute', left: x, top: y, transform: `translateY(${(1 - s) * 900}px) rotate(${rot + (1 - s) * (i ? 20 : -20)}deg)`}}>
+            <Flutuar amplitude={8} fase={i * 1.5}>
+              <Imagem src={src} largura={l} altura={a} borda={14} raio={6} />
+            </Flutuar>
+          </div>
+        );
+      })}
       <Sombras />
     </AbsoluteFill>
   );
@@ -130,6 +163,7 @@ export const VideoImpressoNarrado: React.FC<PropsVideo & {roteiro: RoteiroImpres
           <Sequence key={i} from={ini} durationInFrames={dur}>
             {c.tipo === 'clipe' ? <Clipe cena={c} dur={dur} /> : null}
             {c.tipo === 'folhas' ? <Folhas /> : null}
+            {c.tipo === 'paginas' ? <Paginas imagens={c.imagens} fundo={c.fundo} fundoDe={c.fundoDe} /> : null}
             {c.tipo === 'final' ? (
               <Final tDigital={frameDaPalavra(r, r.palavraDigital) - ini} tCTA={frameDaPalavra(r, r.palavraCTA) - ini} />
             ) : null}
