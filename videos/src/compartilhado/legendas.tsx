@@ -23,9 +23,9 @@ const PESOS_ESPECIAIS: Record<string, number> = {
   '3': 4,
 };
 
-const limpar = (p: string) => p.replace(/[.,!?:;…"“”]/g, '');
+export const limpar = (p: string) => p.replace(/[.,!?:;…"“”]/g, '');
 
-const peso = (palavra: string) => {
+export const peso = (palavra: string) => {
   const p = limpar(palavra);
   if (p.startsWith('R$')) return 17; // "dezenove e noventa"
   if (PESOS_ESPECIAIS[p] !== undefined) return PESOS_ESPECIAIS[p] + 1.5;
