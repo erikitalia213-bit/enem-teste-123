@@ -1,5 +1,26 @@
 # Narração para ElevenLabs: Meu Natal ARMY
 
+## Personagem "Apresentadora ARMY" (cardigan lilás, microfone e caderno)
+
+Fala de fã para fã, com energia de apresentadora. Voz feminina jovem, animada e brasileira.
+
+### A, identidade ("seu Natal tá incompleto")
+```
+Atenção, ARMY! <break time="0.3s"/> Se o seu Natal não tiver isso, tá incompleto. <break time="0.4s"/> Olha só: oitenta desenhos pra colorir, <break time="0.2s"/> mil e quinhentos photocards pra imprimir, <break time="0.2s"/> calendário três dê de dois mil e vinte e sete <break time="0.2s"/> e ainda diário de bônus. <break time="0.4s"/> Tudo por dezenove e noventa, e chega na hora, sem frete. <break time="0.2s"/> Toca em Saiba mais e me agradece depois!
+```
+
+### B, último minuto ("não chega a tempo? esquece")
+```
+ARMY, alerta de Natal! <break time="0.3s"/> Presente que não chega a tempo? Esquece. <break time="0.4s"/> Esse kit é digital: você compra, baixa e imprime em casa no mesmo dia. <break time="0.3s"/> São oitenta desenhos pra colorir, mil e quinhentos photocards e sete calendários três dê. <break time="0.4s"/> Dezenove e noventa, pagamento único. Toca em Saiba mais!
+```
+
+### C, presente para a amiga ("missão")
+```
+Tô aqui com uma missão: achar o presente perfeito pra sua amiga ARMY. <break time="0.4s"/> E achei! <break time="0.3s"/> Um kit de Natal pra imprimir, com desenhos pra colorir, photocards, diário e calendário de dois mil e vinte e sete. <break time="0.4s"/> Custa dezenove e noventa. <break time="0.2s"/> Manda esse vídeo pra ela, ou compra um pra cada uma! Toca em Saiba mais.
+```
+
+---
+
 ## Versão 2: hook para pais (sua filha é ARMY)
 
 Fala direto com mãe/pai que procura presente de Natal para a filha fã de BTS.
