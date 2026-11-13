@@ -11,6 +11,7 @@ const videos = [
   {id: 'NatalArmy03-Checklist', arquivo: 'natal-army-03-checklist'},
   // Anúncios UGC (src/video04-ugc/anuncios.ts): adicione aqui cada id novo
   {id: 'UGC-Mae-Gancho1', arquivo: 'ugc-mae-gancho1'},
+  {id: 'Fundo-Personagem', arquivo: 'fundo-para-personagem'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},
   {id: 'Apresentadora-B-UltimoMinuto', arquivo: 'apresentadora-b-ultimo-minuto'},

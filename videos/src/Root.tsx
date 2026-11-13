@@ -9,6 +9,8 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './vid
 import {Video03Checklist} from './video03-checklist/Video03';
 import {ANUNCIOS} from './video04-ugc/anuncios';
 import {ROTEIROS} from './video06-apresentadora/roteiros';
+import {textos as textosFundo} from './video07-fundo/textos';
+import {VideoFundo} from './video07-fundo/VideoFundo';
 import {VideoApresentadora, duracaoRoteiro} from './video06-apresentadora/VideoApresentadora';
 import {VideoUGC, duracaoAnuncio} from './video04-ugc/VideoUGC';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_03, tempos as tempos03} from './video03-checklist/narracao';
@@ -55,6 +57,7 @@ export const RemotionRoot: React.FC = () => (
         defaultProps={{temTrilha: false, anuncio: a}}
       />
     ))}
+    <Composition id="Fundo-Personagem" component={VideoFundo} {...base} durationInFrames={textosFundo.duracao * FPS} />
     {ROTEIROS.map((r) => (
       <Composition
         key={r.id}
