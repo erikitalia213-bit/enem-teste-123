@@ -4,13 +4,14 @@
 export const textos = {
   gancho: 'Atenção, ARMY! 🚨',
   itens: [
-    {seg: 3.0, rotulo: '80 desenhos pra colorir'},
-    {seg: 5.8, rotulo: '1.500 photocards'},
-    {seg: 8.2, rotulo: 'Diário de bônus'},
-    {seg: 10.4, rotulo: 'Calendário 3D 2027'},
+    {seg: 4.5, rotulo: 'Kit de Natal pra imprimir'},
+    {seg: 6.5, rotulo: '80 desenhos pra colorir'},
+    {seg: 8.6, rotulo: '1.500 photocards'},
+    {seg: 9.9, rotulo: 'Diário de bônus'},
+    {seg: 11.1, rotulo: 'Calendário 3D 2027'},
   ],
-  digital: {seg: 12.8, texto: 'Digital: chega na hora, sem frete ⚡'},
-  preco: {seg: 15.0, texto: 'R$ 19,90'},
-  cta: {seg: 17.0, texto: 'Toque em Saiba mais 💜'},
-  duracao: 20,
+  digital: {seg: 13.5, texto: 'Digital: chega na hora, sem frete ⚡'},
+  preco: {seg: 16.7, texto: 'R$ 19,90'},
+  cta: {seg: 18.2, texto: 'Toque em Saiba mais 💜'},
+  duracao: 23.3, // igual ao vídeo da personagem (23s09 no CapCut)
 };

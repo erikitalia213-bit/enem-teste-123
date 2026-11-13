@@ -6,7 +6,7 @@ import {FPS, LARGURA, cores, estiloTexto} from '../compartilhado/tema';
 import {textos} from './textos';
 
 // Uma imagem por item de textos.itens
-const imagens = [IMAGENS.colorir, IMAGENS.cartoes, IMAGENS.diarioCapa, IMAGENS.calendario];
+const imagens = [IMAGENS.kitCompleto, IMAGENS.colorir, IMAGENS.cartoes, IMAGENS.diarioCapa, IMAGENS.calendario];
 const f = (s: number) => Math.round(s * FPS);
 
 /** Carta do item no topo (some quando o próximo entra). */
@@ -30,7 +30,11 @@ const Carta: React.FC<{src: string; rotulo: string; dur: number}> = ({src, rotul
       }}
     >
       <Flutuar amplitude={10}>
-        <Imagem src={src} largura={380} altura={537} />
+        {src === IMAGENS.kitCompleto ? (
+          <Imagem src={src} largura={720} altura={540} />
+        ) : (
+          <Imagem src={src} largura={380} altura={537} />
+        )}
       </Flutuar>
       <div
         style={{

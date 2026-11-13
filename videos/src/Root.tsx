@@ -57,7 +57,7 @@ export const RemotionRoot: React.FC = () => (
         defaultProps={{temTrilha: false, anuncio: a}}
       />
     ))}
-    <Composition id="Fundo-Personagem" component={VideoFundo} {...base} durationInFrames={textosFundo.duracao * FPS} />
+    <Composition id="Fundo-Personagem" component={VideoFundo} {...base} durationInFrames={Math.round(textosFundo.duracao * FPS)} />
     {ROTEIROS.map((r) => (
       <Composition
         key={r.id}
