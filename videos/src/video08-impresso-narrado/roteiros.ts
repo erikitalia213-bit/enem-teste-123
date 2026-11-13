@@ -96,3 +96,34 @@ export const ROTEIRO_TIKTOK: RoteiroImpresso = {
     {tipo: 'final', palavra: 'tudo'},
   ],
 };
+
+// Mesma edição do TikTok com a narração "Tá chegando o Natal" (voz Sofia).
+export const ROTEIRO_TIKTOK_NATAL: RoteiroImpresso = {
+  id: 'Edit-TikTok-Natal',
+  arquivo: 'natal-army-edit-tiktok-natal',
+  audio: 'narracao/natal-chegando.mp3',
+  duracaoAudio: 28.6,
+  velocidade: 1.12,
+  texto:
+    'Tá chegando o Natal… e você, ARMY, ainda não tem isso? Faltam poucos dias, e esse é o kit que todo fã de BTS vai querer. São 1.500 photocards, 80 desenhos pra colorir, diários pra guardar suas memórias e 7 calendários 3D de 2027. É digital: você compra, baixa e imprime hoje mesmo, sem esperar frete. Tudo por R$ 19,90. Toca em Saiba mais e garante o seu antes do Natal!',
+  silencios: [
+    [0.732, 0.872], [1.234, 1.588], [3.838, 4.29], [4.585, 4.75], [6.85, 7.09], [8.758, 9.166],
+    [11.014, 11.186], [11.319, 11.455], [12.759, 12.883], [16.103, 16.226], [17.875, 18.223],
+    [18.926, 19.202], [19.418, 19.543], [22.666, 22.795], [23.169, 23.491], [25.158, 25.466],
+    [27.339, 27.488], [28.451, 28.604],
+  ],
+  gancho: 'Tá chegando o Natal e você ainda não tem isso? 🎄',
+  palavraDigital: 'digital',
+  palavraCTA: 'toca',
+  cenas: [
+    {tipo: 'clipe', arquivo: T + 'photocards-camisa.mp4', de: 1.0, velocidade: 1.15, volume: 0},
+    {tipo: 'clipe', palavra: 'faltam', arquivo: T + 'caixa-photocards.mp4', de: 0, volume: 0, rotulo: 'Faltam poucos dias ⏳'},
+    {tipo: 'clipe', palavra: 'esse', arquivo: T + 'diario-diy.mp4', de: 8, zoom: 1.16, volume: 0, rotulo: 'O kit que todo fã vai querer ✦'},
+    {tipo: 'clipe', palavra: 'são', arquivo: T + 'photocards-camisa.mp4', de: 6, volume: 0, rotulo: '1.500 photocards'},
+    {tipo: 'paginas', palavra: '80', imagens: [IMAGENS.colorir], fundo: T + 'livro-colorir.mp4', fundoDe: 12, rotulo: '80 desenhos pra colorir'},
+    {tipo: 'paginas', palavra: 'diários', imagens: [IMAGENS.journal, IMAGENS.diarioMusicas], fundo: T + 'diario-diy.mp4', fundoDe: 30, rotulo: 'Diários de bônus'},
+    {tipo: 'paginas', palavra: 'calendários', imagens: [IMAGENS.calendario], fundo: T + 'caixa-photocards.mp4', fundoDe: 18, rotulo: '7 calendários 3D 2027'},
+    {tipo: 'clipe', palavra: 'digital', arquivo: T + 'caixa-photocards.mp4', de: 16, volume: 0, rotulo: 'Digital: imprime hoje ⚡'},
+    {tipo: 'final', palavra: 'tudo'},
+  ],
+};

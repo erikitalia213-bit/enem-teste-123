@@ -9,7 +9,7 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './vid
 import {Video03Checklist} from './video03-checklist/Video03';
 import {ANUNCIOS} from './video04-ugc/anuncios';
 import {ROTEIROS} from './video06-apresentadora/roteiros';
-import {ROTEIRO_TIKTOK, ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
+import {ROTEIRO_TIKTOK, ROTEIRO_TIKTOK_NATAL, ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
 import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/VideoImpressoNarrado';
 import {Video01Narrado, duracaoFolheie} from './video01-folheie/Video01Narrado';
 import {textos as textosFundo} from './video07-fundo/textos';
@@ -84,6 +84,13 @@ export const RemotionRoot: React.FC = () => (
       {...base}
       durationInFrames={duracaoImpresso(ROTEIRO_TIKTOK)}
       defaultProps={{temTrilha: false, roteiro: ROTEIRO_TIKTOK}}
+    />
+    <Composition
+      id={ROTEIRO_TIKTOK_NATAL.id}
+      component={VideoImpressoNarrado}
+      {...base}
+      durationInFrames={duracaoImpresso(ROTEIRO_TIKTOK_NATAL)}
+      defaultProps={{temTrilha: false, roteiro: ROTEIRO_TIKTOK_NATAL}}
     />
   </>
 );

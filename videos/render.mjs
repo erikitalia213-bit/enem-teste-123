@@ -14,6 +14,7 @@ const videos = [
   {id: 'Fundo-Personagem', arquivo: 'fundo-para-personagem'},
   {id: 'Folheie-Nova', arquivo: 'natal-army-01-nova-narracao'},
   {id: 'Edit-TikTok', arquivo: 'natal-army-edit-tiktok'},
+  {id: 'Edit-TikTok-Natal', arquivo: 'natal-army-edit-tiktok-natal'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},
   {id: 'Apresentadora-B-UltimoMinuto', arquivo: 'apresentadora-b-ultimo-minuto'},
