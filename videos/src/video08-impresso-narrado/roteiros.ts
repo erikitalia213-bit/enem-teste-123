@@ -20,6 +20,12 @@ export type RoteiroImpresso = Fala & {
   palavraDigital: string;
   palavraCTA: string;
   cenas: Cena[];
+  /** Gancho em faixa de alto contraste (substitui o texto simples). */
+  hookForte?: {faixa: string; linha: string; destaque: string; selo?: string};
+  /** Card final com selo, checklist, botão grande e setas para o "Saiba mais". */
+  finalForte?: boolean;
+  /** Frames extras no fim depois da voz (para o CTA ficar na tela). */
+  folgaFinal?: number;
 };
 
 const RESTO =
@@ -113,6 +119,9 @@ export const ROTEIRO_TIKTOK_NATAL: RoteiroImpresso = {
     [27.339, 27.488], [28.451, 28.604],
   ],
   gancho: 'Tá chegando o Natal e você ainda não tem isso? 🎄',
+  hookForte: {faixa: '🎄 O NATAL TÁ CHEGANDO', linha: 'e você ainda não tem', destaque: 'ISSO? 👇', selo: '⏳ ÚLTIMOS DIAS'},
+  finalForte: true,
+  folgaFinal: 50,
   palavraDigital: 'digital',
   palavraCTA: 'toca',
   cenas: [
