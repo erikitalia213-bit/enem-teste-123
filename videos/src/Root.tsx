@@ -10,6 +10,8 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './vid
 import {Video03Checklist} from './video03-checklist/Video03';
 import {ANUNCIOS} from './video04-ugc/anuncios';
 import {ROTEIROS} from './video06-apresentadora/roteiros';
+import {ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
+import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/VideoImpressoNarrado';
 import {textos as textosFundo} from './video07-fundo/textos';
 import {VideoFundo} from './video07-fundo/VideoFundo';
 import {VideoApresentadora, duracaoRoteiro} from './video06-apresentadora/VideoApresentadora';
@@ -73,6 +75,16 @@ export const RemotionRoot: React.FC = () => (
         component={VideoApresentadora}
         {...base}
         durationInFrames={duracaoRoteiro(r)}
+        defaultProps={{temTrilha: false, roteiro: r}}
+      />
+    ))}
+    {ROTEIROS_IMPRESSO.map((r) => (
+      <Composition
+        key={r.id}
+        id={r.id}
+        component={VideoImpressoNarrado}
+        {...base}
+        durationInFrames={duracaoImpresso(r)}
         defaultProps={{temTrilha: false, roteiro: r}}
       />
     ))}

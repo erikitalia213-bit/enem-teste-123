@@ -13,6 +13,8 @@ const videos = [
   // Anúncios UGC (src/video04-ugc/anuncios.ts): adicione aqui cada id novo
   {id: 'UGC-Mae-Gancho1', arquivo: 'ugc-mae-gancho1'},
   {id: 'Fundo-Personagem', arquivo: 'fundo-para-personagem'},
+  {id: 'Impresso-A-Photocard', arquivo: 'impresso-a-photocard'},
+  {id: 'Impresso-B-Incompleto', arquivo: 'impresso-b-incompleto'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},
   {id: 'Apresentadora-B-UltimoMinuto', arquivo: 'apresentadora-b-ultimo-minuto'},
