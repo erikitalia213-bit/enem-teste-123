@@ -10,7 +10,7 @@ const imagens = [IMAGENS.kitCompleto, IMAGENS.colorir, IMAGENS.cartoes, IMAGENS.
 const f = (s: number) => Math.round(s * FPS);
 
 /** Carta do item no topo (some quando o próximo entra). */
-const Carta: React.FC<{src: string; rotulo: string; dur: number}> = ({src, rotulo, dur}) => {
+export const Carta: React.FC<{src: string; rotulo: string; dur: number}> = ({src, rotulo, dur}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const s = spring({frame, fps, config: {damping: 12, stiffness: 140}});

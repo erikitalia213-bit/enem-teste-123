@@ -12,6 +12,8 @@ const videos = [
   // Anúncios UGC (src/video04-ugc/anuncios.ts): adicione aqui cada id novo
   {id: 'UGC-Mae-Gancho1', arquivo: 'ugc-mae-gancho1'},
   {id: 'Fundo-Personagem', arquivo: 'fundo-para-personagem'},
+  {id: 'Fundo-Variacao-A', arquivo: 'fundo-variacao-a-natal'},
+  {id: 'Fundo-Variacao-B', arquivo: 'fundo-variacao-b-photocards'},
   {id: 'Folheie-Nova', arquivo: 'natal-army-01-nova-narracao'},
   {id: 'Edit-TikTok', arquivo: 'natal-army-edit-tiktok'},
   {id: 'Edit-TikTok-Natal', arquivo: 'natal-army-edit-tiktok-natal'},

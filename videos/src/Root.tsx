@@ -14,6 +14,8 @@ import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/
 import {Video01Narrado, duracaoFolheie} from './video01-folheie/Video01Narrado';
 import {textos as textosFundo} from './video07-fundo/textos';
 import {VideoFundo} from './video07-fundo/VideoFundo';
+import {FUNDOS} from './video07-fundo/variacoes';
+import {VideoFundoVariacao, duracaoFundo} from './video07-fundo/VideoFundoVariacao';
 import {VideoApresentadora, duracaoRoteiro} from './video06-apresentadora/VideoApresentadora';
 import {VideoUGC, duracaoAnuncio} from './video04-ugc/VideoUGC';
 import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_03, tempos as tempos03} from './video03-checklist/narracao';
@@ -92,5 +94,15 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={duracaoImpresso(ROTEIRO_TIKTOK_NATAL)}
       defaultProps={{temTrilha: false, roteiro: ROTEIRO_TIKTOK_NATAL}}
     />
+    {FUNDOS.map((v) => (
+      <Composition
+        key={v.id}
+        id={v.id}
+        component={VideoFundoVariacao}
+        {...base}
+        durationInFrames={duracaoFundo(v)}
+        defaultProps={{temTrilha: false, variacao: v}}
+      />
+    ))}
   </>
 );
