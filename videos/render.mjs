@@ -15,6 +15,7 @@ const videos = [
   {id: 'Fundo-Variacao-A', arquivo: 'fundo-variacao-a-natal'},
   {id: 'Fundo-Variacao-B', arquivo: 'fundo-variacao-b-photocards'},
   {id: 'Folheie-Nova', arquivo: 'natal-army-01-nova-narracao'},
+  {id: 'Folheie-Variacao-C', arquivo: 'natal-army-01-variacao-c-natal'},
   {id: 'Edit-TikTok', arquivo: 'natal-army-edit-tiktok'},
   {id: 'Edit-TikTok-Natal', arquivo: 'natal-army-edit-tiktok-natal'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)

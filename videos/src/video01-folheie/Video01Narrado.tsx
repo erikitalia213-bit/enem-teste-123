@@ -30,6 +30,9 @@ export type RoteiroFolheie = Fala & {
   arquivo: string;
   audio: string;
   gancho: string;
+  /** Etiqueta durante a parte das "dores" (padrão: "Todo Natal é igual…"). */
+  etiquetaDores?: string;
+  tamanhoGancho?: number;
 };
 
 // Páginas do livro: [imagem, palavra que faz a página aparecer, etiqueta no topo]
@@ -196,12 +199,12 @@ export const Video01Narrado: React.FC<PropsVideo & {roteiro: RoteiroFolheie}> = 
 
         {/* gancho */}
         <Sequence durationInFrames={tTodo + 4} layout="none">
-          <TextoGancho texto={r.gancho} topo={270} tamanho={84} saida={tTodo - 6} />
+          <TextoGancho texto={r.gancho} topo={262} tamanho={r.tamanhoGancho ?? 84} saida={tTodo - 6} />
         </Sequence>
 
         {/* dores */}
         <Sequence from={tTodo} durationInFrames={tDescobri - tTodo} layout="none">
-          <Etiqueta texto="Todo Natal é igual…" topo={300} />
+          <Etiqueta texto={r.etiquetaDores ?? "Todo Natal é igual…"} topo={300} />
         </Sequence>
         {DORES.map((d) => {
           const ini = frameDaPalavra(r, d.palavra) - 3;

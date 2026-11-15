@@ -12,6 +12,7 @@ import {ROTEIROS} from './video06-apresentadora/roteiros';
 import {ROTEIRO_TIKTOK, ROTEIRO_TIKTOK_NATAL, ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
 import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/VideoImpressoNarrado';
 import {Video01Narrado, duracaoFolheie} from './video01-folheie/Video01Narrado';
+import {ROTEIRO_FOLHEIE_C} from './video01-folheie/variacaoC';
 import {textos as textosFundo} from './video07-fundo/textos';
 import {VideoFundo} from './video07-fundo/VideoFundo';
 import {FUNDOS} from './video07-fundo/variacoes';
@@ -73,6 +74,13 @@ export const RemotionRoot: React.FC = () => (
         defaultProps={{temTrilha: false, roteiro: r}}
       />
     ))}
+    <Composition
+      id={ROTEIRO_FOLHEIE_C.id}
+      component={Video01Narrado}
+      {...base}
+      durationInFrames={duracaoFolheie(ROTEIRO_FOLHEIE_C)}
+      defaultProps={{temTrilha: false, roteiro: ROTEIRO_FOLHEIE_C}}
+    />
     <Composition
       id="Folheie-Nova"
       component={Video01Narrado}
