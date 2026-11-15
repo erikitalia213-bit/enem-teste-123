@@ -33,6 +33,10 @@ export type RoteiroFolheie = Fala & {
   /** Etiqueta durante a parte das "dores" (padrão: "Todo Natal é igual…"). */
   etiquetaDores?: string;
   tamanhoGancho?: number;
+  /** Palavra que vira a página para o kit (padrão: "descobri"). */
+  palavraKit?: string;
+  /** Palavra em que entra "digital · sem frete · acesso imediato" (padrão: "digital"). */
+  palavraDigital?: string;
 };
 
 // Páginas do livro: [imagem, palavra que faz a página aparecer, etiqueta no topo]
@@ -181,10 +185,12 @@ const SeloDor: React.FC<{texto: string; x: number; y: number; rot: number}> = ({
 
 export const Video01Narrado: React.FC<PropsVideo & {roteiro: RoteiroFolheie}> = ({roteiro: r, temTrilha}) => {
   const {durationInFrames} = useVideoConfig();
-  const inicios = PAGINAS.map((p, k) => (k === 0 ? 0 : frameDaPalavra(r, p.palavra ?? '') - 4));
+  const inicios = PAGINAS.map((p, k) =>
+    k === 0 ? 0 : frameDaPalavra(r, k === 1 && r.palavraKit ? r.palavraKit : p.palavra ?? '') - 4,
+  );
   const tTodo = frameDaPalavra(r, 'todo') - 4;
   const tFinal = frameDaPalavra(r, 'tudo') - 4;
-  const tDigital = frameDaPalavra(r, 'digital') - tFinal;
+  const tDigital = frameDaPalavra(r, r.palavraDigital ?? 'digital') - tFinal;
   const tCTA = frameDaPalavra(r, 'toca') - tFinal;
   const tDescobri = inicios[1];
 
