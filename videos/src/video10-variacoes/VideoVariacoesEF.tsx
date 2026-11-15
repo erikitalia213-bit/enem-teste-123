@@ -43,9 +43,14 @@ const I = 'clipes/impresso/';
 export const VARIACAO_E: VariacaoEF = {
   id: 'Variacao-E-Presente',
   arquivo: 'natal-army-01-variacao-e-presente',
-  duracaoAudio: 26,
+  audio: 'narracao/variacao-E.mp3',
+  duracaoAudio: 26.59,
   velocidade: 1.15,
-  silencios: [],
+  silencios: [
+    [2.477, 2.673], [3.329, 3.463], [4.053, 4.194], [4.291, 4.721], [4.871, 4.998], [8.62, 8.888],
+    [9.004, 9.161], [10.455, 10.774], [12.63, 12.763], [14.437, 14.805], [15.296, 15.705], [19.034, 19.475],
+    [21.694, 21.844], [22.191, 22.648], [24.228, 24.696], [26.428, 26.593],
+  ],
   texto:
     'Se você é ARMY e ainda não tem isso, seu Natal tá incompleto. É um kit de Natal pra imprimir em casa, com 1.500 photocards, 80 desenhos pra colorir, diários e 7 calendários 3D de 2027. E o melhor: dá pra imprimir um pra você e outro pra presentear sua amiga ARMY. É digital, então chega na hora, sem frete. Tudo por R$ 19,90. Toca em Saiba mais e garante o seu!',
   gancho: 'Se você é ARMY e ainda não tem isso, seu Natal tá incompleto 💜',
