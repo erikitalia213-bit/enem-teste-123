@@ -63,7 +63,7 @@ const DURACAO_VIRADA = 18;
 
 export const duracaoFolheie = (r: RoteiroFolheie) => duracaoFala(r, 18);
 
-const Livro: React.FC<{inicios: number[]}> = ({inicios}) => {
+export const Livro: React.FC<{inicios: number[]}> = ({inicios}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const zoom = spring({frame, fps, config: {damping: 14, stiffness: 90}});

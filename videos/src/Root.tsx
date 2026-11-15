@@ -10,6 +10,7 @@ import {Video03Checklist} from './video03-checklist/Video03';
 import {ANUNCIOS} from './video04-ugc/anuncios';
 import {ROTEIROS} from './video06-apresentadora/roteiros';
 import {VideoVSL, duracaoVSL} from './video09-vsl/VideoVSL';
+import {VARIACOES_EF, VideoVariacaoEF, duracaoEF} from './video10-variacoes/VideoVariacoesEF';
 import {ROTEIRO_TIKTOK, ROTEIRO_TIKTOK_NATAL, ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
 import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/VideoImpressoNarrado';
 import {Video01Narrado, duracaoFolheie} from './video01-folheie/Video01Narrado';
@@ -122,5 +123,15 @@ export const RemotionRoot: React.FC = () => (
       />
     ))}
     <Composition id="VSL-Landing" component={VideoVSL} {...base} durationInFrames={duracaoVSL()} />
+    {VARIACOES_EF.map((v) => (
+      <Composition
+        key={v.id}
+        id={v.id}
+        component={VideoVariacaoEF}
+        {...base}
+        durationInFrames={duracaoEF(v)}
+        defaultProps={{temTrilha: false, variacao: v}}
+      />
+    ))}
   </>
 );

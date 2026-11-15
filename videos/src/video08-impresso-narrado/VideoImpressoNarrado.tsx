@@ -221,7 +221,7 @@ const Seta: React.FC<{atraso: number; x: number}> = ({atraso, x}) => {
   return <div style={{position: 'absolute', left: x, top: 1480 + y, fontSize: 64, opacity: o}}>👇</div>;
 };
 
-const FinalForte: React.FC<{tDigital: number; tCTA: number}> = ({tDigital, tCTA}) => {
+export const FinalForte: React.FC<{tDigital: number; tCTA: number}> = ({tDigital, tCTA}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const s = spring({frame, fps, config: {damping: 12, stiffness: 120}});
