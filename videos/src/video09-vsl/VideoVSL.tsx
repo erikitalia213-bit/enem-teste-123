@@ -16,18 +16,18 @@ import {Clipe, Paginas} from '../video08-impresso-narrado/VideoImpressoNarrado';
 const T = 'clipes/tiktok/';
 
 export const FALA_VSL: Fala = {
-  duracaoAudio: 39.97,
+  duracaoAudio: 40.59,
   velocidade: 1.12,
   texto:
-    'ARMY, imagina ter um Natal inteirinho do BTS pra imprimir em casa? Olha só o que vem nesse kit. São 80 desenhos pra colorir… um journal criativo pra guardar suas memórias de dezembro… 1.500 photocards pra imprimir, recortar e colecionar… e 7 calendários 3D de 2027 pra montar e deixar no seu cantinho. E ainda vem 4 bônus: diário criativo extra, wallpapers de Natal, cartinhas e um desafio ARMY de 7 dias. É tudo digital: você baixa e imprime hoje mesmo, sem frete. Tudo por R$ 19,90. Clica no botão Quero meu kit aqui embaixo e garante o seu!',
+    'ARMY, imagina ter um Natal inteirinho do BTS pra imprimir em casa? Olha só o que vem nesse kit. São 80 desenhos pra colorir… um journal criativo pra guardar suas memórias de dezembro… 1.500 photocards pra imprimir, recortar e colecionar… e 7 calendários 3D de 2027 pra montar e deixar no seu cantinho. E ainda vem 4 bônus: diário criativo extra, wallpapers de Natal, cartinhas e um desafio ARMY de 7 dias. É tudo digital: você baixa e imprime hoje mesmo, sem frete. Tudo por R$ 19,90. Clica no botão Quero meu kit aqui em cima e garante o seu!',
   silencios: [
-    [0.475, 0.735], [1.765, 1.904], [2.032, 2.188], [4.364, 4.853], [5.792, 5.915], [6.182, 6.673],
-    [6.979, 7.154], [8.367, 8.992], [11.854, 12.401], [15.571, 15.712], [16.348, 16.874], [21.619, 22.113],
-    [22.611, 22.775], [23.575, 23.98], [25.335, 25.628], [26.868, 27.127], [27.79, 27.92], [29.851, 29.976],
-    [29.98, 30.437], [30.51, 30.7], [31.402, 31.763], [32.932, 33.066], [34.582, 35.02], [36.552, 36.982],
-    [39.759, 39.967],
+    [0.475, 0.735], [1.765, 1.904], [2.028, 2.189], [4.364, 4.853], [5.792, 5.915], [6.182, 6.673],
+    [6.977, 7.154], [8.365, 8.992], [11.854, 12.401], [15.571, 15.712], [16.348, 16.874], [21.619, 22.113],
+    [22.611, 22.775], [23.55, 23.98], [25.334, 25.628], [26.868, 27.127], [27.79, 27.92], [29.849, 29.976],
+    [29.98, 30.437], [30.51, 30.7], [31.4, 31.763], [32.932, 33.066], [34.582, 35.02], [36.552, 36.85],
+    [37.602, 37.745], [40.389, 40.558],
   ],
-};
+};;
 
 export const duracaoVSL = () => duracaoFala(FALA_VSL, 45);
 
@@ -110,8 +110,8 @@ const Bonus: React.FC<{tempos: number[]}> = ({tempos}) => {
   );
 };
 
-/** Botão igual ao da landing page. */
-const BotaoQueroMeuKit: React.FC = () => {
+/** Chamada apontando para o botão "QUERO MEU KIT" que fica acima do vídeo na página. */
+const ChamadaAcima: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const s = spring({frame, fps, config: {damping: 10, stiffness: 160}});
@@ -129,15 +129,15 @@ const BotaoQueroMeuKit: React.FC = () => {
         boxShadow: '0 18px 45px rgba(10,4,26,0.6), 0 0 50px rgba(182,156,255,0.55)',
         fontFamily: fonte,
         fontWeight: 700,
-        fontSize: 64,
-        letterSpacing: 1,
+        fontSize: 46,
+        letterSpacing: 0.5,
         color: cores.branco,
         transform: `scale(${interpolate(s, [0, 1], [0.4, 1]) * pulso})`,
         opacity: s,
         whiteSpace: 'nowrap',
       }}
     >
-      QUERO MEU KIT ✦
+      👆 Clique em "QUERO MEU KIT" acima
       <div
         style={{
           position: 'absolute',
@@ -153,11 +153,11 @@ const BotaoQueroMeuKit: React.FC = () => {
   );
 };
 
-const Seta: React.FC<{atraso: number; x: number}> = ({atraso, x}) => {
+const Seta: React.FC<{atraso: number; x: number; y: number}> = ({atraso, x, y}) => {
   const frame = useCurrentFrame();
-  const y = Math.abs(Math.sin((frame - atraso) * 0.25)) * 26;
+  const d = Math.abs(Math.sin((frame - atraso) * 0.25)) * 26;
   const o = interpolate(frame, [atraso, atraso + 6], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  return <div style={{position: 'absolute', left: x, top: 1500 + y, fontSize: 70, opacity: o}}>👇</div>;
+  return <div style={{position: 'absolute', left: x, top: y - d, fontSize: 80, opacity: o}}>👆</div>;
 };
 
 const Final: React.FC<{tBotao: number}> = ({tBotao}) => {
@@ -186,12 +186,12 @@ const Final: React.FC<{tBotao: number}> = ({tBotao}) => {
         </Entrada>
       </div>
       <Sequence from={tBotao} layout="none">
-        <div style={{position: 'absolute', top: 1335, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-          <BotaoQueroMeuKit />
+        <div style={{position: 'absolute', top: 1340, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+          <ChamadaAcima />
         </div>
-        <Seta atraso={6} x={300} />
-        <Seta atraso={10} x={505} />
-        <Seta atraso={14} x={710} />
+        <Seta atraso={6} x={300} y={150} />
+        <Seta atraso={10} x={505} y={150} />
+        <Seta atraso={14} x={710} y={150} />
       </Sequence>
     </Fundo>
   );
@@ -223,7 +223,7 @@ export const VideoVSL: React.FC<PropsVideo> = ({temTrilha}) => {
   return (
     <AbsoluteFill style={{backgroundColor: '#000'}}>
       <Trilha ativa={temTrilha} volume={0.15} />
-      <Html5Audio src={staticFile('narracao/vsl.mp3')} playbackRate={f.velocidade} />
+      <Html5Audio src={staticFile('narracao/vsl-v2.mp3')} playbackRate={f.velocidade} />
       {cenas.map((c, i) => {
         const fim = i + 1 < cenas.length ? cenas[i + 1].ini : durationInFrames;
         const dur = fim - c.ini;
