@@ -75,9 +75,14 @@ export const VARIACAO_E: VariacaoEF = {
 export const VARIACAO_F: VariacaoEF = {
   id: 'Variacao-F-Pais',
   arquivo: 'natal-army-01-variacao-f-pais',
-  duracaoAudio: 28,
+  audio: 'narracao/variacao-F.mp3',
+  duracaoAudio: 28.37,
   velocidade: 1.12,
-  silencios: [],
+  silencios: [
+    [1.358, 1.575], [3.472, 3.631], [4.201, 4.629], [8.112, 8.381], [8.515, 8.665], [9.995, 10.261],
+    [13.985, 14.366], [17.826, 18.02], [19.091, 19.526], [20.202, 20.442], [23.257, 23.633], [25.283, 25.674],
+    [28.177, 28.369],
+  ],
   texto:
     'Se sua filha é ARMY, esse é o presente de Natal que ela vai amar. Um kit pra imprimir em casa, com 1.500 photocards, 80 desenhos pra colorir, diários e 7 calendários 3D de 2027. Ela vai passar o Natal criando, colorindo e colecionando, longe do celular. É digital: você compra hoje e já imprime, sem frete. Tudo por R$ 19,90. Toca em Saiba mais e garanta o presente dela!',
   gancho: 'Se sua filha é ARMY, esse é o presente de Natal que ela vai amar 🎁',
@@ -85,7 +90,8 @@ export const VARIACAO_F: VariacaoEF = {
   cenas: [
     // 1) Gancho visual novo: o kit como presente (sem a capa dos membros)
     {tipo: 'presente'},
-    {tipo: 'clipe', palavra: '1500', arquivo: T + 'photocards-camisa.mp4', de: 6, rotulo: '1.500 photocards'},
+    {tipo: 'clipe', palavra: 'kit', arquivo: I + 'g1.mp4', de: 1.6, velocidade: 1.2, rotulo: 'Kit pra imprimir em casa ✦'},
+    {tipo: 'clipe', palavra: 'com', arquivo: T + 'photocards-camisa.mp4', de: 6, rotulo: '1.500 photocards'},
     {tipo: 'paginas', palavra: '80', imagens: [IMAGENS.colorir], fundo: T + 'livro-colorir.mp4', fundoDe: 12, rotulo: '80 desenhos pra colorir'},
     {tipo: 'paginas', palavra: 'diários', imagens: [IMAGENS.journal, IMAGENS.diarioMusicas], fundo: T + 'diario-diy.mp4', fundoDe: 30, rotulo: 'Diários'},
     {tipo: 'paginas', palavra: 'calendários', imagens: [IMAGENS.calendario], fundo: T + 'caixa-photocards.mp4', fundoDe: 18, rotulo: '7 calendários 3D 2027'},
