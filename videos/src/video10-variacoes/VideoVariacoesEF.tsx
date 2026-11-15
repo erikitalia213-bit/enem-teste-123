@@ -21,6 +21,10 @@ export type VariacaoEF = Fala & {
   audio?: string;
   gancho: string;
   estiloLegenda: EstiloLegenda;
+  /** Texto do selo da cena "presente". */
+  seloPresente?: string;
+  /** Mostra legenda também durante o gancho (padrão: não). */
+  legendaNoGancho?: boolean;
   /** Cada cena começa quando a voz fala a palavra (a primeira começa em 0). */
   cenas: (CenaEF & {palavra?: string; ocorrencia?: number; rotulo?: string})[];
 };
@@ -88,7 +92,63 @@ export const VARIACAO_F: VariacaoEF = {
   ],
 };
 
-export const VARIACOES_EF = [VARIACAO_E, VARIACAO_F];
+/* ---------- variações visuais do video 01 com a MESMA narração (vencedora) ---------- */
+const FALA_VIDEO01: Fala = {
+  duracaoAudio: 31.45,
+  velocidade: 1.12,
+  texto:
+    'Se você é ARMY e ainda não tem isso, seu Natal tá incompleto. Todo Natal é igual: merch cara, frete que atrasa, e o presente fica pra depois. Mas eu descobri um jeito diferente… um kit de Natal ARMY pra imprimir em casa, hoje mesmo. São 1.500 photocards, 80 desenhos pra colorir, diários e 7 calendários 3D de 2027. Tudo por R$ 19,90. É digital, então não depende de frete nenhum. Toca em Saiba mais e garante o seu antes do Natal!',
+  silencios: [
+    [0, 0.13], [2.493, 2.748], [3.912, 4.036], [4.129, 4.535], [5.528, 5.895], [6.239, 6.366],
+    [9.561, 10.028], [11.672, 12.08], [14.486, 14.717], [15.374, 15.839], [17.49, 17.65],
+    [17.764, 17.904], [19.179, 19.491], [23.081, 23.528], [25.124, 25.502], [28.113, 28.557],
+    [30.254, 30.387], [31.222, 31.414],
+  ],
+};
+
+/** G: abre com photocards na mão; dores com cenas reais; depois o livro folheando. */
+export const VARIACAO_G: VariacaoEF = {
+  ...FALA_VIDEO01,
+  id: 'Video01-Var-G-Photocards',
+  arquivo: 'natal-army-01-var-g-abre-photocards',
+  audio: 'narracao/impresso-v2-gancho-incompleto.mp3',
+  gancho: 'Se você é ARMY e não tem isso, seu Natal tá incompleto 💜',
+  estiloLegenda: 'roxo',
+  cenas: [
+    {tipo: 'clipe', arquivo: T + 'photocards-camisa.mp4', de: 1.0, velocidade: 1.15, punch: true},
+    {tipo: 'clipe', palavra: 'todo', arquivo: T + 'caixa-photocards.mp4', de: 0, rotulo: 'Merch cara 💸'},
+    {tipo: 'clipe', palavra: 'frete', arquivo: T + 'caixa-photocards.mp4', de: 16, rotulo: 'Frete que atrasa 📦'},
+    {
+      tipo: 'livro',
+      palavra: 'descobri',
+      paginas: [{}, {palavra: 'imprimir'}, {palavra: '1500'}, {palavra: '80'}, {palavra: 'diários'}, {palavra: 'calendários'}],
+    },
+    {tipo: 'final', palavra: 'tudo'},
+  ],
+};
+
+/** H: abre com o kit completo; itens com cenas reais; legenda branca (estilo demonstração). */
+export const VARIACAO_H: VariacaoEF = {
+  ...FALA_VIDEO01,
+  id: 'Video01-Var-H-Demonstracao',
+  arquivo: 'natal-army-01-var-h-demonstracao',
+  audio: 'narracao/impresso-v2-gancho-incompleto.mp3',
+  gancho: 'Se você é ARMY e não tem isso, seu Natal tá incompleto 🎄',
+  estiloLegenda: 'branco',
+  seloPresente: '🎄 Kit de Natal ARMY',
+  cenas: [
+    {tipo: 'presente'},
+    {tipo: 'clipe', palavra: 'todo', arquivo: T + 'diario-diy.mp4', de: 8, zoom: 1.16, rotulo: 'Todo Natal é igual…'},
+    {tipo: 'clipe', palavra: 'descobri', arquivo: I + 'g1.mp4', de: 1.6, velocidade: 1.2, rotulo: 'Kit pra imprimir em casa ✦'},
+    {tipo: 'clipe', palavra: '1500', arquivo: T + 'photocards-camisa.mp4', de: 6, rotulo: '1.500 photocards'},
+    {tipo: 'clipe', palavra: '80', arquivo: I + 'g2.mp4', de: 2.0, rotulo: '80 desenhos pra colorir'},
+    {tipo: 'paginas', palavra: 'diários', imagens: [IMAGENS.journal, IMAGENS.diarioMusicas], fundo: T + 'diario-diy.mp4', fundoDe: 30, rotulo: 'Diários'},
+    {tipo: 'clipe', palavra: 'calendários', arquivo: I + 'calendario.mp4', de: 0.8, rotulo: '7 calendários 3D 2027'},
+    {tipo: 'final', palavra: 'tudo'},
+  ],
+};
+
+export const VARIACOES_EF = [VARIACAO_E, VARIACAO_F, VARIACAO_G, VARIACAO_H];
 export const duracaoEF = (v: VariacaoEF) => duracaoFala(v, 45);
 
 /* ---------------- cenas ---------------- */
@@ -172,7 +232,7 @@ export const VideoVariacaoEF: React.FC<PropsVideo & {variacao: VariacaoEF}> = ({
               </Fundo>
             ) : null}
             {c.tipo === 'presente' ? (
-              <Presente texto={v.id.includes('Pais') ? '🎁 Presente de Natal' : '🎁 1 pra você + 1 pra sua amiga'} />
+              <Presente texto={v.seloPresente ?? (v.id.includes('Pais') ? '🎁 Presente de Natal' : '🎁 1 pra você + 1 pra sua amiga')} />
             ) : null}
             {c.tipo === 'final' ? <FinalForte tDigital={t('digital') - ini} tCTA={t('toca') - ini} /> : null}
             {c.rotulo ? <Legenda texto={c.rotulo} topo={300} /> : null}
@@ -191,7 +251,7 @@ export const VideoVariacaoEF: React.FC<PropsVideo & {variacao: VariacaoEF}> = ({
       ))}
 
       <Legendas
-        trechos={trechosLegenda(v).filter((x) => x.emFrame >= fimGancho - 6 && x.emFrame < tFinal)}
+        trechos={trechosLegenda(v).filter((x) => (v.legendaNoGancho || x.emFrame >= fimGancho - 6) && x.emFrame < tFinal)}
         velocidade={v.velocidade}
         ativa
         estilo={v.estiloLegenda}

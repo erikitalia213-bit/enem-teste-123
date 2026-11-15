@@ -21,6 +21,8 @@ const videos = [
   {id: 'VSL-Landing', arquivo: 'vsl-landing-natal-army'},
   {id: 'Variacao-E-Presente', arquivo: 'natal-army-01-variacao-e-presente'},
   {id: 'Variacao-F-Pais', arquivo: 'natal-army-01-variacao-f-pais'},
+  {id: 'Video01-Var-G-Photocards', arquivo: 'natal-army-01-var-g-abre-photocards'},
+  {id: 'Video01-Var-H-Demonstracao', arquivo: 'natal-army-01-var-h-demonstracao'},
   {id: 'Edit-TikTok-Natal', arquivo: 'natal-army-edit-tiktok-natal'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},
