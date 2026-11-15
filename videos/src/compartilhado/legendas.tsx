@@ -71,7 +71,10 @@ export const montarBlocos = (trechos: TrechoNarracao[], velocidade: number, fps:
   return blocos;
 };
 
-const BlocoLegenda: React.FC<{bloco: Bloco; ate: number}> = ({bloco, ate}) => {
+export type EstiloLegenda = 'roxo' | 'branco';
+
+const BlocoLegenda: React.FC<{bloco: Bloco; ate: number; estilo: EstiloLegenda; base: number}> = ({bloco, ate, estilo, base}) => {
+  const branco = estilo === 'branco';
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const ini = Math.floor(bloco.inicio) - 2;
@@ -82,7 +85,7 @@ const BlocoLegenda: React.FC<{bloco: Bloco; ate: number}> = ({bloco, ate}) => {
     <div
       style={{
         position: 'absolute',
-        bottom: ALTURA - LIMITE_INFERIOR + 8,
+        bottom: ALTURA - base,
         left: 0,
         right: 0,
         display: 'flex',
@@ -96,9 +99,11 @@ const BlocoLegenda: React.FC<{bloco: Bloco; ate: number}> = ({bloco, ate}) => {
           maxWidth: 960,
           padding: '12px 30px 16px',
           borderRadius: 30,
-          background: 'linear-gradient(180deg, rgba(43,27,80,0.82), rgba(30,20,51,0.82))',
-          border: `3px solid rgba(182,156,255,0.75)`,
-          boxShadow: '0 14px 36px rgba(10,4,26,0.55), 0 0 30px rgba(182,156,255,0.25)',
+          background: branco ? '#FFFFFF' : 'linear-gradient(180deg, rgba(43,27,80,0.82), rgba(30,20,51,0.82))',
+          border: branco ? 'none' : `3px solid rgba(182,156,255,0.75)`,
+          boxShadow: branco
+            ? '0 12px 30px rgba(10,4,26,0.35)'
+            : '0 14px 36px rgba(10,4,26,0.55), 0 0 30px rgba(182,156,255,0.25)',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
@@ -118,10 +123,10 @@ const BlocoLegenda: React.FC<{bloco: Bloco; ate: number}> = ({bloco, ate}) => {
               key={i}
               style={{
                 display: 'inline-block',
-                color: ativa ? cores.dourado : cores.branco,
-                opacity: falada ? 1 : 0.6,
+                color: branco ? (ativa ? '#C2185B' : cores.roxoProfundo) : ativa ? cores.dourado : cores.branco,
+                opacity: falada ? 1 : branco ? 0.45 : 0.6,
                 transform: ativa ? `scale(${interpolate(pop, [0, 1], [1, 1.12])}) translateY(-3px)` : 'none',
-                textShadow: `${contorno(4, ativa ? cores.roxoProfundo : cores.roxo)}, 0 6px 14px rgba(10,4,26,0.6)`,
+                textShadow: branco ? 'none' : `${contorno(4, ativa ? cores.roxoProfundo : cores.roxo)}, 0 6px 14px rgba(10,4,26,0.6)`,
               }}
             >
               {w.texto}
@@ -134,11 +139,14 @@ const BlocoLegenda: React.FC<{bloco: Bloco; ate: number}> = ({bloco, ate}) => {
 };
 
 /** Coloque por cima de tudo no vídeo. Só aparece se houver narração. */
-export const Legendas: React.FC<{trechos: TrechoNarracao[]; velocidade: number; ativa: boolean}> = ({
-  trechos,
-  velocidade,
-  ativa,
-}) => {
+export const Legendas: React.FC<{
+  trechos: TrechoNarracao[];
+  velocidade: number;
+  ativa: boolean;
+  estilo?: EstiloLegenda;
+  /** Linha (y) da base da legenda. Padrão: limite da zona segura. */
+  base?: number;
+}> = ({trechos, velocidade, ativa, estilo = 'roxo', base = LIMITE_INFERIOR - 8}) => {
   const {fps} = useVideoConfig();
   if (!ativa) return null;
   const blocos = montarBlocos(trechos, velocidade, fps);
@@ -149,7 +157,7 @@ export const Legendas: React.FC<{trechos: TrechoNarracao[]; velocidade: number; 
         // segura o bloco até o próximo (se a pausa for curta)
         const fimNatural = b.fim + 10;
         const ate = proximo && proximo.inicio - 2 - b.fim < 14 ? Math.floor(proximo.inicio) - 2 : Math.ceil(fimNatural);
-        return <BlocoLegenda key={i} bloco={b} ate={ate} />;
+        return <BlocoLegenda key={i} bloco={b} ate={ate} estilo={estilo} base={base} />;
       })}
     </>
   );

@@ -22,7 +22,7 @@ const Sombras: React.FC = () => (
   </>
 );
 
-const Clipe: React.FC<{cena: Extract<Cena, {tipo: 'clipe'}>; dur: number; punch?: boolean}> = ({cena, dur, punch}) => {
+export const Clipe: React.FC<{cena: Extract<Cena, {tipo: 'clipe'}>; dur: number; punch?: boolean}> = ({cena, dur, punch}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   // "punch": entra com zoom forte + tremida nos primeiros frames (prende o olho)
@@ -51,7 +51,7 @@ const Clipe: React.FC<{cena: Extract<Cena, {tipo: 'clipe'}>; dur: number; punch?
 };
 
 /** Páginas reais do kit na frente de um clipe desfocado. */
-const Paginas: React.FC<{imagens: string[]; fundo: string; fundoDe: number}> = ({imagens, fundo, fundoDe}) => {
+export const Paginas: React.FC<{imagens: string[]; fundo: string; fundoDe: number}> = ({imagens, fundo, fundoDe}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const n = imagens.length;

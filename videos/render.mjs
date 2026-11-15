@@ -18,6 +18,7 @@ const videos = [
   {id: 'Folheie-Variacao-C', arquivo: 'natal-army-01-variacao-c-natal'},
   {id: 'Folheie-Variacao-D', arquivo: 'natal-army-01-variacao-d-photocard'},
   {id: 'Edit-TikTok', arquivo: 'natal-army-edit-tiktok'},
+  {id: 'VSL-Landing', arquivo: 'vsl-landing-natal-army'},
   {id: 'Edit-TikTok-Natal', arquivo: 'natal-army-edit-tiktok-natal'},
   // Personagem Apresentadora (src/video06-apresentadora/roteiros.ts)
   {id: 'Apresentadora-A-Identidade', arquivo: 'apresentadora-a-identidade'},

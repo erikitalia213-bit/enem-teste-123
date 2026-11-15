@@ -9,6 +9,7 @@ import {ARQUIVO_NARRACAO as ARQUIVO_NARRACAO_02, tempos as tempos02} from './vid
 import {Video03Checklist} from './video03-checklist/Video03';
 import {ANUNCIOS} from './video04-ugc/anuncios';
 import {ROTEIROS} from './video06-apresentadora/roteiros';
+import {VideoVSL, duracaoVSL} from './video09-vsl/VideoVSL';
 import {ROTEIRO_TIKTOK, ROTEIRO_TIKTOK_NATAL, ROTEIROS_IMPRESSO} from './video08-impresso-narrado/roteiros';
 import {VideoImpressoNarrado, duracaoImpresso} from './video08-impresso-narrado/VideoImpressoNarrado';
 import {Video01Narrado, duracaoFolheie} from './video01-folheie/Video01Narrado';
@@ -120,5 +121,6 @@ export const RemotionRoot: React.FC = () => (
         defaultProps={{temTrilha: false, variacao: v}}
       />
     ))}
+    <Composition id="VSL-Landing" component={VideoVSL} {...base} durationInFrames={duracaoVSL()} />
   </>
 );
