@@ -34,7 +34,7 @@ export function ImagemExercicio({
                 alt=""
                 fill
                 sizes="(max-width: 480px) 50vw, 240px"
-                className={`object-cover object-top opacity-35 ${i === 1 ? "scale-x-[-1]" : ""}`}
+                className={`object-cover object-[center_62%] opacity-40 ${i === 1 ? "scale-x-[-1]" : ""}`}
                 priority={prioridade}
               />
               <span className="rotulo absolute left-2 top-2 rounded-full bg-black/60 px-2 py-1 text-[10px] text-suave">{r}</span>

@@ -37,9 +37,9 @@ function arredondar(qtd: number, unidade: Unidade): number {
   return Math.ceil(qtd * 4 - 1e-9) / 4; // múltiplos de ¼
 }
 
-function formatarQuantidadeLista(qtd: number, unidade: Unidade, plural: string, nome: string): string {
+function formatarQuantidadeLista(qtd: number, unidade: Unidade): string {
   if (unidade === "a-gosto") return "a gosto";
-  if (unidade === "un") return `${formatarQtd(qtd)} ${qtd > 1 ? plural : nome}`;
+  if (unidade === "un") return `${formatarQtd(qtd)} ${qtd > 1 ? "unidades" : "unidade"}`;
   if (unidade === "g") return qtd >= 1000 ? `${(qtd / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 2 })} kg` : `${qtd} g`;
   if (unidade === "ml") return qtd >= 1000 ? `${(qtd / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 2 })} L` : `${qtd} ml`;
   return `${formatarQtd(qtd)} ${rotuloUnidade(unidade, qtd)}`;
@@ -76,8 +76,7 @@ export function gerarListaDeReceitas(contagem: Map<string, number>): SecaoLista[
 
   const porItem = new Map<string, string[]>();
   for (const { item, unidade, qtd } of soma.values()) {
-    const cat = ingredientes[item]!;
-    const texto = formatarQuantidadeLista(arredondar(qtd, unidade), unidade, cat.plural, cat.nome);
+    const texto = formatarQuantidadeLista(arredondar(qtd, unidade), unidade);
     porItem.set(item, [...(porItem.get(item) ?? []), texto]);
   }
 

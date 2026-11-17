@@ -30,7 +30,7 @@ describe("lista de compras", () => {
     );
     const itens = lista.flatMap((s) => s.itens);
     expect(itens.find((i) => i.chave === "peito-frango")!.quantidade).toBe("600 g");
-    expect(itens.find((i) => i.chave === "ovo")!.quantidade).toBe("6 ovos");
+    expect(itens.find((i) => i.chave === "ovo")!.quantidade).toBe("6 unidades");
     expect(itens.find((i) => i.chave === "pao-integral")!.quantidade).toBe("4 fatias");
     expect(itens.find((i) => i.chave === "sal")!.quantidade).toBe("a gosto");
   });
@@ -76,5 +76,15 @@ describe("formatação", () => {
     expect(formatarIngrediente({ item: "carne-moida", qtd: 500, unidade: "g" })).toBe("500 g de carne moída (patinho)");
     expect(formatarIngrediente({ item: "sal", qtd: null, unidade: "a-gosto" })).toBe("Sal a gosto");
     expect(formatarIngrediente({ item: "banana", qtd: 0.5, unidade: "un", obs: "em rodelas" })).toBe("½ banana (em rodelas)");
+  });
+});
+
+describe("formatarReps", () => {
+  it("deixa a prescrição explícita", async () => {
+    const { formatarReps } = await import("@/lib/formatar");
+    expect(formatarReps("12")).toBe("12 repetições");
+    expect(formatarReps("8 a 10")).toBe("8 a 10 repetições");
+    expect(formatarReps("10 cada perna")).toBe("10 repetições cada perna");
+    expect(formatarReps("12 passos para cada lado")).toBe("12 passos para cada lado");
   });
 });

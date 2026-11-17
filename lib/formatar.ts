@@ -63,3 +63,12 @@ export function formatarDuracaoCurta(segundos: number): string {
   const s = segundos % 60;
   return s ? `${m}min${s}s` : `${m} min`;
 }
+
+/** "12" → "12 repetições"; "10 a 12" → "10 a 12 repetições"; "10 cada perna" → "10 repetições cada perna". */
+export function formatarReps(reps: string): string {
+  const s = reps.trim();
+  if (/^\d+( a \d+)?$/.test(s)) return `${s} repetições`;
+  const m = s.match(/^(\d+( a \d+)?) (cada .+)$/);
+  if (m) return `${m[1]} repetições ${m[3]}`;
+  return s;
+}
