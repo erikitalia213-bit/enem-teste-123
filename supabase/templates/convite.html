@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Seu acesso ao Protocolo 42 Dias</title>
+</head>
+<body style="margin:0;padding:0;background:#0b0b0c;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0b0b0c;">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#151517;border:1px solid #26262a;border-radius:16px;">
+        <tr>
+          <td align="center" style="padding:28px 24px 8px;">
+            <img src="{{ .SiteURL }}/img/email-logo.png" width="240" alt="Protocolo 42 Dias: Bumbum pro Réveillon" style="display:block;width:240px;max-width:80%;height:auto;border:0;">
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 28px 4px;font-family:Arial,Helvetica,sans-serif;color:#f4f4f5;">
+            <h1 style="margin:0 0 12px;font-size:26px;line-height:1.2;font-weight:800;text-align:center;">Oi{{ if .Data.nome }}, {{ .Data.nome }}{{ end }}! Seu acesso chegou 🎆</h1>
+            <p style="margin:0 0 12px;font-size:16px;line-height:1.6;color:#d4d4d8;text-align:center;">Seu <b style="color:#c6f432;">Protocolo 42 Dias</b> está pronto. São 6 semanas de treino guiado de glúteo, com cardápio e acompanhamento até o Réveillon.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#d4d4d8;text-align:center;">Toque no botão para entrar e responder 4 perguntas rápidas. Seu plano é montado na hora.</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:20px 28px 8px;">
+            <table role="presentation" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center" bgcolor="#c6f432" style="border-radius:14px;">
+                  <a href="{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&amp;type=invite&amp;next=/onboarding" target="_blank" style="display:inline-block;padding:16px 30px;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:800;color:#0b0b0c;text-decoration:none;border-radius:14px;">Começar meu protocolo</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:12px 28px 28px;font-family:Arial,Helvetica,sans-serif;color:#a1a1aa;font-size:13px;line-height:1.6;">
+            <p style="margin:0 0 10px;">O botão funciona uma única vez e vale por 1 hora. Se expirar, é só pedir um novo link na tela de login do app.</p>
+            <p style="margin:0 0 10px;">Botão não funcionou? Copie e cole este endereço no navegador:<br><span style="color:#c6f432;word-break:break-all;">{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&amp;type=invite&amp;next=/onboarding</span></p>
+            <p style="margin:0;">Não foi você que pediu? Pode ignorar este e-mail com segurança.</p>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#71717a;max-width:480px;">Protocolo 42 Dias: Bumbum pro Réveillon. Os resultados variam de pessoa para pessoa. Este programa não substitui orientação médica ou de um profissional de educação física.</p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

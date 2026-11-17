@@ -1,0 +1,17 @@
+{
+  "_comentario": "EXEMPLO PROVISÓRIO. Substitua por um payload real capturado em /api/webhooks/debug e ajuste lib/webhooks/adaptadores/wiapy.ts.",
+  "event": "order.paid",
+  "created_at": "2026-11-17T13:21:33-03:00",
+  "data": {
+    "transaction_id": "WP-77881",
+    "status": "paid",
+    "payment_method": "pix",
+    "amount": 4700,
+    "customer": {
+      "name": "Ana Teste",
+      "email": "ana.teste@exemplo.com",
+      "phone": "+5511988887777"
+    },
+    "product": { "id": "p42", "name": "Protocolo 42 Dias: Bumbum pro Réveillon" }
+  }
+}

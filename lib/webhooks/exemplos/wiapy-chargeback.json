@@ -1,0 +1,11 @@
+{
+  "_comentario": "EXEMPLO PROVISÓRIO. Substitua por um payload real capturado em /api/webhooks/debug.",
+  "event": "order.chargeback",
+  "data": {
+    "transaction_id": "WP-77881",
+    "status": "chargeback",
+    "amount": 4700,
+    "customer": { "name": "Ana Teste", "email": "ana.teste@exemplo.com" },
+    "product": { "name": "Protocolo 42 Dias: Bumbum pro Réveillon" }
+  }
+}

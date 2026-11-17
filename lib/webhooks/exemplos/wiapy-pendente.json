@@ -1,0 +1,11 @@
+{
+  "_comentario": "EXEMPLO PROVISÓRIO.",
+  "event": "order.created",
+  "data": {
+    "transaction_id": "WP-77882",
+    "status": "pending",
+    "amount": 4700,
+    "customer": { "name": "Bia Teste", "email": "bia@exemplo.com" },
+    "product": { "name": "Protocolo 42 Dias: Bumbum pro Réveillon" }
+  }
+}

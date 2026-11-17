@@ -1,0 +1,9 @@
+{
+  "event": "SALE_CHARGEBACK",
+  "sale_id": "KV-2026-000123",
+  "payment_method": "CREDIT_CARD",
+  "total_price": "R$ 47,00",
+  "status": "CHARGEBACK",
+  "customer": { "name": "Maria Teste", "email": "maria.teste@exemplo.com" },
+  "products": [{ "name": "Protocolo 42 Dias: Bumbum pro Réveillon", "is_order_bump": false }]
+}

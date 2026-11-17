@@ -1,0 +1,12 @@
+{
+  "_comentario": "EXEMPLO PROVISÓRIO. Substitua por um payload real capturado em /api/webhooks/debug.",
+  "event": "order.refunded",
+  "created_at": "2026-11-22T09:00:00-03:00",
+  "data": {
+    "transaction_id": "WP-77881",
+    "status": "refunded",
+    "amount": 4700,
+    "customer": { "name": "Ana Teste", "email": "ana.teste@exemplo.com" },
+    "product": { "id": "p42", "name": "Protocolo 42 Dias: Bumbum pro Réveillon" }
+  }
+}

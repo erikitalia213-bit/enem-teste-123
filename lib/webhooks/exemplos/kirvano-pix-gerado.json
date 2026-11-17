@@ -1,0 +1,9 @@
+{
+  "event": "PIX_GENERATED",
+  "sale_id": "KV-2026-000124",
+  "payment_method": "PIX",
+  "total_price": "R$ 47,00",
+  "status": "PENDING",
+  "customer": { "name": "Joana Teste", "email": "joana@exemplo.com" },
+  "products": [{ "name": "Protocolo 42 Dias: Bumbum pro Réveillon", "is_order_bump": false }]
+}

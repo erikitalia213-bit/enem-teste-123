@@ -1,0 +1,45 @@
+# Configuração do Supabase CLI (opcional): `supabase start` para rodar local ou
+# `supabase config push` para aplicar no projeto remoto. Tudo aqui também pode ser
+# feito pelo painel (veja o README, seção "Supabase").
+project_id = "protocolo-42-dias"
+
+[auth]
+enabled = true
+# Troque pela URL pública do app (igual a NEXT_PUBLIC_APP_URL)
+site_url = "env(NEXT_PUBLIC_APP_URL)"
+additional_redirect_urls = ["http://localhost:3000/**", "env(NEXT_PUBLIC_APP_URL)/**"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+# Só quem comprou entra: o app cria as contas via webhook (convite).
+enable_signup = true
+
+[auth.rate_limit]
+# E-mails por hora. Com SMTP próprio (Resend) dá para subir bastante.
+email_sent = 300
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
+# Validade do link mágico/convite em segundos (1 hora)
+otp_expiry = 3600
+max_frequency = "60s"
+
+[auth.email.template.invite]
+subject = "Seu acesso ao Protocolo 42 Dias chegou 🎆"
+content_path = "./supabase/templates/convite.html"
+
+[auth.email.template.magic_link]
+subject = "Seu link de acesso ao Protocolo 42 Dias"
+content_path = "./supabase/templates/link-magico.html"
+
+# SMTP próprio via Resend (https://resend.com). Usuário é sempre "resend";
+# a senha é a API key do Resend.
+[auth.email.smtp]
+enabled = true
+host = "smtp.resend.com"
+port = 465
+user = "resend"
+pass = "env(RESEND_API_KEY)"
+admin_email = "env(SMTP_REMETENTE_EMAIL)"
+sender_name = "env(SMTP_REMETENTE_NOME)"
