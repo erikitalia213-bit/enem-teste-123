@@ -1,26 +1,31 @@
 import type { NextConfig } from "next";
 
-/**
- * FLAGLAB 5x5 corre como app Next.js con servidor (Vercel, Netlify, Render o Node propio):
- * el servidor valida la sesión de Supabase y solo envía al navegador el contenido que el
- * usuario compró. Los webhooks de pago (/api/webhooks/*) también requieren servidor.
- */
-const securityHeaders = [
+const cabecalhosSeguranca = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "X-Frame-Options", value: "DENY" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
 const nextConfig: NextConfig = {
-  trailingSlash: true,
-  images: { unoptimized: true },
   reactStrictMode: true,
   poweredByHeader: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [360, 414, 480, 640, 828, 960],
+    imageSizes: [64, 96, 128, 192, 256, 384],
+  },
   async headers() {
     return [
-      { source: "/:path*", headers: securityHeaders },
-      { source: "/app/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "Cache-Control", value: "private, no-store" }] },
+      { source: "/:path*", headers: cabecalhosSeguranca },
+      {
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Service-Worker-Allowed", value: "/" },
+        ],
+      },
+      { source: "/api/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
     ];
   },
 };

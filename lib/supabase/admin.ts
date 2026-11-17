@@ -1,13 +1,20 @@
 import "server-only";
-import { createClient } from "@supabase/supabase-js";
-import { SUPABASE_URL } from "./env";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { supabaseUrl } from "./env";
+
+let cliente: SupabaseClient | null = null;
 
 /**
- * Cliente con la service role key. SOLO para webhooks del servidor.
- * La llave vive en SUPABASE_SERVICE_ROLE_KEY (sin NEXT_PUBLIC_), nunca llega al navegador.
+ * Cliente com a service role (ignora o RLS). Use SOMENTE no servidor:
+ * webhooks, verificação de compra no login e scripts.
  */
-export function getAdminSupabase() {
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
-  if (!SUPABASE_URL || !key) return null;
-  return createClient(SUPABASE_URL, key, { auth: { persistSession: false, autoRefreshToken: false } });
+export function criarClienteAdmin(): SupabaseClient {
+  const chave = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !chave) {
+    throw new Error("Supabase não configurado: defina NEXT_PUBLIC_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY.");
+  }
+  cliente ??= createClient(supabaseUrl, chave, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
+  return cliente;
 }

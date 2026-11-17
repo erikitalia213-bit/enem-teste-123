@@ -1,19 +1,22 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./env";
+import { supabaseAnonKey, supabaseUrl } from "./env";
 
-/** Cliente de Supabase para Server Components y Route Handlers (usa la sesión del usuario). */
-export async function getServerSupabase() {
-  const store = await cookies();
-  return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+/**
+ * Cliente do Supabase para Server Components, Server Actions e Route Handlers.
+ * Usa a sessão da aluna (cookies) — todas as consultas passam pelo RLS.
+ */
+export async function criarClienteServidor() {
+  const cookieStore = await cookies();
+  return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
-      getAll: () => store.getAll(),
-      setAll: (list) => {
+      getAll: () => cookieStore.getAll(),
+      setAll: (lista) => {
         try {
-          list.forEach(({ name, value, options }) => store.set(name, value, options));
+          lista.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
         } catch {
-          // En Server Components no se pueden escribir cookies; el proxy refresca la sesión.
+          // Chamado a partir de um Server Component: o proxy renova os cookies.
         }
       },
     },
