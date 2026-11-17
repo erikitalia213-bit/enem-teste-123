@@ -30,7 +30,7 @@ console.log("Ícones gerados em public/icones");
 // Logo em PNG para os e-mails (muitos clientes de e-mail não exibem WebP).
 await sharp(join(process.cwd(), "public", "img", "logo-42dias.webp"))
   .resize(520)
-  .flatten({ background: "#0b0b0c" })
+  .flatten({ background: "#151517" })
   .png()
   .toFile(join(process.cwd(), "public", "img", "email-logo.png"));
 console.log("Logo de e-mail gerado em public/img/email-logo.png");

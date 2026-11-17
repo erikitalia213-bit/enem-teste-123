@@ -1,6 +1,7 @@
 import { cardapio14Dias, trocasPorFase } from "@/content/cardapio";
 import { exercicios, obterExercicio } from "@/content/exercicios";
 import { ingredientes } from "@/content/ingredientes";
+import { posesImagens } from "@/content/poses-imagens";
 import { rotinaDescanso, treinosBase } from "@/content/protocolo";
 import { obterReceita, ORDEM_REFEICOES, receitas } from "@/content/receitas";
 
@@ -19,6 +20,12 @@ export function validarConteudo(): string[] {
     for (const campo of ["nome", "equipamento", "ondeSentir", "erroComum", "dicaDeOuro"] as const) {
       if (!e[campo]?.trim()) erros.push(`${e.slug}: campo "${campo}" vazio.`);
     }
+  }
+  for (const e of exercicios) {
+    if (!posesImagens[e.slug]) erros.push(`${e.slug}: falta a descrição das poses em content/poses-imagens.ts.`);
+  }
+  for (const slug of Object.keys(posesImagens)) {
+    if (!slugs.has(slug)) erros.push(`content/poses-imagens.ts tem um slug que não existe: ${slug}`);
   }
   if (!exercicios.some((e) => e.local !== "casa")) erros.push("Nenhum exercício de academia.");
   if (!exercicios.some((e) => e.local !== "academia")) erros.push("Nenhum exercício de casa.");

@@ -13,11 +13,13 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "validar:conteudo": "tsx scripts/validar-conteudo.ts",
-    "seed:dev": "tsx scripts/seed-dev.ts",
+    "seed:dev": "node --env-file-if-exists=.env.local --import tsx scripts/seed-dev.ts",
     "icones": "node scripts/gerar-icones.mjs",
     "predev": "node scripts/gerar-manifesto-imagens.mjs",
     "prebuild": "node scripts/gerar-manifesto-imagens.mjs",
-    "imagens:manifesto": "node scripts/gerar-manifesto-imagens.mjs"
+    "imagens:manifesto": "node scripts/gerar-manifesto-imagens.mjs",
+    "test:rls": "bash supabase/testes/rodar.sh",
+    "docs:imagens": "tsx scripts/gerar-prompt-imagens.ts"
   },
   "engines": {
     "node": ">=20"

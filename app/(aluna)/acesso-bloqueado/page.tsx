@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { LogOut, ShieldAlert } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import { ContatoSuporte } from "@/components/ui/ContatoSuporte";
 import { Logo } from "@/components/ui/Logo";
-import { sair } from "@/lib/acoes/sessao";
+import { BotaoSair } from "@/components/app/BotaoSair";
 import { carregarSessao } from "@/lib/sessao";
 
 export const metadata: Metadata = { title: "Acesso indisponível" };
@@ -25,11 +25,9 @@ export default async function AcessoBloqueado() {
         </p>
         <p className="mt-3 text-[15px] leading-relaxed text-suave">Se você acredita que é um engano, fale com o suporte:</p>
         <ContatoSuporte mensagem={`Oi! Meu acesso ao Protocolo 42 Dias (${usuario.email}) aparece como indisponível.`} />
-        <form action={sair} className="mt-4">
-          <button type="submit" className="botao-secundario w-full">
-            <LogOut size={18} aria-hidden /> Entrar com outro e-mail
-          </button>
-        </form>
+        <div className="mt-4">
+          <BotaoSair rotulo="Entrar com outro e-mail" />
+        </div>
       </div>
     </main>
   );

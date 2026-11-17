@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { LifeBuoy, LogOut, Smartphone } from "lucide-react";
+import { LifeBuoy, Smartphone } from "lucide-react";
 import { Cabecalho } from "@/components/app/Cabecalho";
 import { InstalarApp } from "@/components/pwa/InstalarApp";
 import { ContatoSuporte } from "@/components/ui/ContatoSuporte";
-import { sair } from "@/lib/acoes/sessao";
+import { BotaoSair } from "@/components/app/BotaoSair";
 import { formatarData } from "@/lib/datas";
 import { montarPlano } from "@/lib/plano";
 import { exigirAlunaPronta } from "@/lib/sessao";
@@ -51,11 +51,7 @@ export default async function Perfil() {
 
         <ReiniciarProtocolo />
 
-        <form action={sair}>
-          <button type="submit" className="botao-secundario w-full">
-            <LogOut size={18} aria-hidden /> Sair
-          </button>
-        </form>
+        <BotaoSair />
       </div>
     </main>
   );
